@@ -102,19 +102,40 @@
   <script>
     document.getElementById('registerForm').addEventListener('submit', function(event) {
       event.preventDefault();
-      const username = document.getElementById('username').value;
-      const password = document.getElementById('password').value;
-      const confirmPassword = document.getElementById('confirmPassword').value;
+      var username = document.getElementById('username').value;
+      var password = document.getElementById('password').value;
+      var confirmPassword = document.getElementById('confirmPassword').value;
 
       if (password !== confirmPassword) {
         alert('Passwords do not match!');
         return;
       }
-
-      // Simulate registration logic
-      alert(`User ${username} registered successfully!`);
-      window.location.href = 'login.html'; // Redirect to login page
+      else {
+        alert(`User ${username} registered successfully!`);
+        save();
+      }
     });
+      function save() {
+                var usernameData = document.getElementById('username').value
+                var pass = document.getElementById('password').value
+
+                if(localStorage.getItem('usernameLocalData') == null) {
+                    localStorage.setItem('usernameLocalData', '[]');
+                }
+                if(localStorage.getItem('passwordLocalData') == null) {
+                    localStorage.setItem('passwordLocalData', '[]');
+                }
+
+                var usernameOldData = JSON.parse(localStorage.getItem('usernameLocalData'));
+                usernameOldData.push(usernameData);
+                var passOldData = JSON.parse(localStorage.getItem('passwordLocalData'));
+                passOldData.push(pass);
+
+                localStorage.setItem('usernameLocalData', JSON.stringify(usernameOldData));
+                localStorage.setItem('passwordLocalData', JSON.stringify(passOldData));
+
+                return window.location.href = 'login.html';
+            }
   </script>
 </body>
 </html>
