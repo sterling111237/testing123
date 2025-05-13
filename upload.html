@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upload Post</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+      color: #333;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #ccc;
+      padding: 10px 20px;
+      margin-bottom: 20px;
+    }
+
+    .navbar .logo {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .navbar .nav-buttons button {
+      margin: 0 5px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .navbar .nav-buttons .back {
+      background-color: #81c995;
+    }
+
+    .navbar .nav-buttons .upload {
+      background-color: #4fc3f7;
+      color: #fff;
+      margin-left: 10px;
+    }
+
+    .navbar .nav-buttons .upload:hover {
+      background-color: #0288d1;
+    }
+
+    .upload-container {
+      max-width: 600px;
+      margin: 50px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .upload-container h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .upload-container form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .upload-container input,
+    .upload-container textarea,
+    .upload-container select,
+    .upload-container button {
+      margin-bottom: 15px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    .upload-container button {
+      background-color: #4fc3f7;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+
+    .upload-container button:hover {
+      background-color: #0288d1;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <div class="navbar">
+    <div class="logo">李</div>
+    <div class="nav-buttons">
+      <button class="back" onclick="window.location.href='index.html'">Back to Home</button>
+      <button class="upload" onclick="window.location.href='upload.html'">Upload Post</button>
+    </div>
+  </div>
+
+  <!-- Upload Container -->
+  <div class="upload-container">
+    <h2>Create a Post</h2>
+    <form id="uploadForm">
+      <input type="file" id="postImage" accept="image/*" required>
+      <textarea id="postDescription" placeholder="Description" required></textarea>
+      <input type="text" id="postArea" placeholder="Area" required>
+      <input type="text" id="postCategory" placeholder="Category" required>
+      <input type="date" id="postExpiration" required>
+      <select id="postContact">
+        <option value="admin">Admin</option>
+        <option value="owner">Owner</option>
+      </select>
+      <button type="submit">Post</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById('uploadForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const postImage = document.getElementById('postImage').files[0];
+      const postDescription = document.getElementById('postDescription').value;
+      const postArea = document.getElementById('postArea').value;
+      const postCategory = document.getElementById('postCategory').value;
+      const postExpiration = document.getElementById('postExpiration').value;
+      const postContact = document.getElementById('postContact').value;
+
+      // Simulate post creation
+      console.log('Post created:', { postImage, postDescription, postArea, postCategory, postExpiration, postContact });
+      alert('Post created successfully!');
+    });
+  </script>
+</body>
+</html>
