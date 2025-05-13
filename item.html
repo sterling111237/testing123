@@ -9,7 +9,7 @@
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
-      background-color: #e8f5e9;
+      background-color: #d5f2ff;
       color: #333;
     }
 
@@ -20,6 +20,7 @@
       align-items: center;
       background-color: #ccc;
       padding: 10px 20px;
+      margin-bottom: 190px; /* Add spacing below the navigation bar */
     }
     .navbar .logo {
       font-size: 24px;
@@ -35,6 +36,14 @@
     .navbar .nav-buttons .back {
       background-color: #81c995;
     }
+    .navbar .nav-buttons .upload {
+      background-color: #4fc3f7;
+      color: #fff;
+      margin-left: 10px;
+    }
+    .navbar .nav-buttons .upload:hover {
+      background-color: #0288d1;
+    }
 
     /* Item Details Section */
     .item-container {
@@ -42,6 +51,7 @@
       flex-direction: column;
       align-items: center;
       padding: 20px;
+      gap: 150px; /* Increase gap to separate image and descriptions */
     }
     .item-image {
       width: 100%;
@@ -51,15 +61,15 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      margin-bottom: 20px;
       font-size: 24px;
       color: #333;
-      object-fit: cover; /* Ensures the image fits neatly */
+      object-fit: cover;
     }
     .item-details {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive columns */
-      gap: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px; /* Add spacing between description cards */
       width: 100%;
       max-width: 800px;
     }
@@ -98,7 +108,7 @@
       border: none;
       border-radius: 5px;
       background-color: #25d366;
-      color: white;
+      color: rgb(255, 255, 255);
       font-size: 16px;
       cursor: pointer;
     }
@@ -113,6 +123,7 @@
     <div class="logo">李</div>
     <div class="nav-buttons">
       <button class="back" onclick="window.location.href='index.html'">Back to Home</button>
+      <button class="upload" onclick="window.location.href='upload.html'">Upload Post</button>
     </div>
   </div>
 
