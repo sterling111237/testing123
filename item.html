@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Item Details</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #e8f5e9;
+      color: #333;
+    }
+
+    /* Navigation Bar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #ccc;
+      padding: 10px 20px;
+    }
+    .navbar .logo {
+      font-size: 24px;
+      font-weight: bold;
+    }
+    .navbar .nav-buttons button {
+      margin: 0 5px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .navbar .nav-buttons .back {
+      background-color: #81c995;
+    }
+
+    /* Item Details Section */
+    .item-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+    .item-image {
+      width: 100%;
+      max-width: 600px;
+      height: 300px;
+      background-color: #c5e1a5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 20px;
+      font-size: 24px;
+      color: #333;
+      object-fit: cover; /* Ensures the image fits neatly */
+    }
+    .item-details {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive columns */
+      gap: 20px;
+      width: 100%;
+      max-width: 800px;
+    }
+    .detail-card {
+      background-color: #e0e0e0;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .product-info {
+      grid-column: span 3;
+      background-color: #e0e0e0;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+    }
+    .image-card {
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .image-card:hover {
+      transform: scale(1.05);
+    }
+
+    /* Contact Seller Section */
+    .contact-seller {
+      margin-top: 20px;
+      text-align: center;
+    }
+    .contact-seller button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      background-color: #25d366;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .contact-seller button:hover {
+      background-color: #128c7e;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <div class="navbar">
+    <div class="logo">李</div>
+    <div class="nav-buttons">
+      <button class="back" onclick="window.location.href='index.html'">Back to Home</button>
+    </div>
+  </div>
+
+  <!-- Item Details Section -->
+  <div class="item-container">
+    <div class="item-image" id="itemImage">Image</div>
+    <div class="item-details">
+      <div class="detail-card" id="itemDescription">Brief Description about the image</div>
+      <div class="detail-card" id="itemCost">Cost</div>
+      <div class="detail-card" id="itemSeller">Seller Information</div>
+      <div class="product-info" id="itemInfo">Product Information</div>
+    </div>
+  </div>
+  
+  <!-- Contact Seller Section -->
+  <div class="contact-seller">
+    <button onclick="contactSeller('1234567890')">Contact Seller via WhatsApp</button>
+  </div>
+
+  <script>
+      // Function to get query parameters
+      function getQueryParam(param) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(param);
+      }
+
+      // Load item details based on query parameter
+      const imageId = getQueryParam('image');
+      console.log('Image ID:', imageId); // Debugging log
+
+      if (imageId) {
+        const items = {
+          1: {
+            image: 'imgs/sushi.png',
+            description: 'Sushi - A traditional Japanese dish made with vinegared rice and seafood.',
+            cost: '$15',
+            seller: 'Sushi Master',
+            info: 'Freshly prepared sushi with authentic Japanese ingredients.',
+          },
+          2: {
+            image: 'imgs/dimsum.png',
+            description: 'Dim Sum - A variety of small Chinese dishes served with tea.',
+            cost: '$20',
+            seller: 'Dim Sum Delight',
+            info: 'A selection of steamed and fried dim sum favorites.',
+          },
+          3: {
+            image: 'imgs/ramen.png',
+            description: 'Ramen - A Japanese noodle soup with a rich broth.',
+            cost: '$12',
+            seller: 'Ramen House',
+            info: 'Delicious ramen with customizable toppings.',
+          },
+          4: {
+            image: 'imgs/pad thai.png',
+            description: 'Pad Thai - A popular Thai stir-fried noodle dish.',
+            cost: '$10',
+            seller: 'Thai Express',
+            info: 'Authentic Pad Thai with a perfect balance of flavors.',
+          },
+          5: {
+            image: 'imgs/bibimbap.png',
+            description: 'Bibimbap - A Korean rice dish with mixed vegetables and meat.',
+            cost: '$14',
+            seller: 'Korean Kitchen',
+            info: 'Healthy and flavorful Bibimbap with fresh ingredients.',
+          },
+          6: {
+            image: 'imgs/satay.png',
+            description: 'Satay - Grilled meat skewers served with peanut sauce.',
+            cost: '$8',
+            seller: 'Satay Corner',
+            info: 'Juicy and tender satay with a rich peanut sauce.',
+          },
+          7: {
+            image: 'imgs/pho.png',
+            description: 'Pho - A Vietnamese noodle soup with aromatic broth.',
+            cost: '$13',
+            seller: 'Pho Paradise',
+            info: 'Traditional Pho with fresh herbs and spices.',
+          },
+          8: {
+            image: 'imgs/tempura.png',
+            description: 'Tempura - Lightly battered and fried seafood or vegetables.',
+            cost: '$11',
+            seller: 'Tempura House',
+            info: 'Crispy and golden tempura served with dipping sauce.',
+          },
+          9: {
+            image: 'imgs/kimbap.png',
+            description: 'Kimbap - A Korean dish made with rice and various fillings rolled in seaweed.',
+            cost: '$9',
+            seller: 'Kimbap King',
+            info: 'Freshly rolled Kimbap with a variety of fillings.',
+          },
+          10: {
+            image: 'imgs/tteokbokki.png',
+            description: 'Tteokbokki - Spicy Korean rice cakes.',
+            cost: '$7',
+            seller: 'Spicy Bites',
+            info: 'Chewy rice cakes in a spicy and savory sauce.',
+          },
+          11: {
+            image: 'imgs/spring-rolls.png',
+            description: 'Spring Rolls - Fresh or fried rolls filled with vegetables and meat.',
+            cost: '$6',
+            seller: 'Spring Roll Spot',
+            info: 'Crispy and fresh spring rolls with dipping sauce.',
+          },
+          12: {
+            image: 'imgs/naan.png',
+            description: 'Naan - A soft and fluffy Indian flatbread.',
+            cost: '$3',
+            seller: 'Indian Tandoor',
+            info: 'Freshly baked naan from a traditional tandoor oven.',
+          },
+          13: {
+            image: 'imgs/biryani.png',
+            description: 'Biryani - A fragrant Indian rice dish with spices and meat.',
+            cost: '$12',
+            seller: 'Biryani Bowl',
+            info: 'Aromatic biryani with tender meat and flavorful spices.',
+          },
+          14: {
+            image: 'imgs/miso-soup.png',
+            description: 'Miso Soup - A traditional Japanese soup with miso paste.',
+            cost: '$4',
+            seller: 'Soup Station',
+            info: 'Warm and comforting miso soup with tofu and seaweed.',
+          },
+          15: {
+            image: 'imgs/green-curry.png',
+            description: 'Green Curry - A spicy Thai curry with coconut milk.',
+            cost: '$10',
+            seller: 'Curry House',
+            info: 'Rich and creamy green curry with fresh vegetables.',
+          },
+          16: {
+            image: 'imgs/baozi.png',
+            description: 'Baozi - Steamed Chinese buns with various fillings.',
+            cost: '$5',
+            seller: 'Baozi Bar',
+            info: 'Soft and fluffy baozi with savory fillings.',
+          },
+        };
+
+        const item = items[imageId];
+        if (item) {
+          document.getElementById('itemImage').innerHTML = `<img src="${item.image}" alt="Item Image" style="width: 100%; height: auto;">`;
+          document.getElementById('itemDescription').innerText = item.description;
+          document.getElementById('itemCost').innerText = item.cost;
+          document.getElementById('itemSeller').innerText = item.seller;
+          document.getElementById('itemInfo').innerText = item.info;
+        } else {
+          document.getElementById('itemImage').innerText = 'Item not found';
+          console.error('Item not found for Image ID:', imageId); // Debugging log
+        }
+      } else {
+        document.getElementById('itemImage').innerText = 'No item selected';
+        console.error('No Image ID provided in the query parameter'); // Debugging log
+      }
+
+      // Function to contact seller via WhatsApp
+      function contactSeller(phoneNumber) {
+        window.open(`https://wa.me/${phoneNumber}`, '_blank');
+      }
+    </script>
+</body>
+</html>

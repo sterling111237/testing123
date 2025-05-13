@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Front Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #333;
+      color: #fff;
+    }
+
+    /* Navigation Bar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #ccc;
+      padding: 10px 20px;
+    }
+    .navbar .logo {
+      font-size: 24px;
+      font-weight: bold;
+    }
+    .navbar .nav-buttons button {
+      margin: 0 5px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .navbar .nav-buttons .location {
+      background-color: #f28b82;
+    }
+   
+    .navbar .nav-buttons .login {
+      background-color: #81c995;
+    }
+
+    /* Quick Search Section */
+    .quick-search {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #b3e5fc;
+      padding: 10px;
+    }
+    .quick-search button {
+      background-color: #4fc3f7;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      color: #fff;
+    }
+    .quick-search input {
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      width: 300px;
+      margin-right: 10px;
+    }
+
+    /* Image Grid */
+    .image-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive columns */
+      gap: 20px;
+      padding: 20px;
+    }
+    .image-card {
+      background-color: #ccc;
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.3s;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .image-card:hover {
+      transform: scale(1.05);
+    }
+    .image-card img {
+      width: 100%;
+      height: 200px; /* Fixed height for uniformity */
+      object-fit: cover; /* Ensures the image fits neatly */
+    }
+    .image-card .description {
+      padding: 10px;
+      background-color: #444;
+      color: #fff;
+      width: 100%;
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-content {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+      width: 80%;
+      max-width: 500px;
+    }
+    .modal-content img {
+      width: 100%;
+      height: auto;
+    }
+    .modal-content .close {
+      margin-top: 10px;
+      padding: 10px 20px;
+      background-color: #f00;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    /* Registration, Posting, Moderation, WhatsApp Interaction */
+    .registration, .posting, .moderation, .whatsapp-interaction {
+      padding: 20px;
+      background-color: #444;
+      margin: 20px;
+      border-radius: 8px;
+    }
+    .registration h2, .posting h2, .moderation h2, .whatsapp-interaction h2 {
+      margin-top: 0;
+    }
+    .registration input, .posting input, .posting textarea, .posting select {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 5px;
+    }
+    .registration button, .posting button {
+      background-color: #4fc3f7;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      color: #fff;
+    }
+    .moderation #moderationList {
+      max-height: 300px;
+      overflow-y: auto;
+      background-color: #fff;
+      color: #000;
+      padding: 10px;
+      border-radius: 5px;
+    }
+    .whatsapp-interaction button {
+      background-color: #25D366;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      color: #fff;
+    }
+
+    /* Mark as Done Section */
+    .mark-as-done {
+      padding: 20px;
+      background-color: #555;
+      margin: 20px;
+      border-radius: 8px;
+      text-align: center;
+    }
+    .mark-as-done button {
+      background-color: #4caf50;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <div class="navbar">
+    <div class="logo">李</div>
+    <div class="nav-buttons">
+      <button class="location">Location</button>
+      <button class="login" onclick="window.location.href='login.html'">Login/Logout</button>
+    </div>
+  </div>
+
+  <!-- Quick Search Section -->
+  <div class="quick-search">
+    <input type="text" id="searchBar" placeholder="Search for food..." oninput="filterFood()">
+  </div>
+
+  <!-- Image Grid -->
+  <div class="image-container">
+    <!-- Adding more image cards -->
+    <div class="image-card">
+      <img src="imgs/sushi.png" alt="Sushi">
+      <div class="description" onclick="window.location.href='item.html?image=1'">Sushi</div>
+    </div>
+    <div class="image-card">
+      <img src="imgs/dimsum.png" alt="Dim Sum">
+      <div class="description" onclick="window.location.href='item.html?image=2'">Dim Sum</div>
+    </div>
+    <div class="image-card">
+      <img src="imgs/ramen.png" alt="Ramen">
+      <div class="description" onclick="window.location.href='item.html?image=3'">Ramen</div>
+    </div>
+    <div class="image-card">
+      <img src="imgs/pad thai.png" alt="Pad Thai">
+      <div class="description" onclick="window.location.href='item.html?image=4'">Pad Thai</div>
+    </div>
+    <div class="image-card">
+      <img src="imgs/bibimbap.png" alt="Bibimbap">
+      <div class="description" onclick="window.location.href='item.html?image=5'">Bibimbap</div>
+    </div>
+    <div class="image-card">
+      <img src="imgs/satay.png" alt="Satay">
+      <div class="description" onclick="window.location.href='item.html?image=6'">Satay</div>
+    </div>
+    <div class="image-card">
+      <img src="imgs/pho.png" alt="Pho">
+      <div class="description" onclick="window.location.href='item.html?image=7'">Pho</div>
+    </div>
+    <div class="image-card">
+      <img src="imgs/tempura.png" alt="Tempura">
+      <div class="description" onclick="window.location.href='item.html?image=8'">Tempura</div>
+    </div>
+    <div class="image-card">
+      <img src="imgs/kimbap.png" alt="Kimbap">
+      <div class="description" onclick="window.location.href='item.html?image=9'">Kimbap</div>
+    </div>
+    <div class="image-card">
+      <img src="imgs/tteokbokki.png" alt="Tteokbokki">
+      <div class="description" onclick="window.location.href='item.html?image=10'">Tteokbokki</div>
+    </div>
+    <div class="image-card">
+      <img src="imgs/spring-rolls.png" alt="Spring Rolls">
+      <div class="description" onclick="window.location.href='item.html?image=11'">Spring Rolls</div>
+    </div>
+    <div class="image-card">
+      <img src="imgs/naan.png" alt="Naan">
+      <div class="description" onclick="window.location.href='item.html?image=12'">Naan</div>
+    </div>
+    <div class="image-card">
+      <img src="imgs/biryani.png" alt="Biryani">
+      <div class="description" onclick="window.location.href='item.html?image=13'">Biryani</div>
+    </div>
+    <div class="image-card">
+      <img src="imgs/miso-soup.png" alt="Miso Soup">
+      <div class="description" onclick="window.location.href='item.html?image=14'">Miso Soup</div>
+    </div>
+    <div class="image-card">
+      <img src="imgs/green-curry.png" alt="Green Curry">
+      <div class="description" onclick="window.location.href='item.html?image=15'">Green Curry</div>
+    </div>
+    <div class="image-card">
+      <img src="imgs/baozi.png" alt="Baozi">
+      <div class="description" onclick="window.location.href='item.html?image=16'">Baozi</div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal" id="imageModal">
+    <div class="modal-content">
+      <h2 id="modalTitle"></h2>
+      <p id="modalDescription"></p>
+      <button class="close" onclick="closeModal()">Close</button>
+    </div>
+  </div>
+
+  <!-- Member Registration Section -->
+  <div class="registration">
+    <h2>Member Registration</h2>
+    <form id="registrationForm">
+      <input type="text" id="memberName" placeholder="Name" required>
+      <input type="email" id="memberEmail" placeholder="Email" required>
+      <input type="text" id="contactPIC" placeholder="Contact PIC">
+      <button type="submit">Register</button>
+    </form>
+  </div>
+
+  <!-- Posting Section -->
+  <div class="posting">
+    <h2>Create a Post</h2>
+    <form id="postingForm">
+      <input type="file" id="postImage" accept="image/*" required>
+      <textarea id="postDescription" placeholder="Description" required></textarea>
+      <input type="text" id="postArea" placeholder="Area" required>
+      <input type="text" id="postCategory" placeholder="Category" required>
+      <input type="date" id="postExpiration" required>
+      <select id="postContact">
+        <option value="admin">Admin</option>
+        <option value="owner">Owner</option>
+      </select>
+      <button type="submit">Post</button>
+    </form>
+  </div>
+
+  <!-- Moderation Section -->
+  <div class="moderation">
+    <h2>Moderation</h2>
+    <div id="moderationList">
+      <!-- Posts will be dynamically listed here for moderation -->
+      <div class="post" id="post1">
+        <p>Post Description: Selling fresh sushi</p>
+        <button onclick="moderatePost(1, 'approved')">Approve</button>
+        <button onclick="moderatePost(1, 'rejected')">Reject</button>
+        <button onclick="moderatePost(1, 'taken down')">Take Down</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mark as Done Section -->
+  <div class="mark-as-done">
+    <h2>Mark as Done</h2>
+    <button onclick="markAsDone(1)">Mark Post 1 as Done</button>
+  </div>
+
+  <!-- WhatsApp Interaction -->
+  <div class="whatsapp-interaction">
+    <h2>Contact via WhatsApp</h2>
+    <button onclick="contactWhatsApp()">Contact Now</button>
+  </div>
+
+  <script>
+    function openModal(title, description) {
+      document.getElementById('modalTitle').innerText = title;
+      document.getElementById('modalDescription').innerText = description;
+      document.getElementById('imageModal').style.display = 'flex';
+    }
+
+    function closeModal() {
+      document.getElementById('imageModal').style.display = 'none';
+    }
+
+    function filterFood() {
+      const searchInput = document.getElementById('searchBar').value.toLowerCase();
+      const foodCards = document.querySelectorAll('.image-card');
+
+      foodCards.forEach(card => {
+        const foodName = card.querySelector('.description').innerText.toLowerCase();
+        if (foodName.includes(searchInput)) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    // Member Registration
+    document.getElementById('registrationForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      alert('Registration submitted for admin approval.');
+    });
+
+    // Posting
+    document.getElementById('postingForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      alert('Post created and pending moderation.');
+    });
+
+    // Moderation (Example Functionality)
+    function moderatePost(postId, action) {
+      alert(`Post ${postId} has been ${action}.`);
+    }
+
+    // Mark as Done (Example Functionality)
+    function markAsDone(postId) {
+      document.getElementById(`post${postId}`).style.textDecoration = 'line-through';
+      alert(`Post ${postId} marked as done.`);
+    }
+
+    // WhatsApp Interaction
+    function contactWhatsApp() {
+      const phoneNumber = '1234567890'; // Replace with dynamic contact number
+      window.open(`https://wa.me/${phoneNumber}`, '_blank');
+    }
+  </script>
+</body>
+</html>
