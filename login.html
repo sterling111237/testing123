@@ -110,18 +110,24 @@
   <script>
     document.getElementById('loginForm').addEventListener('submit', function(event) {
       event.preventDefault();
-      const username = document.getElementById('username').value;
-      const password = document.getElementById('password').value;
+      var usernameInput = document.getElementById('username').value;
+      var passwordInput = document.getElementById('password').value;
+      var usernameData = JSON.parse(localStorage.getItem("usernameLocalData"));
+      var passwordData = JSON.parse(localStorage.getItem("passwordLocalData"));
 
-      // Add your login validation logic here
-      if (username === 'admin' && password === 'password') { // Example credentials
-        window.location.href = 'index.html'; // Redirect to the front page
-      } else {
-        alert('Invalid username or password');
-      }
+      for (let i =0;i < usernameData.length; i++) {
+          console.log(usernameData[i]);
+          console.log(i)
+          console.log(usernameData.length)
+          if (usernameInput == usernameData[i] && passwordInput == passwordData[i]) {
+            console.log("Logged in");
+            return window.location.href = 'index.html';
+          }
+        }
+        alert ("wrong password");
     });
 
-    document.querySelector('.register-btn').addEventListener('click', function() {
+      document.querySelector('.register-btn').addEventListener('click', function() {
       window.open('register.html', '_blank'); // Opens the registration page in a new tab
     });
   </script>
