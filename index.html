@@ -39,6 +39,14 @@
     .navbar .nav-buttons .login {
       background-color: #81c995;
     }
+    .navbar .nav-buttons .upload {
+      background-color: #4fc3f7;
+      color: #fff;
+      margin-left: 10px;
+    }
+    .navbar .nav-buttons .upload:hover {
+      background-color: #0288d1;
+    }
 
     /* Quick Search Section */
     .quick-search {
@@ -132,24 +140,24 @@
       cursor: pointer;
     }
 
-    /* Registration, Posting, Moderation, WhatsApp Interaction */
-    .registration, .posting, .moderation, .whatsapp-interaction {
+    /* Registration, Moderation, WhatsApp Interaction */
+    .registration, .moderation, .whatsapp-interaction {
       padding: 20px;
       background-color: #444;
       margin: 20px;
       border-radius: 8px;
     }
-    .registration h2, .posting h2, .moderation h2, .whatsapp-interaction h2 {
+    .registration h2, .moderation h2, .whatsapp-interaction h2 {
       margin-top: 0;
     }
-    .registration input, .posting input, .posting textarea, .posting select {
+    .registration input, .moderation #moderationList {
       width: 100%;
       padding: 10px;
       margin: 10px 0;
       border: none;
       border-radius: 5px;
     }
-    .registration button, .posting button {
+    .registration button {
       background-color: #4fc3f7;
       border: none;
       padding: 10px 20px;
@@ -199,6 +207,7 @@
     <div class="nav-buttons">
       <button class="location">Location</button>
       <button class="login" onclick="window.location.href='login.html'">Login/Logout</button>
+      <button class="upload" onclick="window.location.href='upload.html'">Upload Post</button>
     </div>
   </div>
 
@@ -296,23 +305,6 @@
     </form>
   </div>
 
-  <!-- Posting Section -->
-  <div class="posting">
-    <h2>Create a Post</h2>
-    <form id="postingForm">
-      <input type="file" id="postImage" accept="image/*" required>
-      <textarea id="postDescription" placeholder="Description" required></textarea>
-      <input type="text" id="postArea" placeholder="Area" required>
-      <input type="text" id="postCategory" placeholder="Category" required>
-      <input type="date" id="postExpiration" required>
-      <select id="postContact">
-        <option value="admin">Admin</option>
-        <option value="owner">Owner</option>
-      </select>
-      <button type="submit">Post</button>
-    </form>
-  </div>
-
   <!-- Moderation Section -->
   <div class="moderation">
     <h2>Moderation</h2>
@@ -368,12 +360,6 @@
     document.getElementById('registrationForm').addEventListener('submit', function(event) {
       event.preventDefault();
       alert('Registration submitted for admin approval.');
-    });
-
-    // Posting
-    document.getElementById('postingForm').addEventListener('submit', function(event) {
-      event.preventDefault();
-      alert('Post created and pending moderation.');
     });
 
     // Moderation (Example Functionality)
