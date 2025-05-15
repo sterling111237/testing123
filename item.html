@@ -19,7 +19,7 @@
       justify-content: space-between;
       align-items: center;
       background-color: #ccc;
-      padding: 10px 20px;
+      padding: 15px 30px;
       margin-bottom: 190px; /* Add spacing below the navigation bar */
     }
     .navbar .logo {
@@ -43,6 +43,14 @@
     }
     .navbar .nav-buttons .upload:hover {
       background-color: #0288d1;
+    }
+    .navbar .nav-buttons .register {
+      background-color: #f28b82;
+      color: #fff;
+      margin-left: 10px;
+    }
+    .navbar .nav-buttons .register:hover {
+      background-color: #e57373;
     }
 
     /* Item Details Section */
@@ -115,6 +123,20 @@
     .contact-seller button:hover {
       background-color: #128c7e;
     }
+
+    /* Mark as Done Button */
+    .mark-done {
+      background-color: #4caf50;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      color: #fff;
+      margin-top: 10px;
+    }
+    .mark-done:hover {
+      background-color: #388e3c;
+    }
   </style>
 </head>
 <body>
@@ -124,6 +146,7 @@
     <div class="nav-buttons">
       <button class="back" onclick="window.location.href='index.html'">Back to Home</button>
       <button class="upload" onclick="window.location.href='upload.html'">Upload Post</button>
+      <button class="register" onclick="window.location.href='register.html'">Member Registration</button>
     </div>
   </div>
 
@@ -135,6 +158,7 @@
       <div class="detail-card" id="itemCost">Cost</div>
       <div class="detail-card" id="itemSeller">Seller Information</div>
       <div class="product-info" id="itemInfo">Product Information</div>
+      <button onclick="markAsDone(1)" class="mark-done">Mark as Done</button>
     </div>
   </div>
   
@@ -289,6 +313,12 @@
       // Function to contact seller via WhatsApp
       function contactSeller(phoneNumber) {
         window.open(`https://wa.me/${phoneNumber}`, '_blank');
+      }
+
+      // Function to mark item as done
+      function markAsDone(itemId) {
+        console.log(`Item ${itemId} marked as done.`);
+        alert(`Item ${itemId} has been marked as done.`);
       }
     </script>
 </body>
