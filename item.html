@@ -56,10 +56,9 @@
     /* Item Details Section */
     .item-container {
       display: flex;
-      flex-direction: column;
-      align-items: center;
+      flex-direction: row;
+      justify-content: space-between;
       padding: 20px;
-      gap: 150px; /* Increase gap to separate image and descriptions */
     }
     .item-image {
       width: 100%;
@@ -74,22 +73,30 @@
       object-fit: cover;
     }
     .item-details {
+      width: 60%;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      gap: 20px; /* Add spacing between description cards */
+      gap: 20px;
+    }
+    .item-image-gallery {
+      width: 35%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .item-image-gallery img {
       width: 100%;
-      max-width: 800px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+    .item-image-gallery img:hover {
+      transform: scale(1.05);
     }
     .detail-card {
       background-color: #e0e0e0;
       padding: 20px;
       border-radius: 8px;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
     }
     .product-info {
       grid-column: span 3;
@@ -116,7 +123,7 @@
       border: none;
       border-radius: 5px;
       background-color: #25d366;
-      color: rgb(255, 255, 255);
+      color: white;
       font-size: 16px;
       cursor: pointer;
     }
@@ -152,12 +159,31 @@
 
   <!-- Item Details Section -->
   <div class="item-container">
-    <div class="item-image" id="itemImage">Image</div>
+    <!-- Image Gallery -->
+    <div class="item-image-gallery" id="itemImageGallery">
+      <!-- Image gallery will be populated by JavaScript -->
+    </div>
+
+    <!-- Item Details -->
     <div class="item-details">
-      <div class="detail-card" id="itemDescription">Brief Description about the image</div>
-      <div class="detail-card" id="itemCost">Cost</div>
-      <div class="detail-card" id="itemSeller">Seller Information</div>
-      <div class="product-info" id="itemInfo">Product Information</div>
+      <div class="detail-card" id="itemDescription">
+        <h2>Item Title</h2>
+        <p>Item description goes here. It provides details about the product.</p>
+      </div>
+      <div class="detail-card" id="itemCost">
+        <h3>Price</h3>
+        <p>$15,000</p>
+      </div>
+      <div class="detail-card" id="itemSeller">
+        <h3>Seller Information</h3>
+        <p>Seller Name: John Doe</p>
+        <p>Location: Jakarta</p>
+      </div>
+      <div class="detail-card" id="itemInfo">
+        <h3>Additional Information</h3>
+        <p>Year: 2021</p>
+        <p>Condition: Like New</p>
+      </div>
       <button onclick="markAsDone(1)" class="mark-done">Mark as Done</button>
     </div>
   </div>
@@ -296,7 +322,10 @@
 
         const item = items[imageId];
         if (item) {
-          document.getElementById('itemImage').innerHTML = `<img src="${item.image}" alt="Item Image" style="width: 100%; height: auto;">`;
+          // Populate image gallery
+          const imageGallery = document.getElementById('itemImageGallery');
+          imageGallery.innerHTML = `<img src="${item.image}" alt="Item Image">`;
+          
           document.getElementById('itemDescription').innerText = item.description;
           document.getElementById('itemCost').innerText = item.cost;
           document.getElementById('itemSeller').innerText = item.seller;
