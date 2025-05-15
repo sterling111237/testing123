@@ -57,3 +57,22 @@ function moderatePost(postId, action) {
         }
     }
 }
+
+function filterByPrice() {
+  const minPriceInput = document.querySelector('[placeholder="Min Price"]');
+  const maxPriceInput = document.querySelector('[placeholder="Max Price"]');
+
+  const minPrice = minPriceInput.value ? parseFloat(minPriceInput.value) : NaN;
+  const maxPrice = maxPriceInput.value ? parseFloat(maxPriceInput.value) : NaN;
+
+  const foodCards = document.querySelectorAll('.image-card');
+
+  foodCards.forEach(card => {
+    const priceElement = card.querySelector('.price');
+    if (priceElement) {
+      const priceText = priceElement.textContent.replace(/[^0-9.]/g, ''); // Extract numbers
+      const price = parseFloat(priceText);
+      card.style.display = (isNaN(minPrice) || price >= minPrice) && (isNaN(maxPrice) || price <= maxPrice) ? 'block' : 'none';
+    }
+  });
+}
