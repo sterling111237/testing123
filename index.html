@@ -10,7 +10,7 @@
       margin: 0;
       padding: 0;
       background-color: #333;
-      color: #fff;
+      color: #ffffff;
     }
 
     /* Navigation Bar */
@@ -18,7 +18,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background-color: #ccc;
+      background-color: #5f5f5f;
       padding: 10px 20px;
     }
     .navbar .logo {
@@ -46,6 +46,14 @@
     }
     .navbar .nav-buttons .upload:hover {
       background-color: #0288d1;
+    }
+    .navbar .nav-buttons .register {
+      background-color: #f28b82;
+      color: #fff;
+      margin-left: 10px;
+    }
+    .navbar .nav-buttons .register:hover {
+      background-color: #e57373;
     }
 
     /* Quick Search Section */
@@ -140,24 +148,24 @@
       cursor: pointer;
     }
 
-    /* Registration, Moderation, WhatsApp Interaction */
-    .registration, .moderation, .whatsapp-interaction {
+    /* Moderation, WhatsApp Interaction */
+    .moderation, .whatsapp-interaction {
       padding: 20px;
       background-color: #444;
       margin: 20px;
       border-radius: 8px;
     }
-    .registration h2, .moderation h2, .whatsapp-interaction h2 {
+    .moderation h2, .whatsapp-interaction h2 {
       margin-top: 0;
     }
-    .registration input, .moderation #moderationList {
+    .moderation #moderationList {
       width: 100%;
       padding: 10px;
       margin: 10px 0;
       border: none;
       border-radius: 5px;
     }
-    .registration button {
+    .moderation button {
       background-color: #4fc3f7;
       border: none;
       padding: 10px 20px;
@@ -198,6 +206,61 @@
       cursor: pointer;
       color: #fff;
     }
+
+    /* Mark as Done Overlay */
+    .mark-done-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    .overlay-content {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+      width: 80%;
+      max-width: 500px;
+    }
+    .overlay-content h2 {
+      margin-bottom: 20px;
+    }
+    .item-list button {
+      display: block;
+      margin: 10px auto;
+      padding: 10px 20px;
+      background-color: #4caf50;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .item-list button:hover {
+      background-color: #388e3c;
+    }
+    .close-overlay {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #f00;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    select {
+      border: 2px solid #4caf50;
+      border-radius: 5px;
+      padding: 5px;
+      background-color: #fff;
+      color: #000;
+    }
   </style>
 </head>
 <body>
@@ -205,9 +268,10 @@
   <div class="navbar">
     <div class="logo">李</div>
     <div class="nav-buttons">
-      <button class="location">Location</button>
+      <button class="location" onclick="filterByLocation(prompt('Enter location (e.g., japan, china, all):'))">Location</button>
       <button class="login" onclick="window.location.href='login.html'">Login/Logout</button>
-      <button class="upload" onclick="window.location.href='upload.html'">Upload Post</button>
+      <button class="upload" onclick="window.location.href='uploadprep.html'">Upload Post</button>
+      <button class="register" onclick="window.location.href='member.html'">Member Registration</button>
     </div>
   </div>
 
@@ -219,67 +283,67 @@
   <!-- Image Grid -->
   <div class="image-container">
     <!-- Adding more image cards -->
-    <div class="image-card">
+    <div class="image-card" data-location="japan">
       <img src="imgs/sushi.png" alt="Sushi">
       <div class="description" onclick="window.location.href='item.html?image=1'">Sushi</div>
     </div>
-    <div class="image-card">
+    <div class="image-card" data-location="china">
       <img src="imgs/dimsum.png" alt="Dim Sum">
       <div class="description" onclick="window.location.href='item.html?image=2'">Dim Sum</div>
     </div>
-    <div class="image-card">
+    <div class="image-card" data-location="japan">
       <img src="imgs/ramen.png" alt="Ramen">
       <div class="description" onclick="window.location.href='item.html?image=3'">Ramen</div>
     </div>
-    <div class="image-card">
+    <div class="image-card" data-location="thailand">
       <img src="imgs/pad thai.png" alt="Pad Thai">
       <div class="description" onclick="window.location.href='item.html?image=4'">Pad Thai</div>
     </div>
-    <div class="image-card">
+    <div class="image-card" data-location="korea">
       <img src="imgs/bibimbap.png" alt="Bibimbap">
       <div class="description" onclick="window.location.href='item.html?image=5'">Bibimbap</div>
     </div>
-    <div class="image-card">
+    <div class="image-card" data-location="indonesia">
       <img src="imgs/satay.png" alt="Satay">
       <div class="description" onclick="window.location.href='item.html?image=6'">Satay</div>
     </div>
-    <div class="image-card">
+    <div class="image-card" data-location="vietnam">
       <img src="imgs/pho.png" alt="Pho">
       <div class="description" onclick="window.location.href='item.html?image=7'">Pho</div>
     </div>
-    <div class="image-card">
+    <div class="image-card" data-location="japan">
       <img src="imgs/tempura.png" alt="Tempura">
       <div class="description" onclick="window.location.href='item.html?image=8'">Tempura</div>
     </div>
-    <div class="image-card">
+    <div class="image-card" data-location="korea">
       <img src="imgs/kimbap.png" alt="Kimbap">
       <div class="description" onclick="window.location.href='item.html?image=9'">Kimbap</div>
     </div>
-    <div class="image-card">
+    <div class="image-card" data-location="korea">
       <img src="imgs/tteokbokki.png" alt="Tteokbokki">
       <div class="description" onclick="window.location.href='item.html?image=10'">Tteokbokki</div>
     </div>
-    <div class="image-card">
+    <div class="image-card" data-location="vietnam">
       <img src="imgs/spring-rolls.png" alt="Spring Rolls">
       <div class="description" onclick="window.location.href='item.html?image=11'">Spring Rolls</div>
     </div>
-    <div class="image-card">
+    <div class="image-card" data-location="india">
       <img src="imgs/naan.png" alt="Naan">
       <div class="description" onclick="window.location.href='item.html?image=12'">Naan</div>
     </div>
-    <div class="image-card">
+    <div class="image-card" data-location="india">
       <img src="imgs/biryani.png" alt="Biryani">
       <div class="description" onclick="window.location.href='item.html?image=13'">Biryani</div>
     </div>
-    <div class="image-card">
+    <div class="image-card" data-location="japan">
       <img src="imgs/miso-soup.png" alt="Miso Soup">
       <div class="description" onclick="window.location.href='item.html?image=14'">Miso Soup</div>
     </div>
-    <div class="image-card">
+    <div class="image-card" data-location="thailand">
       <img src="imgs/green-curry.png" alt="Green Curry">
       <div class="description" onclick="window.location.href='item.html?image=15'">Green Curry</div>
     </div>
-    <div class="image-card">
+    <div class="image-card" data-location="china">
       <img src="imgs/baozi.png" alt="Baozi">
       <div class="description" onclick="window.location.href='item.html?image=16'">Baozi</div>
     </div>
@@ -294,35 +358,30 @@
     </div>
   </div>
 
-  <!-- Member Registration Section -->
-  <div class="registration">
-    <h2>Member Registration</h2>
-    <form id="registrationForm">
-      <input type="text" id="memberName" placeholder="Name" required>
-      <input type="email" id="memberEmail" placeholder="Email" required>
-      <input type="text" id="contactPIC" placeholder="Contact PIC">
-      <button type="submit">Register</button>
-    </form>
-  </div>
 
-  <!-- Moderation Section -->
-  <div class="moderation">
-    <h2>Moderation</h2>
-    <div id="moderationList">
-      <!-- Posts will be dynamically listed here for moderation -->
-      <div class="post" id="post1">
-        <p>Post Description: Selling fresh sushi</p>
-        <button onclick="moderatePost(1, 'approved')">Approve</button>
-        <button onclick="moderatePost(1, 'rejected')">Reject</button>
-        <button onclick="moderatePost(1, 'taken down')">Take Down</button>
-      </div>
-    </div>
-  </div>
 
   <!-- Mark as Done Section -->
   <div class="mark-as-done">
     <h2>Mark as Done</h2>
-    <button onclick="markAsDone(1)">Mark Post 1 as Done</button>
+    <select id="markDoneSelect">
+      <option value="1">Sushi</option>
+      <option value="2">Dim Sum</option>
+      <option value="3">Ramen</option>
+      <option value="4">Pad Thai</option>
+      <option value="5">Bibimbap</option>
+      <option value="6">Satay</option>
+      <option value="7">Pho</option>
+      <option value="8">Tempura</option>
+      <option value="9">Kimbap</option>
+      <option value="10">Tteokbokki</option>
+      <option value="11">Spring Rolls</option>
+      <option value="12">Naan</option>
+      <option value="13">Biryani</option>
+      <option value="14">Miso Soup</option>
+      <option value="15">Green Curry</option>
+      <option value="16">Baozi</option>
+    </select>
+    <button onclick="markAsDoneFromSelect()">Mark as Done</button>
   </div>
 
   <!-- WhatsApp Interaction -->
@@ -356,15 +415,17 @@
       });
     }
 
-    // Member Registration
-    document.getElementById('registrationForm').addEventListener('submit', function(event) {
-      event.preventDefault();
-      alert('Registration submitted for admin approval.');
-    });
+    function filterByLocation(location) {
+      const foodCards = document.querySelectorAll('.image-card');
 
-    // Moderation (Example Functionality)
-    function moderatePost(postId, action) {
-      alert(`Post ${postId} has been ${action}.`);
+      foodCards.forEach(card => {
+        const foodLocation = card.getAttribute('data-location'); // Assuming data-location attribute is added to cards
+        if (foodLocation === location || location === 'all') {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
     }
 
     // Mark as Done (Example Functionality)
@@ -377,6 +438,11 @@
     function contactWhatsApp() {
       const phoneNumber = '1234567890'; // Replace with dynamic contact number
       window.open(`https://wa.me/${phoneNumber}`, '_blank');
+    }
+
+    function markAsDoneFromSelect() {
+      const selectedItem = document.getElementById('markDoneSelect').value;
+      alert(`Item ${selectedItem} has been marked as done.`);
     }
   </script>
 </body>
