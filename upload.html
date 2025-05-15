@@ -39,20 +39,11 @@
       background-color: #81c995;
     }
 
-    .navbar .nav-buttons .upload {
-      background-color: #4fc3f7;
-      color: #fff;
-      margin-left: 10px;
-    }
-
-    .navbar .nav-buttons .upload:hover {
-      background-color: #0288d1;
-    }
 
     .upload-container {
-      max-width: 600px;
+      max-width: 650px;
       margin: 50px auto;
-      padding: 20px;
+      padding: 50px;
       background-color: #fff;
       border-radius: 8px;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -89,6 +80,34 @@
     .upload-container button:hover {
       background-color: #0288d1;
     }
+
+    .image-upload-section {
+      margin-bottom: 20px;
+    }
+    .image-grid {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+    }
+    .image-slot {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border: 1px dashed #ccc;
+      padding: 10px;
+      width: 100px;
+      height: 100px;
+      text-align: center;
+    }
+    .image-slot input {
+      display: none;
+    }
+    .image-slot p {
+      margin-top: 10px;
+      font-size: 12px;
+      color: #666;
+    }
   </style>
 </head>
 <body>
@@ -97,7 +116,7 @@
     <div class="logo">李</div>
     <div class="nav-buttons">
       <button class="back" onclick="window.location.href='index.html'">Back to Home</button>
-      <button class="upload" onclick="window.location.href='upload.html'">Upload Post</button>
+      
     </div>
   </div>
 
@@ -105,31 +124,91 @@
   <div class="upload-container">
     <h2>Create a Post</h2>
     <form id="uploadForm">
-      <input type="file" id="postImage" accept="image/*" required>
+      <div class="image-upload-section">
+        <label for="postImage">Upload Images:</label>
+        <div class="image-grid">
+          <div class="image-slot">
+            <label for="postImage1">
+              <img src="imgs/placeholder.png" alt="Upload" id="previewImage1" style="width: 100%; height: auto; cursor: pointer;">
+            </label>
+            <input type="file" id="postImage1" accept="image/*" onchange="previewImage(event, 'previewImage1')">
+            <p>Upload Picture</p>
+          </div>
+          <div class="image-slot">
+            <label for="postImage2">
+              <img src="imgs/placeholder.png" alt="Upload" id="previewImage2" style="width: 100%; height: auto; cursor: pointer;">
+            </label>
+            <input type="file" id="postImage2" accept="image/*" onchange="previewImage(event, 'previewImage2')">
+            <p>Photo 1</p>
+          </div>
+          <div class="image-slot">
+            <label for="postImage3">
+              <img src="imgs/placeholder.png" alt="Upload" id="previewImage3" style="width: 100%; height: auto; cursor: pointer;">
+            </label>
+            <input type="file" id="postImage3" accept="image/*" onchange="previewImage(event, 'previewImage3')">
+            <p>Photo 2</p>
+          </div>
+          <div class="image-slot">
+            <label for="postImage4">
+              <img src="imgs/placeholder.png" alt="Upload" id="previewImage4" style="width: 100%; height: auto; cursor: pointer;">
+            </label>
+            <input type="file" id="postImage4" accept="image/*" onchange="previewImage(event, 'previewImage4')">
+            <p>Photo 3</p>
+          </div>
+          <div class="image-slot">
+            <label for="postImage5">
+              <img src="imgs/placeholder.png" alt="Upload" id="previewImage5" style="width: 100%; height: auto; cursor: pointer;">
+            </label>
+            <input type="file" id="postImage5" accept="image/*" onchange="previewImage(event, 'previewImage5')">
+            <p>Photo 4</p>
+          </div>
+        </div>
+      </div>
       <textarea id="postDescription" placeholder="Description" required></textarea>
       <input type="text" id="postArea" placeholder="Area" required>
       <input type="text" id="postCategory" placeholder="Category" required>
-      <input type="date" id="postExpiration" required>
-      <select id="postContact">
-        <option value="admin">Admin</option>
-        <option value="owner">Owner</option>
+      <input type="text" id="postType" placeholder="Type" required>
+      <select id="postCondition" required>
+        <option value="" disabled selected>Select Condition</option>
+        <option value="new">New</option>
+        <option value="Used">Used</option>
       </select>
+      <input type="date" id="postExpiration" required>
       <button type="submit">Post</button>
     </form>
   </div>
 
   <script>
+    function previewImage(event, previewId) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          document.getElementById(previewId).src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
     document.getElementById('uploadForm').addEventListener('submit', function(event) {
       event.preventDefault();
-      const postImage = document.getElementById('postImage').files[0];
+      const images = [];
+      for (let i = 1; i <= 5; i++) {
+        const fileInput = document.getElementById(`postImage${i}`);
+        if (fileInput && fileInput.files[0]) {
+          images.push(fileInput.files[0]);
+        }
+      }
       const postDescription = document.getElementById('postDescription').value;
       const postArea = document.getElementById('postArea').value;
       const postCategory = document.getElementById('postCategory').value;
+      const postType = document.getElementById('postType').value;
+      const postCondition = document.getElementById('postCondition').value;
       const postExpiration = document.getElementById('postExpiration').value;
       const postContact = document.getElementById('postContact').value;
 
       // Simulate post creation
-      console.log('Post created:', { postImage, postDescription, postArea, postCategory, postExpiration, postContact });
+      console.log('Post created:', { images, postDescription, postArea, postCategory, postType, postCondition, postExpiration, postContact });
       alert('Post created successfully!');
     });
   </script>
