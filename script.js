@@ -19,39 +19,6 @@ document.addEventListener('DOMContentLoaded', function() {
             alert('Login submitted for: ' + username);
         });
     }
-
-    // Member Registration
-    const registrationForm = document.getElementById('registrationForm');
-    if (registrationForm) {
-        registrationForm.addEventListener('submit', function(event) {
-            event.preventDefault();
-            const memberName = document.getElementById('memberName').value;
-            const memberEmail = document.getElementById('memberEmail').value;
-            const contactPIC = document.getElementById('contactPIC').value;
-
-            // Simulate admin approval process
-            console.log('Registration submitted:', { memberName, memberEmail, contactPIC });
-            alert('Registration submitted for admin approval.');
-        });
-    }
-
-    // Posting
-    const postingForm = document.getElementById('postingForm');
-    if (postingForm) {
-        postingForm.addEventListener('submit', function(event) {
-            event.preventDefault();
-            const postImage = document.getElementById('postImage').files[0];
-            const postDescription = document.getElementById('postDescription').value;
-            const postArea = document.getElementById('postArea').value;
-            const postCategory = document.getElementById('postCategory').value;
-            const postExpiration = document.getElementById('postExpiration').value;
-            const postContact = document.getElementById('postContact').value;
-
-            // Simulate post creation
-            console.log('Post created:', { postImage, postDescription, postArea, postCategory, postExpiration, postContact });
-            alert('Post created and pending moderation.');
-        });
-    }
 });
 
 function openModal(title, description) {
@@ -76,12 +43,6 @@ function filterFood() {
       card.style.display = 'none'; // Hide the card if it doesn't match
     }
   });
-}
-
-// Mark as Done
-function markAsDone(postId) {
-    console.log(`Post ${postId} marked as done.`);
-    alert(`Post ${postId} has been marked as done.`);
 }
 
 // Moderation (Extended Functionality)
