@@ -21,10 +21,23 @@
       background-color: #5f5f5f;
       padding: 10px 20px;
     }
+
     .navbar .logo {
-      font-size: 24px;
-      font-weight: bold;
+      flex: 1;
     }
+
+    .navbar .font-selector {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+    }
+
+    .navbar .nav-buttons {
+      flex: 1;
+      display: flex;
+      justify-content: flex-end;
+    }
+
     .navbar .nav-buttons button {
       margin: 0 5px;
       padding: 10px 20px;
@@ -32,10 +45,6 @@
       border-radius: 5px;
       cursor: pointer;
     }
-    .navbar .nav-buttons .location {
-      background-color: #f28b82;
-    }
-   
     .navbar .nav-buttons .login {
       background-color: #81c995;
     }
@@ -80,38 +89,67 @@
       margin-right: 10px;
     }
 
+    /* Container and Sidebar */
+    .container {
+      display: flex;
+    }
+
+    .sidebar {
+      width: 20%;
+      background-color: #444;
+      color: #fff;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
     /* Image Grid */
     .image-container {
+      width: 80%;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive columns */
+      grid-template-columns: repeat(4, 1fr); /* 4 columns */
+      grid-auto-rows: minmax(200px, auto); /* Adjust rows to fit content */
       gap: 20px;
       padding: 20px;
+      justify-content: center; /* Center the grid horizontally */
     }
     .image-card {
-      background-color: #ccc;
+      background-color: #fff;
+      border: 1px solid #ddd;
       border-radius: 8px;
       overflow: hidden;
       cursor: pointer;
       transition: transform 0.3s;
-      text-align: center;
+      text-align: left;
       display: flex;
       flex-direction: column;
-      align-items: center;
       justify-content: space-between;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
     .image-card:hover {
       transform: scale(1.05);
     }
     .image-card img {
       width: 100%;
-      height: 200px; /* Fixed height for uniformity */
-      object-fit: cover; /* Ensures the image fits neatly */
+      height: 150px;
+      object-fit: cover;
     }
-    .image-card .description {
+    .image-card .details {
       padding: 10px;
-      background-color: #444;
-      color: #fff;
-      width: 100%;
+    }
+    .image-card .details h3 {
+      font-size: 16px;
+      margin: 0;
+      color: #333;
+    }
+    .image-card .details p {
+      font-size: 14px;
+      margin: 5px 0;
+      color: #666;
+    }
+    .image-card .details .price {
+      font-size: 18px;
+      font-weight: bold;
+      color: #000;
     }
 
     /* Modal */
@@ -148,102 +186,11 @@
       cursor: pointer;
     }
 
-    /* Moderation, WhatsApp Interaction */
-    .moderation, .whatsapp-interaction {
-      padding: 20px;
-      background-color: #444;
-      margin: 20px;
-      border-radius: 8px;
-    }
-    .moderation h2, .whatsapp-interaction h2 {
-      margin-top: 0;
-    }
-    .moderation #moderationList {
-      width: 100%;
-      padding: 10px;
-      margin: 10px 0;
-      border: none;
-      border-radius: 5px;
-    }
-    .moderation button {
-      background-color: #4fc3f7;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 5px;
-      cursor: pointer;
-      color: #fff;
-    }
-    .moderation #moderationList {
-      max-height: 300px;
-      overflow-y: auto;
-      background-color: #fff;
-      color: #000;
-      padding: 10px;
-      border-radius: 5px;
-    }
-    .whatsapp-interaction button {
-      background-color: #25D366;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 5px;
-      cursor: pointer;
-      color: #fff;
-    }
 
-    /* Mark as Done Section */
-    .mark-as-done {
-      padding: 20px;
-      background-color: #555;
-      margin: 20px;
-      border-radius: 8px;
-      text-align: center;
-    }
-    .mark-as-done button {
-      background-color: #4caf50;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 5px;
-      cursor: pointer;
-      color: #fff;
-    }
+   
 
-    /* Mark as Done Overlay */
-    .mark-done-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.8);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-    }
-    .overlay-content {
-      background-color: #fff;
-      padding: 20px;
-      border-radius: 8px;
-      text-align: center;
-      width: 80%;
-      max-width: 500px;
-    }
-    .overlay-content h2 {
-      margin-bottom: 20px;
-    }
-    .item-list button {
-      display: block;
-      margin: 10px auto;
-      padding: 10px 20px;
-      background-color: #4caf50;
-      color: #fff;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    .item-list button:hover {
-      background-color: #388e3c;
-    }
+  
+    
     .close-overlay {
       margin-top: 20px;
       padding: 10px 20px;
@@ -261,17 +208,63 @@
       background-color: #fff;
       color: #000;
     }
+
+    /* Hidden Bar Styles */
+    .hidden-bar {
+      position: fixed;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 0;
+      background-color: #333;
+      overflow-x: hidden;
+      transition: 0.5s;
+      padding-top: 60px;
+      color: white;
+    }
+
+    .hidden-bar a {
+      padding: 8px 8px 8px 32px;
+      text-decoration: none;
+      font-size: 25px;
+      color: #818181;
+      display: block;
+      transition: 0.3s;
+    }
+
+    .hidden-bar a:hover {
+      color: #f1f1f1;
+    }
+
+    .hidden-bar .close-btn {
+      position: absolute;
+      top: 0;
+      right: 25px;
+      font-size: 36px;
+      margin-left: 50px;
+    }
+
+    .open-hidden-bar {
+      font-size: 20px;
+      cursor: pointer;
+      color: white;
+      background-color: #444;
+      border: none;
+      padding: 10px;
+      margin: 10px;
+    }
   </style>
 </head>
 <body>
   <!-- Navigation Bar -->
   <div class="navbar">
     <div class="logo">李</div>
+    
     <div class="nav-buttons">
-      <button class="location" onclick="filterByLocation(prompt('Enter location (e.g., japan, china, all):'))">Location</button>
-      <button class="login" onclick="window.location.href='login.html'">Login/Logout</button>
+      <button class="login" onclick="window.location.href='login.html'">Logout</button>
       <button class="upload" onclick="window.location.href='uploadprep.html'">Upload Post</button>
       <button class="register" onclick="window.location.href='member.html'">Member Registration</button>
+      <button class="font-size-toggle" onclick="toggleFontSize()">Toggle Font Size</button>
     </div>
   </div>
 
@@ -280,72 +273,176 @@
     <input type="text" id="searchBar" placeholder="Search for food..." oninput="filterFood()">
   </div>
 
-  <!-- Image Grid -->
-  <div class="image-container">
-    <!-- Adding more image cards -->
-    <div class="image-card" data-location="japan">
-      <img src="imgs/sushi.png" alt="Sushi">
-      <div class="description" onclick="window.location.href='item.html?image=1'">Sushi</div>
+  <!-- Container with Sidebar and Image Grid -->
+  <div class="container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <h3>Filter</h3>
+      <div>
+        <h4>Category</h4>
+        <ul>
+          <li><input type="checkbox" id="category1"> Handphone & Tablet</li>
+          <li><input type="checkbox" id="category2"> Accessories</li>
+          <li><input type="checkbox" id="category3"> Automotive</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Location</h4>
+        <select onchange="filterByLocation(this.value)">
+          <option value="all">All Locations</option>
+          <option value="japan">Japan</option>
+          <option value="china">China</option>
+          <option value="thailand">Thailand</option>
+          <option value="korea">Korea</option>
+          <option value="indonesia">Indonesia</option>
+          <option value="vietnam">Vietnam</option>
+          <option value="india">India</option>
+        </select>
+      </div>
+      <div>
+        <h4>Price</h4>
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span>Rp</span>
+          <input type="text" placeholder="Minimum Price" id="minPrice" style="width: 100px;">
+        </div>
+        <div style="display: flex; align-items: center; gap: 10px; margin-top: 10px;">
+          <span>Rp</span>
+          <input type="text" placeholder="Maximum Price" id="maxPrice" style="width: 100px;">
+        </div>
+      </div>
     </div>
-    <div class="image-card" data-location="china">
-      <img src="imgs/dimsum.png" alt="Dim Sum">
-      <div class="description" onclick="window.location.href='item.html?image=2'">Dim Sum</div>
-    </div>
-    <div class="image-card" data-location="japan">
-      <img src="imgs/ramen.png" alt="Ramen">
-      <div class="description" onclick="window.location.href='item.html?image=3'">Ramen</div>
-    </div>
-    <div class="image-card" data-location="thailand">
-      <img src="imgs/pad thai.png" alt="Pad Thai">
-      <div class="description" onclick="window.location.href='item.html?image=4'">Pad Thai</div>
-    </div>
-    <div class="image-card" data-location="korea">
-      <img src="imgs/bibimbap.png" alt="Bibimbap">
-      <div class="description" onclick="window.location.href='item.html?image=5'">Bibimbap</div>
-    </div>
-    <div class="image-card" data-location="indonesia">
-      <img src="imgs/satay.png" alt="Satay">
-      <div class="description" onclick="window.location.href='item.html?image=6'">Satay</div>
-    </div>
-    <div class="image-card" data-location="vietnam">
-      <img src="imgs/pho.png" alt="Pho">
-      <div class="description" onclick="window.location.href='item.html?image=7'">Pho</div>
-    </div>
-    <div class="image-card" data-location="japan">
-      <img src="imgs/tempura.png" alt="Tempura">
-      <div class="description" onclick="window.location.href='item.html?image=8'">Tempura</div>
-    </div>
-    <div class="image-card" data-location="korea">
-      <img src="imgs/kimbap.png" alt="Kimbap">
-      <div class="description" onclick="window.location.href='item.html?image=9'">Kimbap</div>
-    </div>
-    <div class="image-card" data-location="korea">
-      <img src="imgs/tteokbokki.png" alt="Tteokbokki">
-      <div class="description" onclick="window.location.href='item.html?image=10'">Tteokbokki</div>
-    </div>
-    <div class="image-card" data-location="vietnam">
-      <img src="imgs/spring-rolls.png" alt="Spring Rolls">
-      <div class="description" onclick="window.location.href='item.html?image=11'">Spring Rolls</div>
-    </div>
-    <div class="image-card" data-location="india">
-      <img src="imgs/naan.png" alt="Naan">
-      <div class="description" onclick="window.location.href='item.html?image=12'">Naan</div>
-    </div>
-    <div class="image-card" data-location="india">
-      <img src="imgs/biryani.png" alt="Biryani">
-      <div class="description" onclick="window.location.href='item.html?image=13'">Biryani</div>
-    </div>
-    <div class="image-card" data-location="japan">
-      <img src="imgs/miso-soup.png" alt="Miso Soup">
-      <div class="description" onclick="window.location.href='item.html?image=14'">Miso Soup</div>
-    </div>
-    <div class="image-card" data-location="thailand">
-      <img src="imgs/green-curry.png" alt="Green Curry">
-      <div class="description" onclick="window.location.href='item.html?image=15'">Green Curry</div>
-    </div>
-    <div class="image-card" data-location="china">
-      <img src="imgs/baozi.png" alt="Baozi">
-      <div class="description" onclick="window.location.href='item.html?image=16'">Baozi</div>
+
+    <!-- Image Grid -->
+    <div class="image-container">
+      <!-- Updated image cards with new design -->
+      <div class="image-card" onclick="window.location.href='item.html?image=1'">
+        <img src="imgs/sushi.png" alt="Sushi">
+        <div class="details">
+          <h3>Sushi</h3>
+          <p>Traditional Japanese dish</p>
+          <p class="price">$15</p>
+        </div>
+      </div>
+      <div class="image-card" onclick="window.location.href='item.html?image=2'">
+        <img src="imgs/dimsum.png" alt="Dim Sum">
+        <div class="details">
+          <h3>Dim Sum</h3>
+          <p>Chinese small dishes</p>
+          <p class="price">$20</p>
+        </div>
+      </div>
+      <div class="image-card" onclick="window.location.href='item.html?image=3'">
+        <img src="imgs/ramen.png" alt="Ramen">
+        <div class="details">
+          <h3>Ramen</h3>
+          <p>Japanese noodle soup</p>
+          <p class="price">$12</p>
+        </div>
+      </div>
+      <div class="image-card" onclick="window.location.href='item.html?image=4'">
+        <img src="imgs/pad thai.png" alt="Pad Thai">
+        <div class="details">
+          <h3>Pad Thai</h3>
+          <p>Thai stir-fried noodles</p>
+          <p class="price">$10</p>
+        </div>
+      </div>
+      <div class="image-card" data-location="korea">
+        <img src="imgs/bibimbap.png" alt="Bibimbap">
+        <div class="details">
+          <h3>Bibimbap</h3>
+          <p>Mixed rice with vegetables and meat.</p>
+          <div class="price">$9</div>
+        </div>
+      </div>
+      <div class="image-card" data-location="indonesia">
+        <img src="imgs/satay.png" alt="Satay">
+        <div class="details">
+          <h3>Satay</h3>
+          <p>Grilled meat skewers with peanut sauce.</p>
+          <div class="price">$10</div>
+        </div>
+      </div>
+      <div class="image-card" data-location="vietnam">
+        <img src="imgs/pho.png" alt="Pho">
+        <div class="details">
+          <h3>Pho</h3>
+          <p>Vietnamese noodle soup with herbs and meat.</p>
+          <div class="price">$7</div>
+        </div>
+      </div>
+      <div class="image-card" data-location="japan">
+        <img src="imgs/tempura.png" alt="Tempura">
+        <div class="details">
+          <h3>Tempura</h3>
+          <p>Battered and deep-fried seafood and vegetables.</p>
+          <div class="price">$13</div>
+        </div>
+      </div>
+      <div class="image-card" data-location="korea">
+        <img src="imgs/kimbap.png" alt="Kimbap">
+        <div class="details">
+          <h3>Kimbap</h3>
+          <p>Korean rice rolls with vegetables and meat.</p>
+          <div class="price">$8</div>
+        </div>
+      </div>
+      <div class="image-card" data-location="korea">
+        <img src="imgs/tteokbokki.png" alt="Tteokbokki">
+        <div class="details">
+          <h3>Tteokbokki</h3>
+          <p>Spicy Korean rice cakes with fish cakes.</p>
+          <div class="price">$9</div>
+        </div>
+      </div>
+      <div class="image-card" data-location="vietnam">
+        <img src="imgs/spring-rolls.png" alt="Spring Rolls">
+        <div class="details">
+          <h3>Spring Rolls</h3>
+          <p>Crispy rolls with shrimp and vegetables.</p>
+          <div class="price">$6</div>
+        </div>
+      </div>
+      <div class="image-card" data-location="india">
+        <img src="imgs/naan.png" alt="Naan">
+        <div class="details">
+          <h3>Naan</h3>
+          <p>Soft and fluffy Indian bread.</p>
+          <div class="price">$4</div>
+        </div>
+      </div>
+      <div class="image-card" data-location="india">
+        <img src="imgs/biryani.png" alt="Biryani">
+        <div class="details">
+          <h3>Biryani</h3>
+          <p>Fragrant rice dish with meat and spices.</p>
+          <div class="price">$15</div>
+        </div>
+      </div>
+      <div class="image-card" data-location="japan">
+        <img src="imgs/miso-soup.png" alt="Miso Soup">
+        <div class="details">
+          <h3>Miso Soup</h3>
+          <p>Traditional Japanese soup with tofu and seaweed.</p>
+          <div class="price">$5</div>
+        </div>
+      </div>
+      <div class="image-card" data-location="thailand">
+        <img src="imgs/green-curry.png" alt="Green Curry">
+        <div class="details">
+          <h3>Green Curry</h3>
+          <p>Spicy Thai curry with coconut milk and vegetables.</p>
+          <div class="price">$14</div>
+        </div>
+      </div>
+      <div class="image-card" data-location="china">
+        <img src="imgs/baozi.png" alt="Baozi">
+        <div class="details">
+          <h3>Baozi</h3>
+          <p>Chinese steamed buns with various fillings.</p>
+          <div class="price">$7</div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -359,36 +456,15 @@
   </div>
 
 
-
-  <!-- Mark as Done Section -->
-  <div class="mark-as-done">
-    <h2>Mark as Done</h2>
-    <select id="markDoneSelect">
-      <option value="1">Sushi</option>
-      <option value="2">Dim Sum</option>
-      <option value="3">Ramen</option>
-      <option value="4">Pad Thai</option>
-      <option value="5">Bibimbap</option>
-      <option value="6">Satay</option>
-      <option value="7">Pho</option>
-      <option value="8">Tempura</option>
-      <option value="9">Kimbap</option>
-      <option value="10">Tteokbokki</option>
-      <option value="11">Spring Rolls</option>
-      <option value="12">Naan</option>
-      <option value="13">Biryani</option>
-      <option value="14">Miso Soup</option>
-      <option value="15">Green Curry</option>
-      <option value="16">Baozi</option>
-    </select>
-    <button onclick="markAsDoneFromSelect()">Mark as Done</button>
+  <!-- Hidden Bar -->
+  <div id="hiddenBar" class="hidden-bar">
+    <a href="javascript:void(0)" class="close-btn" onclick="closeHiddenBar()">&times;</a>
+    <a href="#">Link 1</a>
+    <a href="#">Link 2</a>
+    <a href="#">Link 3</a>
   </div>
 
-  <!-- WhatsApp Interaction -->
-  <div class="whatsapp-interaction">
-    <h2>Contact via WhatsApp</h2>
-    <button onclick="contactWhatsApp()">Contact Now</button>
-  </div>
+  <button class="open-hidden-bar" onclick="openHiddenBar()">☰ Open Hidden Bar</button>
 
   <script>
     function openModal(title, description) {
@@ -428,21 +504,52 @@
       });
     }
 
-    // Mark as Done (Example Functionality)
-    function markAsDone(postId) {
-      document.getElementById(`post${postId}`).style.textDecoration = 'line-through';
-      alert(`Post ${postId} marked as done.`);
+    function filterByPrice() {
+      const minPrice = parseFloat(document.getElementById('minPrice').value.replace('.', '').replace(',', '.'));
+      const maxPrice = parseFloat(document.getElementById('maxPrice').value.replace('.', '').replace(',', '.'));
+      const foodCards = document.querySelectorAll('.image-card');
+
+      foodCards.forEach(card => {
+          const priceElement = card.querySelector('.price');
+          const price = parseFloat(priceElement.innerText.replace('$', '').replace('.', '').replace(',', '.'));
+
+          if ((isNaN(minPrice) || price >= minPrice) && (isNaN(maxPrice) || price <= maxPrice)) {
+              card.style.display = 'block';
+          } else {
+              card.style.display = 'none';
+          }
+      });
     }
 
-    // WhatsApp Interaction
-    function contactWhatsApp() {
-      const phoneNumber = '1234567890'; // Replace with dynamic contact number
-      window.open(`https://wa.me/${phoneNumber}`, '_blank');
+    // Attach event listeners to price input fields
+    document.getElementById('minPrice').addEventListener('input', filterByPrice);
+    document.getElementById('maxPrice').addEventListener('input', filterByPrice);
+
+    
+
+    function openHiddenBar() {
+      document.getElementById("hiddenBar").style.width = "250px";
     }
 
-    function markAsDoneFromSelect() {
-      const selectedItem = document.getElementById('markDoneSelect').value;
-      alert(`Item ${selectedItem} has been marked as done.`);
+    function closeHiddenBar() {
+      document.getElementById("hiddenBar").style.width = "0";
+    }
+
+    // Update the onclick logic for image cards
+    document.querySelectorAll('.image-card').forEach((card, index) => {
+      card.onclick = () => {
+        window.location.href = `item.html?image=${index + 1}`;
+      };
+    });
+
+    function changeFontSize(size) {
+      document.body.style.fontSize = size;
+    }
+
+    function toggleFontSize() {
+      const currentSize = window.getComputedStyle(document.body).fontSize;
+      const newSize = (currentSize === '16px' || currentSize === '') ? '18px' : '16px';
+      document.body.style.fontSize = newSize;
     }
   </script>
 </body>
