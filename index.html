@@ -9,7 +9,7 @@
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
-      background-color: #333;
+      background-color: #777777;
       color: #ffffff;
     }
 
@@ -18,7 +18,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background-color: #5f5f5f;
+      background-color: #505050;
       padding: 10px 20px;
     }
 
@@ -92,64 +92,80 @@
     /* Container and Sidebar */
     .container {
       display: flex;
+      gap: 32px;
+      max-width: 1300px;
+      margin: 40px auto;
     }
 
     .sidebar {
-      width: 20%;
-      background-color: #444;
-      color: #fff;
-      padding: 20px;
+      width: 260px;
+      background-color: #fff;
+      color: #222;
+      padding: 28px 20px;
       box-sizing: border-box;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      min-height: 600px;
     }
 
     /* Image Grid */
     .image-container {
-      width: 80%;
+      flex: 1;
       display: grid;
-      grid-template-columns: repeat(4, 1fr); /* 4 columns */
-      grid-auto-rows: minmax(200px, auto); /* Adjust rows to fit content */
-      gap: 20px;
-      padding: 20px;
-      justify-content: center; /* Center the grid horizontally */
+      grid-template-columns: repeat(4, 1fr);
+      grid-auto-rows: minmax(220px, auto);
+      gap: 24px;
+      padding: 0;
+      align-items: stretch;
     }
     .image-card {
       background-color: #fff;
-      border: 1px solid #ddd;
-      border-radius: 8px;
+      border: 1px solid #eee;
+      border-radius: 12px;
       overflow: hidden;
       cursor: pointer;
-      transition: transform 0.3s;
+      transition: box-shadow 0.2s, transform 0.2s;
       text-align: left;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      justify-content: flex-start;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      min-height: 260px;
     }
     .image-card:hover {
-      transform: scale(1.05);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+      transform: translateY(-4px) scale(1.03);
     }
     .image-card img {
       width: 100%;
-      height: 150px;
+      height: 160px;
       object-fit: cover;
+      background: #f7f7f7;
+      border-bottom: 1px solid #eee;
     }
     .image-card .details {
-      padding: 10px;
+      padding: 16px 16px 10px 16px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
     }
     .image-card .details h3 {
-      font-size: 16px;
-      margin: 0;
-      color: #333;
+      font-size: 17px;
+      margin: 0 0 6px 0;
+      color: #222;
+      font-weight: 600;
     }
     .image-card .details p {
       font-size: 14px;
-      margin: 5px 0;
+      margin: 0 0 8px 0;
       color: #666;
     }
     .image-card .details .price {
       font-size: 18px;
       font-weight: bold;
-      color: #000;
+      color: #00aa5b;
+      margin-top: auto;
     }
 
     /* Modal */
@@ -303,6 +319,23 @@
         </select>
       </div>
       <div>
+        <h4>Condition</h4>
+        <select id="conditionSelect">
+          <option value="all">All</option>
+          <option value="new">New</option>
+          <option value="used">Used</option>
+        </select>
+      </div>
+      <div>
+        <h4>Release Date</h4>
+        <select id="releaseSelect">
+          <option value="all">Anytime</option>
+          <option value="day">A day ago</option>
+          <option value="week">A week ago</option>
+          <option value="month">A month ago</option>
+        </select>
+      </div>
+      <div>
         <h4>Price</h4>
         <div style="display: flex; align-items: center; gap: 10px;">
           <span>Rp</span>
@@ -319,7 +352,7 @@
     <!-- Image Grid -->
     <div class="image-container">
       <!-- Updated image cards with new design -->
-      <div class="image-card" data-category="authentic" onclick="window.location.href='item.html?image=1'">
+      <div class="image-card" data-category="authentic" data-condition="new" data-release="2025-05-18" onclick="window.location.href='item.html?image=1'">
         <img src="imgs/sushi.png" alt="Sushi">
         <div class="details">
           <h3>Sushi</h3>
@@ -327,7 +360,7 @@
           <p class="price">$15</p>
         </div>
       </div>
-      <div class="image-card" data-category="authentic" onclick="window.location.href='item.html?image=2'">
+      <div class="image-card" data-category="authentic" data-condition="used" data-release="2025-05-12" onclick="window.location.href='item.html?image=2'">
         <img src="imgs/dimsum.png" alt="Dim Sum">
         <div class="details">
           <h3>Dim Sum</h3>
@@ -335,7 +368,7 @@
           <p class="price">$20</p>
         </div>
       </div>
-      <div class="image-card" data-category="authentic" onclick="window.location.href='item.html?image=3'">
+      <div class="image-card" data-category="authentic" data-condition="new" data-release="2025-05-10" onclick="window.location.href='item.html?image=3'">
         <img src="imgs/ramen.png" alt="Ramen">
         <div class="details">
           <h3>Ramen</h3>
@@ -343,7 +376,7 @@
           <p class="price">$12</p>
         </div>
       </div>
-      <div class="image-card" data-category="authentic" onclick="window.location.href='item.html?image=4'">
+      <div class="image-card" data-category="authentic" data-condition="used" data-release="2025-04-19" onclick="window.location.href='item.html?image=4'">
         <img src="imgs/pad thai.png" alt="Pad Thai">
         <div class="details">
           <h3>Pad Thai</h3>
@@ -351,7 +384,7 @@
           <p class="price">$10</p>
         </div>
       </div>
-      <div class="image-card" data-location="korea" data-category="authentic" onclick="window.location.href='item.html?image=5'">
+      <div class="image-card" data-location="korea" data-category="authentic" data-condition="new" data-release="2025-05-17" onclick="window.location.href='item.html?image=5'">
         <img src="imgs/bibimbap.png" alt="Bibimbap">
         <div class="details">
           <h3>Bibimbap</h3>
@@ -359,7 +392,7 @@
           <div class="price">$9</div>
         </div>
       </div>
-      <div class="image-card" data-location="indonesia" data-category="fast food" onclick="window.location.href='item.html?image=6'">
+      <div class="image-card" data-location="indonesia" data-category="fast food" data-condition="used" data-release="2025-05-15" onclick="window.location.href='item.html?image=6'">
         <img src="imgs/satay.png" alt="Satay">
         <div class="details">
           <h3>Satay</h3>
@@ -367,7 +400,7 @@
           <div class="price">$10</div>
         </div>
       </div>
-      <div class="image-card" data-location="vietnam" data-category="authentic" onclick="window.location.href='item.html?image=7'">
+      <div class="image-card" data-location="vietnam" data-category="authentic" data-condition="new" data-release="2025-05-13" onclick="window.location.href='item.html?image=7'">
         <img src="imgs/pho.png" alt="Pho">
         <div class="details">
           <h3>Pho</h3>
@@ -375,7 +408,7 @@
           <div class="price">$7</div>
         </div>
       </div>
-      <div class="image-card" data-location="japan" data-category="fast food" onclick="window.location.href='item.html?image=8'">
+      <div class="image-card" data-location="japan" data-category="fast food" data-condition="used" data-release="2025-05-10" onclick="window.location.href='item.html?image=8'">
         <img src="imgs/tempura.png" alt="Tempura">
         <div class="details">
           <h3>Tempura</h3>
@@ -383,7 +416,7 @@
           <div class="price">$13</div>
         </div>
       </div>
-      <div class="image-card" data-location="korea" data-category="fast food" onclick="window.location.href='item.html?image=9'">
+      <div class="image-card" data-location="korea" data-category="fast food" data-condition="new" data-release="2025-05-01" onclick="window.location.href='item.html?image=9'">
         <img src="imgs/kimbap.png" alt="Kimbap">
         <div class="details">
           <h3>Kimbap</h3>
@@ -391,7 +424,7 @@
           <div class="price">$8</div>
         </div>
       </div>
-      <div class="image-card" data-location="korea" data-category="nearby" onclick="window.location.href='item.html?image=10'">
+      <div class="image-card" data-location="korea" data-category="nearby" data-condition="used" data-release="2025-04-30" onclick="window.location.href='item.html?image=10'">
         <img src="imgs/tteokbokki.png" alt="Tteokbokki">
         <div class="details">
           <h3>Tteokbokki</h3>
@@ -399,7 +432,7 @@
           <div class="price">$9</div>
         </div>
       </div>
-      <div class="image-card" data-location="vietnam" data-category="fast food" onclick="window.location.href='item.html?image=11'">
+      <div class="image-card" data-location="vietnam" data-category="fast food" data-condition="new" data-release="2025-05-19" onclick="window.location.href='item.html?image=11'">
         <img src="imgs/spring-rolls.png" alt="Spring Rolls">
         <div class="details">
           <h3>Spring Rolls</h3>
@@ -407,7 +440,7 @@
           <div class="price">$6</div>
         </div>
       </div>
-      <div class="image-card" data-location="india" data-category="nearby" onclick="window.location.href='item.html?image=12'">
+      <div class="image-card" data-location="india" data-category="nearby" data-condition="used" data-release="2025-05-18" onclick="window.location.href='item.html?image=12'">
         <img src="imgs/naan.png" alt="Naan">
         <div class="details">
           <h3>Naan</h3>
@@ -415,7 +448,7 @@
           <div class="price">$4</div>
         </div>
       </div>
-      <div class="image-card" data-location="india" data-category="authentic" onclick="window.location.href='item.html?image=13'">
+      <div class="image-card" data-location="india" data-category="authentic" data-condition="new" data-release="2025-05-17" onclick="window.location.href='item.html?image=13'">
         <img src="imgs/biryani.png" alt="Biryani">
         <div class="details">
           <h3>Biryani</h3>
@@ -423,7 +456,7 @@
           <div class="price">$15</div>
         </div>
       </div>
-      <div class="image-card" data-location="japan" data-category="nearby" onclick="window.location.href='item.html?image=14'">
+      <div class="image-card" data-location="japan" data-category="nearby" data-condition="used" data-release="2025-05-15" onclick="window.location.href='item.html?image=14'">
         <img src="imgs/miso-soup.png" alt="Miso Soup">
         <div class="details">
           <h3>Miso Soup</h3>
@@ -431,7 +464,7 @@
           <div class="price">$5</div>
         </div>
       </div>
-      <div class="image-card" data-location="thailand" data-category="authentic" onclick="window.location.href='item.html?image=15'">
+      <div class="image-card" data-location="thailand" data-category="authentic" data-condition="new" data-release="2025-05-12" onclick="window.location.href='item.html?image=15'">
         <img src="imgs/green-curry.png" alt="Green Curry">
         <div class="details">
           <h3>Green Curry</h3>
@@ -439,7 +472,7 @@
           <div class="price">$14</div>
         </div>
       </div>
-      <div class="image-card" data-location="china" data-category="authentic" onclick="window.location.href='item.html?image=16'">
+      <div class="image-card" data-location="china" data-category="authentic" data-condition="used" data-release="2025-05-10" onclick="window.location.href='item.html?image=16'">
         <img src="imgs/baozi.png" alt="Baozi">
         <div class="details">
           <h3>Baozi</h3>
@@ -448,7 +481,7 @@
         </div>
       </div>
       <!-- Extra cards for 5 rows -->
-      <div class="image-card" data-location="china" data-category="fast food" onclick="window.location.href='item.html?image=17'">
+      <div class="image-card" data-location="china" data-category="fast food" data-condition="new" data-release="2025-05-09" onclick="window.location.href='item.html?image=17'">
         <img src="imgs/baozi.png" alt="Baozi (Chicken)">
         <div class="details">
           <h3>Baozi (Chicken)</h3>
@@ -456,7 +489,7 @@
           <div class="price">$8</div>
         </div>
       </div>
-      <div class="image-card" data-location="japan" data-category="fast food" onclick="window.location.href='item.html?image=18'">
+      <div class="image-card" data-location="japan" data-category="fast food" data-condition="used" data-release="2025-05-08" onclick="window.location.href='item.html?image=18'">
         <img src="imgs/sushi.png" alt="Sushi (Salmon)">
         <div class="details">
           <h3>Sushi (Salmon)</h3>
@@ -464,7 +497,7 @@
           <div class="price">$18</div>
         </div>
       </div>
-      <div class="image-card" data-location="thailand" data-category="nearby" onclick="window.location.href='item.html?image=19'">
+      <div class="image-card" data-location="thailand" data-category="nearby" data-condition="new" data-release="2025-05-07" onclick="window.location.href='item.html?image=19'">
         <img src="imgs/green-curry.png" alt="Green Curry (Spicy)">
         <div class="details">
           <h3>Green Curry (Spicy)</h3>
@@ -472,7 +505,7 @@
           <div class="price">$16</div>
         </div>
       </div>
-      <div class="image-card" data-location="india" data-category="fast food" onclick="window.location.href='item.html?image=20'">
+      <div class="image-card" data-location="india" data-category="fast food" data-condition="used" data-release="2025-05-06" onclick="window.location.href='item.html?image=20'">
         <img src="imgs/biryani.png" alt="Biryani (Lamb)">
         <div class="details">
           <h3>Biryani (Lamb)</h3>
@@ -480,7 +513,7 @@
           <div class="price">$20</div>
         </div>
       </div>
-      <div class="image-card" data-location="korea">
+      <div class="image-card" data-location="korea" data-category="authentic" data-condition="new" data-release="2025-05-19">
         <img src="imgs/bibimbap.png" alt="Bibimbap">
         <div class="details">
           <h3>Bibimbap</h3>
@@ -488,7 +521,7 @@
           <div class="price">$9</div>
         </div>
       </div>
-      <div class="image-card" data-location="indonesia">
+      <div class="image-card" data-location="indonesia" data-category="fast food" data-condition="used" data-release="2025-05-18">
         <img src="imgs/satay.png" alt="Satay">
         <div class="details">
           <h3>Satay</h3>
@@ -496,7 +529,7 @@
           <div class="price">$10</div>
         </div>
       </div>
-      <div class="image-card" data-location="vietnam">
+      <div class="image-card" data-location="vietnam" data-category="authentic" data-condition="new" data-release="2025-05-17">
         <img src="imgs/pho.png" alt="Pho">
         <div class="details">
           <h3>Pho</h3>
@@ -504,7 +537,7 @@
           <div class="price">$7</div>
         </div>
       </div>
-      <div class="image-card" data-location="japan">
+      <div class="image-card" data-location="japan" data-category="fast food" data-condition="used" data-release="2025-05-16">
         <img src="imgs/tempura.png" alt="Tempura">
         <div class="details">
           <h3>Tempura</h3>
@@ -512,7 +545,7 @@
           <div class="price">$13</div>
         </div>
       </div>
-      <div class="image-card" data-location="korea">
+      <div class="image-card" data-location="korea" data-category="fast food" data-condition="new" data-release="2025-05-15">
         <img src="imgs/kimbap.png" alt="Kimbap">
         <div class="details">
           <h3>Kimbap</h3>
@@ -520,7 +553,7 @@
           <div class="price">$8</div>
         </div>
       </div>
-      <div class="image-card" data-location="korea">
+      <div class="image-card" data-location="korea" data-category="nearby" data-condition="used" data-release="2025-05-14">
         <img src="imgs/tteokbokki.png" alt="Tteokbokki">
         <div class="details">
           <h3>Tteokbokki</h3>
@@ -528,7 +561,7 @@
           <div class="price">$9</div>
         </div>
       </div>
-      <div class="image-card" data-location="vietnam">
+      <div class="image-card" data-location="vietnam" data-category="fast food" data-condition="new" data-release="2025-05-13">
         <img src="imgs/spring-rolls.png" alt="Spring Rolls">
         <div class="details">
           <h3>Spring Rolls</h3>
@@ -536,7 +569,7 @@
           <div class="price">$6</div>
         </div>
       </div>
-      <div class="image-card" data-location="india">
+      <div class="image-card" data-location="india" data-category="nearby" data-condition="used" data-release="2025-05-12">
         <img src="imgs/naan.png" alt="Naan">
         <div class="details">
           <h3>Naan</h3>
@@ -544,7 +577,7 @@
           <div class="price">$4</div>
         </div>
       </div>
-      <div class="image-card" data-location="india">
+      <div class="image-card" data-location="india" data-category="authentic" data-condition="new" data-release="2025-05-11">
         <img src="imgs/biryani.png" alt="Biryani">
         <div class="details">
           <h3>Biryani</h3>
@@ -552,7 +585,7 @@
           <div class="price">$15</div>
         </div>
       </div>
-      <div class="image-card" data-location="japan">
+      <div class="image-card" data-location="japan" data-category="nearby" data-condition="used" data-release="2025-05-10">
         <img src="imgs/miso-soup.png" alt="Miso Soup">
         <div class="details">
           <h3>Miso Soup</h3>
@@ -560,7 +593,7 @@
           <div class="price">$5</div>
         </div>
       </div>
-      <div class="image-card" data-location="thailand">
+      <div class="image-card" data-location="thailand" data-category="authentic" data-condition="new" data-release="2025-05-09">
         <img src="imgs/green-curry.png" alt="Green Curry">
         <div class="details">
           <h3>Green Curry</h3>
@@ -568,7 +601,7 @@
           <div class="price">$14</div>
         </div>
       </div>
-      <div class="image-card" data-location="china">
+      <div class="image-card" data-location="china" data-category="authentic" data-condition="used" data-release="2025-05-08">
         <img src="imgs/baozi.png" alt="Baozi">
         <div class="details">
           <h3>Baozi</h3>
@@ -659,9 +692,13 @@
     document.getElementById('applyFiltersBtn').addEventListener('click', function() {
       const selectedCategories = Array.from(document.querySelectorAll('.category-checkbox:checked')).map(cb => cb.value.toLowerCase());
       const selectedLocation = document.getElementById('locationSelect').value;
+      const selectedCondition = document.getElementById('conditionSelect').value;
+      const selectedRelease = document.getElementById('releaseSelect').value;
       const minPrice = parseFloat(document.getElementById('minPrice').value.replace('.', '').replace(',', '.'));
       const maxPrice = parseFloat(document.getElementById('maxPrice').value.replace('.', '').replace(',', '.'));
       const foodCards = document.querySelectorAll('.image-card');
+
+      const now = new Date();
 
       foodCards.forEach(card => {
         // Category filter
@@ -670,12 +707,28 @@
         // Location filter
         const foodLocation = card.getAttribute('data-location');
         let locationMatch = (selectedLocation === 'all' || foodLocation === selectedLocation);
+        // Condition filter
+        let cardCondition = card.getAttribute('data-condition');
+        let conditionMatch = (selectedCondition === 'all' || (cardCondition && cardCondition === selectedCondition));
+        // Release date filter
+        let cardRelease = card.getAttribute('data-release');
+        let releaseMatch = true;
+        if (selectedRelease !== 'all' && cardRelease) {
+          const releaseDate = new Date(cardRelease);
+          if (selectedRelease === 'day') {
+            releaseMatch = (now - releaseDate) <= 24*60*60*1000;
+          } else if (selectedRelease === 'week') {
+            releaseMatch = (now - releaseDate) <= 7*24*60*60*1000;
+          } else if (selectedRelease === 'month') {
+            releaseMatch = (now - releaseDate) <= 31*24*60*60*1000;
+          }
+        }
         // Price filter
         const priceElement = card.querySelector('.price');
         const price = parseFloat(priceElement.innerText.replace('$', '').replace('.', '').replace(',', '.'));
         let priceMatch = (isNaN(minPrice) || price >= minPrice) && (isNaN(maxPrice) || price <= maxPrice);
 
-        if (categoryMatch && locationMatch && priceMatch) {
+        if (categoryMatch && locationMatch && conditionMatch && releaseMatch && priceMatch) {
           card.style.display = 'block';
         } else {
           card.style.display = 'none';
