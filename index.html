@@ -9,7 +9,7 @@
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
-      background-color: #777777;
+      background-color: #dadada;
       color: #ffffff;
     }
 
@@ -18,7 +18,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background-color: #505050;
+      background-color: #999999;
       padding: 10px 20px;
     }
 
@@ -301,9 +301,12 @@
         <h4>Category</h4>
         <ul>
           <li><input type="checkbox" class="category-checkbox" value="Fast Food"> Fast Food</li>
-          <li><input type="checkbox" class="category-checkbox" value="Nearby"> Nearby</li>
+          <li><input type="checkbox" class="category-checkbox" value="Trending"> Trending</li>
           <li><input type="checkbox" class="category-checkbox" value="Authentic"> Authentic</li>
+          <li><input type="checkbox" class="category-checkbox" value="Light Meal"> Light Meal</li>
+          <li><input type="checkbox" class="category-checkbox" value="Healthy"> Healthy</li>
         </ul>
+        <button id="clearCategoryBtn" style="margin-top:8px; padding:4px 10px; background:#eee; color:#333; border:none; border-radius:4px; cursor:pointer; font-size:13px;">Clear</button>
       </div>
       <div>
         <h4>Location</h4>
@@ -376,7 +379,7 @@
           <p class="price">$12</p>
         </div>
       </div>
-      <div class="image-card" data-category="authentic" data-condition="used" data-release="2025-04-19" onclick="window.location.href='item.html?image=4'">
+      <div class="image-card" data-category="light meal" data-condition="used" data-release="2025-04-19" onclick="window.location.href='item.html?image=4'">
         <img src="imgs/pad thai.png" alt="Pad Thai">
         <div class="details">
           <h3>Pad Thai</h3>
@@ -392,7 +395,7 @@
           <div class="price">$9</div>
         </div>
       </div>
-      <div class="image-card" data-location="indonesia" data-category="fast food" data-condition="used" data-release="2025-05-15" onclick="window.location.href='item.html?image=6'">
+      <div class="image-card" data-location="indonesia" data-category="trending" data-condition="used" data-release="2025-05-15" onclick="window.location.href='item.html?image=6'">
         <img src="imgs/satay.png" alt="Satay">
         <div class="details">
           <h3>Satay</h3>
@@ -408,7 +411,7 @@
           <div class="price">$7</div>
         </div>
       </div>
-      <div class="image-card" data-location="japan" data-category="fast food" data-condition="used" data-release="2025-05-10" onclick="window.location.href='item.html?image=8'">
+      <div class="image-card" data-location="japan" data-category="trending" data-condition="used" data-release="2025-05-10" onclick="window.location.href='item.html?image=8'">
         <img src="imgs/tempura.png" alt="Tempura">
         <div class="details">
           <h3>Tempura</h3>
@@ -416,7 +419,7 @@
           <div class="price">$13</div>
         </div>
       </div>
-      <div class="image-card" data-location="korea" data-category="fast food" data-condition="new" data-release="2025-05-01" onclick="window.location.href='item.html?image=9'">
+      <div class="image-card" data-location="korea" data-category="light meal" data-condition="new" data-release="2025-05-01" onclick="window.location.href='item.html?image=9'">
         <img src="imgs/kimbap.png" alt="Kimbap">
         <div class="details">
           <h3>Kimbap</h3>
@@ -424,7 +427,7 @@
           <div class="price">$8</div>
         </div>
       </div>
-      <div class="image-card" data-location="korea" data-category="nearby" data-condition="used" data-release="2025-04-30" onclick="window.location.href='item.html?image=10'">
+      <div class="image-card" data-location="korea" data-category="light meal" data-condition="used" data-release="2025-04-30" onclick="window.location.href='item.html?image=10'">
         <img src="imgs/tteokbokki.png" alt="Tteokbokki">
         <div class="details">
           <h3>Tteokbokki</h3>
@@ -432,7 +435,7 @@
           <div class="price">$9</div>
         </div>
       </div>
-      <div class="image-card" data-location="vietnam" data-category="fast food" data-condition="new" data-release="2025-05-19" onclick="window.location.href='item.html?image=11'">
+      <div class="image-card" data-location="vietnam" data-category="trending" data-condition="new" data-release="2025-05-19" onclick="window.location.href='item.html?image=11'">
         <img src="imgs/spring-rolls.png" alt="Spring Rolls">
         <div class="details">
           <h3>Spring Rolls</h3>
@@ -481,7 +484,7 @@
         </div>
       </div>
       <!-- Extra cards for 5 rows -->
-      <div class="image-card" data-location="china" data-category="fast food" data-condition="new" data-release="2025-05-09" onclick="window.location.href='item.html?image=17'">
+      <div class="image-card" data-location="china" data-category="trending" data-condition="new" data-release="2025-05-09" onclick="window.location.href='item.html?image=17'">
         <img src="imgs/baozi.png" alt="Baozi (Chicken)">
         <div class="details">
           <h3>Baozi (Chicken)</h3>
@@ -489,7 +492,7 @@
           <div class="price">$8</div>
         </div>
       </div>
-      <div class="image-card" data-location="japan" data-category="fast food" data-condition="used" data-release="2025-05-08" onclick="window.location.href='item.html?image=18'">
+      <div class="image-card" data-location="japan" data-category="trending" data-condition="used" data-release="2025-05-08" onclick="window.location.href='item.html?image=18'">
         <img src="imgs/sushi.png" alt="Sushi (Salmon)">
         <div class="details">
           <h3>Sushi (Salmon)</h3>
@@ -505,7 +508,7 @@
           <div class="price">$16</div>
         </div>
       </div>
-      <div class="image-card" data-location="india" data-category="fast food" data-condition="used" data-release="2025-05-06" onclick="window.location.href='item.html?image=20'">
+      <div class="image-card" data-location="india" data-category="trending" data-condition="used" data-release="2025-05-06" onclick="window.location.href='item.html?image=20'">
         <img src="imgs/biryani.png" alt="Biryani (Lamb)">
         <div class="details">
           <h3>Biryani (Lamb)</h3>
@@ -513,7 +516,7 @@
           <div class="price">$20</div>
         </div>
       </div>
-      <div class="image-card" data-location="korea" data-category="authentic" data-condition="new" data-release="2025-05-19">
+      <div class="image-card" data-location="korea" data-category="healthy" data-condition="new" data-release="2025-05-19">
         <img src="imgs/bibimbap.png" alt="Bibimbap">
         <div class="details">
           <h3>Bibimbap</h3>
@@ -521,7 +524,7 @@
           <div class="price">$9</div>
         </div>
       </div>
-      <div class="image-card" data-location="indonesia" data-category="fast food" data-condition="used" data-release="2025-05-18">
+      <div class="image-card" data-location="indonesia" data-category="trending" data-condition="used" data-release="2025-05-18">
         <img src="imgs/satay.png" alt="Satay">
         <div class="details">
           <h3>Satay</h3>
@@ -529,7 +532,7 @@
           <div class="price">$10</div>
         </div>
       </div>
-      <div class="image-card" data-location="vietnam" data-category="authentic" data-condition="new" data-release="2025-05-17">
+      <div class="image-card" data-location="vietnam" data-category="healthy" data-condition="new" data-release="2025-05-17">
         <img src="imgs/pho.png" alt="Pho">
         <div class="details">
           <h3>Pho</h3>
@@ -537,7 +540,7 @@
           <div class="price">$7</div>
         </div>
       </div>
-      <div class="image-card" data-location="japan" data-category="fast food" data-condition="used" data-release="2025-05-16">
+      <div class="image-card" data-location="japan" data-category="trending" data-condition="used" data-release="2025-05-16">
         <img src="imgs/tempura.png" alt="Tempura">
         <div class="details">
           <h3>Tempura</h3>
@@ -545,7 +548,7 @@
           <div class="price">$13</div>
         </div>
       </div>
-      <div class="image-card" data-location="korea" data-category="fast food" data-condition="new" data-release="2025-05-15">
+      <div class="image-card" data-location="korea" data-category="trending" data-condition="new" data-release="2025-05-15">
         <img src="imgs/kimbap.png" alt="Kimbap">
         <div class="details">
           <h3>Kimbap</h3>
@@ -561,7 +564,7 @@
           <div class="price">$9</div>
         </div>
       </div>
-      <div class="image-card" data-location="vietnam" data-category="fast food" data-condition="new" data-release="2025-05-13">
+      <div class="image-card" data-location="vietnam" data-category="trending" data-condition="new" data-release="2025-05-13">
         <img src="imgs/spring-rolls.png" alt="Spring Rolls">
         <div class="details">
           <h3>Spring Rolls</h3>
@@ -688,6 +691,11 @@
       });
     }
 
+    // Quick clear for category checkboxes
+    document.getElementById('clearCategoryBtn').addEventListener('click', function() {
+      document.querySelectorAll('.category-checkbox').forEach(cb => cb.checked = false);
+    });
+
     // Apply Filters Button Logic
     document.getElementById('applyFiltersBtn').addEventListener('click', function() {
       const selectedCategories = Array.from(document.querySelectorAll('.category-checkbox:checked')).map(cb => cb.value.toLowerCase());
@@ -701,9 +709,10 @@
       const now = new Date();
 
       foodCards.forEach(card => {
-        // Category filter
+        // Category filter (support multiple categories per card, comma-separated)
         let cardCategory = card.getAttribute('data-category');
-        let categoryMatch = selectedCategories.length === 0 || (cardCategory && selectedCategories.includes(cardCategory));
+        let cardCategories = cardCategory ? cardCategory.split(',').map(c => c.trim().toLowerCase()) : [];
+        let categoryMatch = selectedCategories.length === 0 || selectedCategories.some(cat => cardCategories.includes(cat));
         // Location filter
         const foodLocation = card.getAttribute('data-location');
         let locationMatch = (selectedLocation === 'all' || foodLocation === selectedLocation);
