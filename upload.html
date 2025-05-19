@@ -190,26 +190,46 @@
       }
     }
 
-    document.getElementById('uploadForm').addEventListener('submit', function(event) {
+    // Allow clicking on the image to trigger the file input for all slots
+    for (let i = 1; i <= 5; i++) {
+      const img = document.getElementById(`previewImage${i}`);
+      const input = document.getElementById(`postImage${i}`);
+      if (img && input) {
+        img.addEventListener('click', function() {
+          input.click();
+        });
+      }
+    }
+
+    document.getElementById('uploadForm').addEventListener('submit', async function(event) {
       event.preventDefault();
       const images = [];
       for (let i = 1; i <= 5; i++) {
         const fileInput = document.getElementById(`postImage${i}`);
         if (fileInput && fileInput.files[0]) {
-          images.push(fileInput.files[0]);
+          // For demo, just use the file name. For real images, you'd need to upload or encode as base64.
+          images.push(fileInput.files[0].name);
         }
       }
-      const postDescription = document.getElementById('postDescription').value;
-      const postArea = document.getElementById('postArea').value;
-      const postCategory = document.getElementById('postCategory').value;
-      const postType = document.getElementById('postType').value;
-      const postCondition = document.getElementById('postCondition').value;
-      const postExpiration = document.getElementById('postExpiration').value;
-      const postContact = document.getElementById('postContact').value;
+      const post = {
+        images,
+        description: document.getElementById('postDescription').value,
+        area: document.getElementById('postArea').value,
+        category: document.getElementById('postCategory').value,
+        type: document.getElementById('postType').value,
+        condition: document.getElementById('postCondition').value,
+        expiration: document.getElementById('postExpiration').value,
+        createdAt: new Date().toISOString()
+      };
 
-      // Simulate post creation
-      console.log('Post created:', { images, postDescription, postArea, postCategory, postType, postCondition, postExpiration, postContact });
+      await fetch('http://localhost:3001/posts', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(post)
+      });
+
       alert('Post created successfully!');
+      window.location.href = 'index.html';
     });
   </script>
 </body>
