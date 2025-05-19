@@ -67,53 +67,83 @@
     .item-container {
       display: flex;
       flex-direction: row;
-      justify-content: space-between;
-      padding: 20px;
-    }
-    .item-image {
-      width: 100%;
-      max-width: 600px;
-      height: 300px;
-      background-color: #c5e1a5;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 24px;
-      color: #333;
-      object-fit: cover;
-    }
-    .item-details {
-      width: 60%;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
+      gap: 32px;
+      padding: 32px 40px;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+      max-width: 1200px;
+      margin: 40px auto;
     }
     .item-image-gallery {
-      width: 35%;
+      width: 420px;
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 16px;
+      align-items: flex-start;
     }
     .item-image-gallery img {
       width: 100%;
-      border-radius: 8px;
+      border-radius: 12px;
       cursor: pointer;
-      transition: transform 0.3s;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      background: #f7f7f7;
+      transition: transform 0.2s;
+      margin-bottom: 12px;
     }
     .item-image-gallery img:hover {
-      transform: scale(1.05);
+      transform: scale(1.03);
+    }
+    .item-details {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
     }
     .detail-card {
-      background-color: #e0e0e0;
-      padding: 20px;
-      border-radius: 8px;
+      background-color: #fff;
+      padding: 0 0 18px 0;
+      border-radius: 0;
+      box-shadow: none;
+      border-bottom: 1px solid #eee;
+      margin-bottom: 0;
+    }
+    .detail-card:last-child {
+      border-bottom: none;
+    }
+    .detail-card h2, .detail-card h3 {
+      margin-top: 0;
+      margin-bottom: 10px;
+      font-weight: 600;
+      color: #222;
+    }
+    .detail-card p {
+      margin: 0 0 8px 0;
+      color: #444;
+      font-size: 16px;
     }
     .product-info {
-      grid-column: span 3;
-      background-color: #e0e0e0;
+      background-color: #f7f7f7;
       padding: 20px;
       border-radius: 8px;
       text-align: center;
+    }
+    .mark-done {
+      width: 100%;
+      font-size: 18px;
+      padding: 14px 0;
+      margin-top: 18px;
+      border-radius: 8px;
+      background: #00aa5b;
+      color: #fff;
+      border: none;
+      font-weight: 600;
+      letter-spacing: 1px;
+      box-shadow: 0 2px 8px rgba(0,170,91,0.08);
+      transition: background 0.2s;
+    }
+    .mark-done:hover {
+      background: #008f4c;
     }
     .image-card {
       cursor: pointer;
@@ -210,7 +240,6 @@
     <div class="item-image-gallery" id="itemImageGallery">
       <!-- Image gallery will be populated by JavaScript -->
     </div>
-
     <!-- Item Details -->
     <div class="item-details">
       <div class="detail-card" id="itemDescription">
@@ -233,6 +262,7 @@
       </div>
       <button onclick="markAsDone(1)" class="mark-done">Mark as Done</button>
     </div>
+    <!-- End Item Details -->
   </div>
   
   <!-- Contact Seller Section -->
