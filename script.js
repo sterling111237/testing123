@@ -19,6 +19,11 @@ document.addEventListener('DOMContentLoaded', function() {
             alert('Login submitted for: ' + username);
         });
     }
+
+    const searchBar = document.getElementById('searchBar');
+    if (searchBar) {
+      searchBar.addEventListener('input', filterFood);
+    }
 });
 
 function openModal(title, description) {
@@ -36,7 +41,7 @@ function filterFood() {
   const foodCards = document.querySelectorAll('.image-card');
 
   foodCards.forEach(card => {
-    const foodName = card.querySelector('.description').innerText.toLowerCase();
+    const foodName = card.querySelector('h3').innerText.toLowerCase(); // Targeting <h3> for food name
     if (foodName.includes(searchInput)) {
       card.style.display = 'block'; // Show the card if it matches the search
     } else {
