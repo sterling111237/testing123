@@ -82,7 +82,7 @@
       gap: 16px;
       align-items: flex-start;
     }
-    .item-image-gallery img {
+    .main-image {
       width: 100%;
       border-radius: 12px;
       cursor: pointer;
@@ -90,9 +90,28 @@
       background: #f7f7f7;
       transition: transform 0.2s;
       margin-bottom: 12px;
+      height: 320px;
+      object-fit: cover;
     }
-    .item-image-gallery img:hover {
+    .main-image:hover {
       transform: scale(1.03);
+    }
+    .thumbnail-row {
+      display: flex;
+      gap: 10px;
+      margin-top: 8px;
+    }
+    .thumbnail-row img {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: border 0.2s;
+    }
+    .thumbnail-row img.selected {
+      border: 2px solid #4fc3f7;
     }
     .item-details {
       flex: 1;
@@ -285,6 +304,7 @@
         const items = {
           1: {
             image: 'imgs/sushi.png',
+            images: ['imgs/sushi.png', 'imgs/sushi2.png', 'imgs/sushi3.png', 'imgs/sushi4.png', 'imgs/sushi5.png'],
             description: 'Sushi - A traditional Japanese dish made with vinegared rice and seafood.',
             cost: '$15',
             seller: 'Sushi Master',
@@ -292,6 +312,7 @@
           },
           2: {
             image: 'imgs/dimsum.png',
+            images: ['imgs/dimsum.png', 'imgs/dimsum2.png', 'imgs/dimsum3.png', 'imgs/dimsum4.png', 'imgs/dimsum5.png'],
             description: 'Dim Sum - A variety of small Chinese dishes served with tea.',
             cost: '$20',
             seller: 'Dim Sum Delight',
@@ -299,6 +320,7 @@
           },
           3: {
             image: 'imgs/ramen.png',
+            images: ['imgs/ramen.png', 'imgs/ramen2.png', 'imgs/ramen3.png', 'imgs/ramen4.png', 'imgs/ramen5.png'],
             description: 'Ramen - A Japanese noodle soup with a rich broth.',
             cost: '$12',
             seller: 'Ramen House',
@@ -306,7 +328,7 @@
           },
           4: {
             image: 'imgs/pad thai.png',
-            description: 'Pad Thai - A popular Thai stir-fried noodle dish.',
+            images: ['imgs/pad thai.png', 'imgs/pad thai2.png', 'imgs/pad thai3.png', 'imgs/pad thai4.png', 'imgs/pad thai5.png'],
             cost: '$10',
             seller: 'Thai Express',
             info: 'Authentic Pad Thai with a perfect balance of flavors.',
@@ -399,10 +421,28 @@
 
         const item = items[imageId];
         if (item) {
-          // Populate image gallery
+          // Demo: support multiple images per item (if available)
+          // For now, use the same image multiple times for preview
+          const images = item.images || [item.image, item.image, item.image];
+          let mainImage = images[0];
           const imageGallery = document.getElementById('itemImageGallery');
-          imageGallery.innerHTML = `<img src="${item.image}" alt="Item Image">`;
-          
+          imageGallery.innerHTML = `
+            <img src="${mainImage}" alt="Item Image" class="main-image" id="mainPreviewImage">
+            <div class="thumbnail-row">
+              ${images.map((img, idx) => `<img src="${img}" class="thumbnail${idx === 0 ? ' selected' : ''}" data-idx="${idx}">`).join('')}
+            </div>
+          `;
+
+          // Thumbnail click event
+          imageGallery.querySelectorAll('.thumbnail').forEach(thumb => {
+            thumb.addEventListener('click', function() {
+              const idx = parseInt(this.getAttribute('data-idx'));
+              document.getElementById('mainPreviewImage').src = images[idx];
+              imageGallery.querySelectorAll('.thumbnail').forEach(t => t.classList.remove('selected'));
+              this.classList.add('selected');
+            });
+          });
+
           document.getElementById('itemDescription').innerText = item.description;
           document.getElementById('itemCost').innerText = item.cost;
           document.getElementById('itemSeller').innerText = item.seller;
