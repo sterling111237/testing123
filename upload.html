@@ -195,6 +195,7 @@
           <span style="vertical-align: middle;">&#9881; Settings</span>
         </button>
         <div id="settingsDropdown" class="dropdown-content" style="display: none; position: absolute; right: 0; background: #fffbe6; min-width: 200px; box-shadow: 0 2px 8px rgba(0,0,0,0.12); border-radius: 8px; z-index: 100; padding: 16px 18px 12px 18px;">
+          <button class="profile" onclick="window.location.href='profile.html'" style="width:100%;margin-bottom:10px;background-color:#4fc3f7;color:#fff;">Profile</button>
           <div class="font-size-dropdown" style="margin-bottom: 12px;">
             <select id="fontSizeSelect" style="border-radius: 5px; padding: 5px; width:100%;">
               <option value="14px">Small</option>
@@ -285,6 +286,7 @@
         </div>
       </div>
       <textarea id="postDescription" placeholder="Description" required></textarea>
+      <input type="number" id="postPrice" placeholder="Price" required>
       <input type="text" id="postArea" placeholder="Area" required>
       <input type="text" id="postCategory" placeholder="Category" required>
       <input type="text" id="postType" placeholder="Type" required>
@@ -314,7 +316,27 @@
         'Extra Large': 'Extra Large',
         'English': 'English',
         'Bahasa Indonesia': 'Bahasa Indonesia',
-        '中文 (Mandarin)': '中文 (Mandarin)'
+        '中文 (Mandarin)': '中文 (Mandarin)',
+        'Create a Post': 'Create a Post',
+        'Upload Images:': 'Upload Images:',
+        'Upload Picture': 'Upload Picture',
+        'Photo 1': 'Photo 1',
+        'Photo 2': 'Photo 2',
+        'Photo 3': 'Photo 3',
+        'Photo 4': 'Photo 4',
+        'Description': 'Description',
+        'Price': 'Price',
+        'Area': 'Area',
+        'Category': 'Category',
+        'Type': 'Type',
+        'Select Condition': 'Select Condition',
+        'New': 'New',
+        'Used': 'Used',
+        'Expiration': 'Expiration',
+        'Post': 'Post',
+        'Post created successfully!': 'Post created successfully!',
+        'Failed to post:': 'Failed to post:',
+        'Network or server error.': 'Network or server error.'
       },
       id: {
         'Back to Home': 'Kembali ke Beranda',
@@ -324,7 +346,27 @@
         'Extra Large': 'Sangat Besar',
         'English': 'Inggris',
         'Bahasa Indonesia': 'Bahasa Indonesia',
-        '中文 (Mandarin)': '中文 (Mandarin)'
+        '中文 (Mandarin)': '中文 (Mandarin)',
+        'Create a Post': 'Buat Postingan',
+        'Upload Images:': 'Unggah Gambar:',
+        'Upload Picture': 'Unggah Foto',
+        'Photo 1': 'Foto 1',
+        'Photo 2': 'Foto 2',
+        'Photo 3': 'Foto 3',
+        'Photo 4': 'Foto 4',
+        'Description': 'Deskripsi',
+        'Price': 'Harga',
+        'Area': 'Wilayah',
+        'Category': 'Kategori',
+        'Type': 'Tipe',
+        'Select Condition': 'Pilih Kondisi',
+        'New': 'Baru',
+        'Used': 'Bekas',
+        'Expiration': 'Kedaluwarsa',
+        'Post': 'Posting',
+        'Post created successfully!': 'Posting berhasil dibuat!',
+        'Failed to post:': 'Gagal memposting:',
+        'Network or server error.': 'Kesalahan jaringan atau server.'
       },
       zh: {
         'Back to Home': '返回首页',
@@ -334,7 +376,27 @@
         'Extra Large': '特大',
         'English': '英语',
         'Bahasa Indonesia': '印尼语',
-        '中文 (Mandarin)': '中文 (普通话)'
+        '中文 (Mandarin)': '中文 (普通话)',
+        'Create a Post': '创建帖子',
+        'Upload Images:': '上传图片：',
+        'Upload Picture': '上传图片',
+        'Photo 1': '照片1',
+        'Photo 2': '照片2',
+        'Photo 3': '照片3',
+        'Photo 4': '照片4',
+        'Description': '描述',
+        'Price': '价格',
+        'Area': '地区',
+        'Category': '类别',
+        'Type': '类型',
+        'Select Condition': '选择状态',
+        'New': '新的',
+        'Used': '二手',
+        'Expiration': '到期',
+        'Post': '发布',
+        'Post created successfully!': '发布成功！',
+        'Failed to post:': '发布失败：',
+        'Network or server error.': '网络或服务器错误。'
       }
     };
 
@@ -443,14 +505,22 @@
           createdAt: new Date().toISOString()
         };
 
-        await fetch('http://localhost:3001/api/posts', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(post)
-        });
-
-        alert('Post created successfully!');
-        window.location.href = 'index.html';
+        try {
+          const response = await fetch('http://localhost:3001/api/posts', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(post)
+          });
+          if (response.ok) {
+            alert('Post created successfully!');
+            window.location.href = 'index.html';
+          } else {
+            const errorData = await response.json();
+            alert('Failed to post: ' + (errorData.error || 'Unknown error.'));
+          }
+        } catch (err) {
+          alert('Failed to post: Network or server error.');
+        }
       });
       // --- End main upload logic ---
     });
