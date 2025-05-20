@@ -211,28 +211,56 @@
     <div class="logo">李</div>
     <div class="nav-buttons">
       <button class="back" onclick="window.location.href='index.html'">Back to Home</button>
-      <button class="upload" onclick="window.location.href='upload.html'">Upload Post</button>
+      <button class="upload" onclick="window.location.href='uploadprep.html'">Upload Post</button>
       <button class="register" onclick="window.location.href='register.html'">Member Registration</button>
-      <div class="font-size-dropdown" style="position: relative; display: flex; align-items: center; gap: 8px;">
-        <select id="fontSizeSelect" style="border-radius: 5px; padding: 5px;">
-          <option value="14px">Small</option>
-          <option value="16px" selected>Medium</option>
-          <option value="18px">Large</option>
-          <option value="20px">Extra Large</option>
-        </select>
-        <select id="langSelect" style="margin-left: 10px; border-radius: 5px; padding: 5px;">
-          <option value="en">English</option>
-          <option value="id">Bahasa Indonesia</option>
-          <option value="zh">中文 (Mandarin)</option>
-        </select>
+      <div class="settings-dropdown" style="position: relative; display: inline-block; margin-left: 10px;">
+        <button class="settings" onclick="toggleSettingsDropdown(event)" title="Settings" style="background-color: #ffd966; color: #222; border-radius: 5px; padding: 10px 20px; border: none; font-size: 15px; cursor: pointer; transition: background 0.2s; min-width: 120px;">
+          <span style="vertical-align: middle;">&#9881; Settings</span>
+        </button>
+        <div id="settingsDropdown" class="dropdown-content" style="display: none; position: absolute; right: 0; background: #fffbe6; min-width: 200px; box-shadow: 0 2px 8px rgba(0,0,0,0.12); border-radius: 8px; z-index: 100; padding: 16px 18px 12px 18px;">
+          <button class="login" onclick="window.location.href='login.html'" style="width:100%;margin-bottom:10px;background-color:#81c995;color:#fff;">Logout</button>
+          <div class="font-size-dropdown" style="margin-bottom: 12px;">
+            <select id="fontSizeSelect" style="border-radius: 5px; padding: 5px; width:100%;">
+              <option value="14px">Small</option>
+              <option value="16px" selected>Medium</option>
+              <option value="18px">Large</option>
+              <option value="20px">Extra Large</option>
+            </select>
+          </div>
+          <div style="margin-bottom: 0;">
+            <select id="langSelect" style="border-radius: 5px; padding: 5px; width:100%;">
+              <option value="en">English</option>
+              <option value="id">Bahasa Indonesia</option>
+              <option value="zh">中文 (Mandarin)</option>
+            </select>
+          </div>
+        </div>
       </div>
     <script>
-      // Font size selector logic
-      document.getElementById('fontSizeSelect').addEventListener('change', function() {
-        document.body.style.fontSize = this.value;
-        document.querySelectorAll('.item-details p, .item-details h2, .item-details h3').forEach(function(el) {
-          el.style.fontSize = this.value;
-        }, this);
+      // Settings dropdown logic (copied from index.html)
+      function toggleSettingsDropdown(event) {
+        event.stopPropagation();
+        const dropdown = document.getElementById('settingsDropdown');
+        dropdown.style.display = (dropdown.style.display === 'block') ? 'none' : 'block';
+      }
+      document.addEventListener('click', function(event) {
+        const dropdown = document.getElementById('settingsDropdown');
+        const settingsBtn = document.querySelector('.settings');
+        if (!dropdown || !settingsBtn) return;
+        if (!dropdown.contains(event.target) && !settingsBtn.contains(event.target)) {
+          dropdown.style.display = 'none';
+        }
+      });
+      document.getElementById('settingsDropdown').addEventListener('change', function(e) {
+        if (e.target && e.target.id === 'fontSizeSelect') {
+          document.body.style.fontSize = e.target.value;
+          document.querySelectorAll('.item-details p, .item-details h2, .item-details h3').forEach(function(el) {
+            el.style.fontSize = e.target.value;
+          });
+        }
+        if (e.target && e.target.id === 'langSelect') {
+          if (typeof translatePage === 'function') translatePage(e.target.value);
+        }
       });
 
       // Translation dictionary
@@ -397,13 +425,11 @@ document.getElementById('langSelect').addEventListener('change', function() {
         <p>Condition: Like New</p>
       </div>
       <button onclick="markAsDone(1)" class="mark-done">Mark as Done</button>
+      <!-- Contact Seller Section -->
+      <div class="contact-seller">
+        <button onclick="contactSeller('1234567890')">Contact Seller via WhatsApp</button>
+      </div>
     </div>
-    <!-- End Item Details -->
-  </div>
-  
-  <!-- Contact Seller Section -->
-  <div class="contact-seller">
-    <button onclick="contactSeller('1234567890')">Contact Seller via WhatsApp</button>
   </div>
 
   <script>
