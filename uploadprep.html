@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Select Category</title>
+  <title>Interactive Front Page</title>
   <style>
     .font-size-dropdown {
       display: flex;
@@ -14,6 +14,232 @@
       padding: 4px 10px;
       box-shadow: 0 1px 4px rgba(0,0,0,0.04);
     }
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f7fa;
+      color: #222;
+    }
+
+    /* Navigation Bar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #e0e7ef;
+      padding: 14px 32px;
+      border-radius: 0 0 12px 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+    }
+
+    .navbar .logo {
+      flex: 1;
+      font-size: 26px;
+      font-weight: bold;
+      color: #222;
+    }
+
+    .navbar .font-selector {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+    }
+
+    .navbar .nav-buttons {
+      flex: 1;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .navbar .nav-buttons button {
+      margin: 0 5px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 15px;
+      transition: background 0.2s, color 0.2s;
+    }
+    .navbar .nav-buttons .login {
+      background-color: #81c995;
+      color: #fff;
+    }
+    .navbar .nav-buttons .login:hover {
+      background-color: #5fa87a;
+    }
+    .navbar .nav-buttons .upload {
+      background-color: #4fc3f7;
+      color: #fff;
+      margin-left: 10px;
+    }
+    .navbar .nav-buttons .upload:hover {
+      background-color: #0288d1;
+    }
+    .navbar .nav-buttons .register {
+      background-color: #f28b82;
+      color: #fff;
+      margin-left: 10px;
+    }
+    .navbar .nav-buttons .register:hover {
+      background-color: #e57373;
+    }
+
+    /* Quick Search Section */
+    .quick-search {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #e3f2fd;
+      padding: 12px 0;
+    }
+    .quick-search button {
+      background-color: #4fc3f7;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      color: #fff;
+      font-size: 15px;
+    }
+    .quick-search button:hover {
+      background-color: #0288d1;
+    }
+    .quick-search input {
+      padding: 10px;
+      border: 1px solid #b3c7e6;
+      border-radius: 5px;
+      width: 300px;
+      margin-right: 10px;
+      background: #fff;
+      color: #222;
+      font-size: 15px;
+    }
+
+    /* Container and Sidebar */
+    .container {
+      display: flex;
+      gap: 32px;
+      max-width: 1300px;
+      margin: 40px auto;
+    }
+
+    .sidebar {
+      width: 260px;
+      background-color: #fff;
+      color: #222;
+      padding: 28px 20px;
+      box-sizing: border-box;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      min-height: 600px;
+    }
+
+    /* Image Grid */
+    .image-container {
+      flex: 1;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-auto-rows: minmax(220px, auto);
+      gap: 24px;
+      padding: 0;
+      align-items: stretch;
+    }
+    .image-card {
+      background-color: #fff;
+      border: 1px solid #eee;
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: box-shadow 0.2s, transform 0.2s;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      min-height: 260px;
+    }
+    .image-card:hover {
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+      transform: translateY(-4px) scale(1.03);
+    }
+    .image-card img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      background: #f7f7f7;
+      border-bottom: 1px solid #eee;
+    }
+    .image-card .details {
+      padding: 16px 16px 10px 16px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+    .image-card .details h3 {
+      font-size: 17px;
+      margin: 0 0 6px 0;
+      color: #222;
+      font-weight: 600;
+    }
+    .image-card .details p {
+      font-size: 14px;
+      margin: 0 0 8px 0;
+      color: #666;
+    }
+    .image-card .details .price {
+      font-size: 18px;
+      font-weight: bold;
+      color: #00aa5b;
+      margin-top: auto;
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-content {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+      width: 80%;
+      max-width: 500px;
+      color: #222;
+    }
+    .modal-content img {
+      width: 100%;
+      height: auto;
+    }
+    .modal-content .close {
+      margin-top: 10px;
+      padding: 10px 20px;
+      background-color: #f00;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .close-overlay {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #f00;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
     select {
       border: 1.5px solid #b3c7e6;
       border-radius: 5px;
@@ -37,353 +263,740 @@
       margin: 0;
       min-width: 110px;
     }
-    .custom-navbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background-color: #ccc;
-      padding: 15px 30px;
-      margin-bottom: 30px;
-      border-radius: 0 0 8px 8px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
-    }
-    .custom-navbar .logo {
-      flex: 0 0 auto;
-      font-size: 24px;
-      font-weight: bold;
-      margin-right: 40px;
-    }
-    .custom-navbar .nav-buttons {
-      display: flex;
-      align-items: center;
-      gap: 18px;
-    }
-    .custom-navbar .back {
-      background-color: #81c995;
-      border: none;
-      border-radius: 5px;
-      padding: 8px 18px;
-      font-size: 15px;
-      cursor: pointer;
-      margin-right: 10px;
-    }
-    .custom-navbar .selectors {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .custom-navbar select {
-      border-radius: 5px;
-      padding: 5px 10px;
-      font-size: 15px;
-      border: 1px solid #bbb;
-      background: #fff;
-    }
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f9f9f9;
-      color: #333;
-    }
 
-    .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background-color: #ccc;
-      padding: 15px 30px;
-      margin-bottom: 30px;
-    }
-
-    .navbar .logo {
-      font-size: 24px;
-      font-weight: bold;
-    }
-
-    .navbar .nav-buttons button {
-      margin: 0 5px;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    .navbar .nav-buttons .back {
-      background-color: #81c995;
-    }
-
-    
-    .container {
-      display: flex;
-      flex-direction: row;
-      max-width: 1200px;
-      margin: 90px auto;
-      padding: 70px;
-      background-color: #fff;
-      border-radius: 8px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    }
-
-    .category-list {
-      flex: 1;
-      border-right: 1px solid #ddd;
-      padding-right: 20px;
-    }
-
-    .category-list h2 {
-      margin-bottom: 20px;
-    }
-
-    .category-list button {
-      display: block;
-      width: 100%;
-      padding: 15px;
-      margin-bottom: 30px;
-      border: none;
-      border-radius: 100px;
-      background-color: #4fc3f7;
-      color: #ffffff;
-      cursor: pointer;
-      text-align: left;
-    }
-
-    .category-list button:hover {
-      background-color: #0288d1;
-    }
-
-    .subcategory-list {
-      flex: 2;
-      padding-left: 20px;
-    }
-
-    .subcategory-list h2 {
-      margin-bottom: 20px;
-    }
-
-    .subcategory-list button {
-      display: inline-block;
-      padding: 50px 70px;
-      margin: 25px;
-      border: 5px solid #ddd;
-      border-radius: 100px;
-      background-color: #fff;
-      cursor: pointer;
-    }
-
-    .subcategory-list button:hover {
-      background-color: #a79797;
-    }
-
-    .subcategory-list button.active {
-      background-color: #4fc3f7;
-      color: #fff;
-      border-color: #0288d1;
-    }
   </style>
 </head>
 <body>
-    <!-- Navigation Bar -->
-    <div class="navbar custom-navbar">
-      <div class="logo">李</div>
-      <div class="nav-buttons">
-        <button class="back" onclick="window.location.href='index.html'">Back to Home</button>
-        <div class="settings-dropdown" style="position: relative; display: inline-block; margin-left: 10px;">
-          <button class="settings" onclick="toggleSettingsDropdown()" title="Settings" style="background-color: #ffd966; color: #222; border-radius: 5px; padding: 10px 20px; border: none; font-size: 15px; cursor: pointer; transition: background 0.2s; min-width: 120px;">
-            <span style="vertical-align: middle;">&#9881; Settings</span>
-          </button>
-          <div id="settingsDropdown" class="dropdown-content" style="display: none; position: absolute; right: 0; background: #fffbe6; min-width: 200px; box-shadow: 0 2px 8px rgba(0,0,0,0.12); border-radius: 8px; z-index: 100; padding: 16px 18px 12px 18px;">
-            <div class="font-size-dropdown" style="margin-bottom: 12px;">
-              <select id="fontSizeSelect" style="border-radius: 5px; padding: 5px; width:100%;">
-                <option value="14px">Small</option>
-                <option value="16px" selected>Medium</option>
-                <option value="18px">Large</option>
-                <option value="20px">Extra Large</option>
-              </select>
-            </div>
-<script>
-  // Robust settings dropdown logic
-  function toggleSettingsDropdown(event) {
-    if (event) event.stopPropagation();
-    const dropdown = document.getElementById('settingsDropdown');
-    dropdown.style.display = (dropdown.style.display === 'block') ? 'none' : 'block';
-  }
-  document.addEventListener('click', function(event) {
-    const dropdown = document.getElementById('settingsDropdown');
-    const settingsBtn = document.querySelector('.settings');
-    if (!dropdown || !settingsBtn) return;
-    if (!dropdown.contains(event.target) && !settingsBtn.contains(event.target)) {
-      dropdown.style.display = 'none';
-    }
-  });
-  document.getElementById('settingsDropdown').addEventListener('change', function(e) {
-    if (e.target && e.target.id === 'fontSizeSelect') {
-      document.body.style.fontSize = e.target.value;
-    }
-    if (e.target && e.target.id === 'langSelect') {
-      if (typeof translatePage === 'function') translatePage(e.target.value);
-    }
-  });
-</script>
-            <div style="margin-bottom: 0;">
-              <select id="langSelect" style="border-radius: 5px; padding: 5px; width:100%;">
-                <option value="en">English</option>
-                <option value="id">Bahasa Indonesia</option>
-                <option value="zh">中文 (Mandarin)</option>
-              </select>
-            </div>
+  <!-- Navigation Bar -->
+  <div class="navbar">
+    <div class="logo">李</div>
+    
+    <div class="nav-buttons">
+      <button class="upload" onclick="window.location.href='uploadprep.html'">Upload Post</button>
+      <div class="settings-dropdown" style="position: relative; display: inline-block; margin-left: 10px;">
+        <button class="settings" onclick="toggleSettingsDropdown()" title="Settings" style="background-color: #ffd966; color: #222; border-radius: 5px; padding: 10px 20px; border: none; font-size: 15px; cursor: pointer; transition: background 0.2s; min-width: 120px;">
+          <span style="vertical-align: middle;">&#9881; Settings</span>
+        </button>
+        <div id="settingsDropdown" class="dropdown-content" style="display: none; position: absolute; right: 0; background: #fffbe6; min-width: 200px; box-shadow: 0 2px 8px rgba(0,0,0,0.12); border-radius: 8px; z-index: 100; padding: 16px 18px 12px 18px;">
+          <button class="profile" onclick="window.location.href='profile.html'" style="width:100%;margin-bottom:10px;background-color:#4fc3f7;color:#fff;">Profile</button>
+          <button class="member" onclick="window.location.href='member.html'" style="width:100%;margin-bottom:10px;background-color:#f28b82;color:#fff;">Member</button>
+          <button class="login" onclick="window.location.href='login.html'" style="width:100%;margin-bottom:10px;background-color:#81c995;color:#fff;">Logout</button>
+          <div class="font-size-dropdown" style="margin-bottom: 12px;">
+            <select id="fontSizeSelect" style="border-radius: 5px; padding: 5px; width:100%;">
+              <option value="14px">Small</option>
+              <option value="16px" selected>Medium</option>
+              <option value="18px">Large</option>
+              <option value="20px">Extra Large</option>
+            </select>
+          </div>
+          <div style="margin-bottom: 0;">
+            <select id="langSelect" style="border-radius: 5px; padding: 5px; width:100%;">
+              <option value="en">English</option>
+              <option value="id">Bahasa Indonesia</option>
+              <option value="zh">中文 (Mandarin)</option>
+            </select>
           </div>
         </div>
       </div>
-    <script>
-      // Font size selector logic
-      document.getElementById('fontSizeSelect').addEventListener('change', function() {
-        document.body.style.fontSize = this.value;
-      });
+  <script>
+    // Settings dropdown logic
+    function toggleSettingsDropdown() {
+      const dropdown = document.getElementById('settingsDropdown');
+      dropdown.style.display = (dropdown.style.display === 'block') ? 'none' : 'block';
+    }
 
-      // Translation dictionary (minimal for demo, expand as needed)
-      const translations = {
-        en: {
-          'Back to Home': 'Back to Home',
-          'Small': 'Small',
-          'Medium': 'Medium',
-          'Large': 'Large',
-          'Extra Large': 'Extra Large',
-          'English': 'English',
-          'Bahasa Indonesia': 'Bahasa Indonesia',
-          '中文 (Mandarin)': '中文 (Mandarin)'
-        },
-        id: {
-          'Back to Home': 'Kembali ke Beranda',
-          'Small': 'Kecil',
-          'Medium': 'Sedang',
-          'Large': 'Besar',
-          'Extra Large': 'Sangat Besar',
-          'English': 'Inggris',
-          'Bahasa Indonesia': 'Bahasa Indonesia',
-          '中文 (Mandarin)': '中文 (Mandarin)'
-        },
-        zh: {
-          'Back to Home': '返回首页',
-          'Small': '小',
-          'Medium': '中',
-          'Large': '大',
-          'Extra Large': '特大',
-          'English': '英语',
-          'Bahasa Indonesia': '印尼语',
-          '中文 (Mandarin)': '中文 (普通话)'
-        }
-      };
-
-      // Store original text for translation
-      function storeOriginalText(el) {
-        if (el.nodeType === 3) {
-          if (!el._originalText) {
-            el._originalText = el.nodeValue;
-          }
-        } else if (el.nodeType === 1) {
-          if (["SCRIPT", "STYLE"].includes(el.tagName)) return;
-          if ((el.tagName === 'OPTION' || el.tagName === 'BUTTON') && !el._originalText) {
-            el._originalText = el.textContent;
-          }
-          if (el.placeholder && !el._originalPlaceholder) {
-            el._originalPlaceholder = el.placeholder;
-          }
-          Array.from(el.childNodes).forEach(storeOriginalText);
-        }
+    // Hide dropdown when clicking outside
+    document.addEventListener('click', function(event) {
+      const dropdown = document.getElementById('settingsDropdown');
+      const settingsBtn = document.querySelector('.settings');
+      if (!dropdown || !settingsBtn) return;
+      if (!dropdown.contains(event.target) && !settingsBtn.contains(event.target)) {
+        dropdown.style.display = 'none';
       }
+    });
 
-      function translatePage(lang) {
-        function translateElementText(el) {
-          if (el.nodeType === 3) {
-            const original = el._originalText || el.nodeValue;
-            const trimmed = original.trim();
-            if (translations[lang][trimmed]) {
-              el.nodeValue = original.replace(trimmed, translations[lang][trimmed]);
-            } else {
-              el.nodeValue = original;
-            }
-          } else if (el.nodeType === 1) {
-            if (["SCRIPT", "STYLE"].includes(el.tagName)) return;
-            if (el.tagName === 'OPTION' || el.tagName === 'BUTTON') {
-              const original = el._originalText || el.textContent;
-              const trimmed = original.trim();
-              if (translations[lang][trimmed]) {
-                el.textContent = translations[lang][trimmed];
-              } else {
-                el.textContent = original;
-              }
-            }
-            if (el.placeholder) {
-              const original = el._originalPlaceholder || el.placeholder;
-              if (translations[lang][original]) {
-                el.placeholder = translations[lang][original];
-              } else {
-                el.placeholder = original;
-              }
-            }
-            Array.from(el.childNodes).forEach(translateElementText);
-          }
-        }
-        translateElementText(document.body);
+    // Settings dropdown: font size and language logic
+    document.getElementById('settingsDropdown').addEventListener('change', function(e) {
+      if (e.target && e.target.id === 'fontSizeSelect') {
+        changeFontSize(e.target.value);
       }
+      if (e.target && e.target.id === 'langSelect') {
+        translatePage(e.target.value);
+      }
+    });
+  </script>
+    </div>
+  </div>
 
-      document.addEventListener('DOMContentLoaded', function() {
-        storeOriginalText(document.body);
-        const lang = document.getElementById('langSelect').value;
-        translatePage(lang);
-      });
-      document.getElementById('langSelect').addEventListener('change', function() {
-        translatePage(this.value);
-      });
-    </script>
+  <!-- Quick Search Section -->
+  <div class="quick-search">
+    <input type="text" id="searchBar" placeholder="Search for food..." oninput="filterFood()">
+  </div>
+
+  <!-- Container with Sidebar and Image Grid -->
+  <div class="container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <h3>Filter</h3>
+      <div>
+        <h4>Category</h4>
+        <ul>
+          <li><input type="checkbox" class="category-checkbox" value="Fast Food"> Fast Food</li>
+          <li><input type="checkbox" class="category-checkbox" value="Trending"> Trending</li>
+          <li><input type="checkbox" class="category-checkbox" value="Authentic"> Authentic</li>
+          <li><input type="checkbox" class="category-checkbox" value="Light Meal"> Light Meal</li>
+          <li><input type="checkbox" class="category-checkbox" value="Healthy"> Healthy</li>
+        </ul>
+        <button id="clearCategoryBtn" style="margin-top:8px; padding:4px 10px; background:#eee; color:#333; border:none; border-radius:4px; cursor:pointer; font-size:13px;">Clear</button>
+      </div>
+      <div>
+        <h4>Location</h4>
+        <select id="locationSelect">
+          <option value="all">All Locations</option>
+          <option value="japan">Japan</option>
+          <option value="china">China</option>
+          <option value="thailand">Thailand</option>
+          <option value="korea">Korea</option>
+          <option value="indonesia">Indonesia</option>
+          <option value="vietnam">Vietnam</option>
+          <option value="india">India</option>
+        </select>
+      </div>
+      <div>
+        <h4>Condition</h4>
+        <select id="conditionSelect">
+          <option value="all">All</option>
+          <option value="new">New</option>
+          <option value="used">Used</option>
+        </select>
+      </div>
+      <div>
+        <h4>Release Date</h4>
+        <select id="releaseSelect">
+          <option value="all">Anytime</option>
+          <option value="day">A day ago</option>
+          <option value="week">A week ago</option>
+          <option value="month">A month ago</option>
+        </select>
+      </div>
+      <div>
+        <h4>Price</h4>
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span>Rp</span>
+          <input type="text" placeholder="Minimum Price" id="minPrice" style="width: 100px;">
+        </div>
+        <div style="display: flex; align-items: center; gap: 10px; margin-top: 10px;">
+          <span>Rp</span>
+          <input type="text" placeholder="Maximum Price" id="maxPrice" style="width: 100px;">
+        </div>
+      </div>
+      <button id="applyFiltersBtn" style="margin-top: 20px; padding: 10px 20px; background: #4fc3f7; color: #fff; border: none; border-radius: 5px; cursor: pointer;">Apply Filters</button>
     </div>
 
-    <!-- Container -->
-    <div class="container">
-      <!-- Category List -->
-      <div class="category-list">
-        <h2>Select a Category</h2>
-        <button onclick="selectCategory('Free Items')">Free Items</button>
-        <button onclick="selectCategory('Vehicles')">Vehicles</button>
-        <button onclick="selectCategory('Properties')">Properties</button>
-        <button onclick="selectCategory('Jobs')">Jobs</button>
-        <button onclick="selectCategory('Electronics')">Electronics</button>
+    <!-- Image Grid -->
+    <div class="image-container">
+      <!-- Updated image cards with new design -->
+      <div class="image-card" data-category="authentic" data-condition="new" data-release="2025-05-18" onclick="window.location.href='item.html?image=1'">
+        <img src="imgs/sushi.png" alt="Sushi">
+        <div class="details">
+          <h3>Sushi</h3>
+          <p>Traditional Japanese dish</p>
+          <p class="price">$15</p>
+        </div>
       </div>
-
-      <!-- Subcategory List -->
-      <div class="subcategory-list">
-        <h2>Select a Subcategory</h2>
-        <div id="subcategoryButtons">
-          <!-- Subcategory buttons will be dynamically added here -->
+      <div class="image-card" data-category="authentic" data-condition="used" data-release="2025-05-12" onclick="window.location.href='item.html?image=2'">
+        <img src="imgs/dimsum.png" alt="Dim Sum">
+        <div class="details">
+          <h3>Dim Sum</h3>
+          <p>Chinese small dishes</p>
+          <p class="price">$20</p>
+        </div>
+      </div>
+      <div class="image-card" data-category="authentic" data-condition="new" data-release="2025-05-10" onclick="window.location.href='item.html?image=3'">
+        <img src="imgs/ramen.png" alt="Ramen">
+        <div class="details">
+          <h3>Ramen</h3>
+          <p>Japanese noodle soup</p>
+          <p class="price">$12</p>
+        </div>
+      </div>
+      <div class="image-card" data-category="light meal" data-condition="used" data-release="2025-04-19" onclick="window.location.href='item.html?image=4'">
+        <img src="imgs/pad thai.png" alt="Pad Thai">
+        <div class="details">
+          <h3>Pad Thai</h3>
+          <p>Thai stir-fried noodles</p>
+          <p class="price">$10</p>
+        </div>
+      </div>
+      <div class="image-card" data-location="korea" data-category="authentic" data-condition="new" data-release="2025-05-17" onclick="window.location.href='item.html?image=5'">
+        <img src="imgs/bibimbap.png" alt="Bibimbap">
+        <div class="details">
+          <h3>Bibimbap</h3>
+          <p>Mixed rice with vegetables and meat.</p>
+          <div class="price">$9</div>
+        </div>
+      </div>
+      <div class="image-card" data-location="indonesia" data-category="trending" data-condition="used" data-release="2025-05-15" onclick="window.location.href='item.html?image=6'">
+        <img src="imgs/satay.png" alt="Satay">
+        <div class="details">
+          <h3>Satay</h3>
+          <p>Grilled meat skewers with peanut sauce.</p>
+          <div class="price">$10</div>
+        </div>
+      </div>
+      <div class="image-card" data-location="vietnam" data-category="authentic" data-condition="new" data-release="2025-05-13" onclick="window.location.href='item.html?image=7'">
+        <img src="imgs/pho.png" alt="Pho">
+        <div class="details">
+          <h3>Pho</h3>
+          <p>Vietnamese noodle soup with herbs and meat.</p>
+          <div class="price">$7</div>
+        </div>
+      </div>
+      <div class="image-card" data-location="japan" data-category="trending" data-condition="used" data-release="2025-05-10" onclick="window.location.href='item.html?image=8'">
+        <img src="imgs/tempura.png" alt="Tempura">
+        <div class="details">
+          <h3>Tempura</h3>
+          <p>Battered and deep-fried seafood and vegetables.</p>
+          <div class="price">$13</div>
+        </div>
+      </div>
+      <div class="image-card" data-location="korea" data-category="light meal" data-condition="new" data-release="2025-05-01" onclick="window.location.href='item.html?image=9'">
+        <img src="imgs/kimbap.png" alt="Kimbap">
+        <div class="details">
+          <h3>Kimbap</h3>
+          <p>Korean rice rolls with vegetables and meat.</p>
+          <div class="price">$8</div>
+        </div>
+      </div>
+      <div class="image-card" data-location="korea" data-category="light meal" data-condition="used" data-release="2025-04-30" onclick="window.location.href='item.html?image=10'">
+        <img src="imgs/tteokbokki.png" alt="Tteokbokki">
+        <div class="details">
+          <h3>Tteokbokki</h3>
+          <p>Spicy Korean rice cakes with fish cakes.</p>
+          <div class="price">$9</div>
+        </div>
+      </div>
+      <div class="image-card" data-location="vietnam" data-category="trending" data-condition="new" data-release="2025-05-19" onclick="window.location.href='item.html?image=11'">
+        <img src="imgs/spring-rolls.png" alt="Spring Rolls">
+        <div class="details">
+          <h3>Spring Rolls</h3>
+          <p>Crispy rolls with shrimp and vegetables.</p>
+          <div class="price">$6</div>
+        </div>
+      </div>
+      <div class="image-card" data-location="india" data-category="nearby" data-condition="used" data-release="2025-05-18" onclick="window.location.href='item.html?image=12'">
+        <img src="imgs/naan.png" alt="Naan">
+        <div class="details">
+          <h3>Naan</h3>
+          <p>Soft and fluffy Indian bread.</p>
+          <div class="price">$4</div>
+        </div>
+      </div>
+      <div class="image-card" data-location="india" data-category="authentic" data-condition="new" data-release="2025-05-17" onclick="window.location.href='item.html?image=13'">
+        <img src="imgs/biryani.png" alt="Biryani">
+        <div class="details">
+          <h3>Biryani</h3>
+          <p>Fragrant rice dish with meat and spices.</p>
+          <div class="price">$15</div>
+        </div>
+      </div>
+      <div class="image-card" data-location="japan" data-category="nearby" data-condition="used" data-release="2025-05-15" onclick="window.location.href='item.html?image=14'">
+        <img src="imgs/miso-soup.png" alt="Miso Soup">
+        <div class="details">
+          <h3>Miso Soup</h3>
+          <p>Traditional Japanese soup with tofu and seaweed.</p>
+          <div class="price">$5</div>
+        </div>
+      </div>
+      <div class="image-card" data-location="thailand" data-category="authentic" data-condition="new" data-release="2025-05-12" onclick="window.location.href='item.html?image=15'">
+        <img src="imgs/green-curry.png" alt="Green Curry">
+        <div class="details">
+          <h3>Green Curry</h3>
+          <p>Spicy Thai curry with coconut milk and vegetables.</p>
+          <div class="price">$14</div>
+        </div>
+      </div>
+      <div class="image-card" data-location="china" data-category="authentic" data-condition="used" data-release="2025-05-10" onclick="window.location.href='item.html?image=16'">
+        <img src="imgs/baozi.png" alt="Baozi">
+        <div class="details">
+          <h3>Baozi</h3>
+          <p>Chinese steamed buns with various fillings.</p>
+          <div class="price">$7</div>
+        </div>
+      </div>
+      <!-- Extra cards for 5 rows -->
+      <div class="image-card" data-location="china" data-category="trending" data-condition="new" data-release="2025-05-09" onclick="window.location.href='item.html?image=17'">
+        <img src="imgs/baozi.png" alt="Baozi (Chicken)">
+        <div class="details">
+          <h3>Baozi (Chicken)</h3>
+          <p>Steamed Chinese buns with chicken filling.</p>
+          <div class="price">$8</div>
+        </div>
+      </div>
+      <div class="image-card" data-location="japan" data-category="trending" data-condition="used" data-release="2025-05-08" onclick="window.location.href='item.html?image=18'">
+        <img src="imgs/sushi.png" alt="Sushi (Salmon)">
+        <div class="details">
+          <h3>Sushi (Salmon)</h3>
+          <p>Salmon sushi with fresh wasabi.</p>
+          <div class="price">$18</div>
+        </div>
+      </div>
+      <div class="image-card" data-location="thailand" data-category="nearby" data-condition="new" data-release="2025-05-07" onclick="window.location.href='item.html?image=19'">
+        <img src="imgs/green-curry.png" alt="Green Curry (Spicy)">
+        <div class="details">
+          <h3>Green Curry (Spicy)</h3>
+          <p>Extra spicy Thai green curry with coconut milk.</p>
+          <div class="price">$16</div>
+        </div>
+      </div>
+      <div class="image-card" data-location="india" data-category="trending" data-condition="used" data-release="2025-05-06" onclick="window.location.href='item.html?image=20'">
+        <img src="imgs/biryani.png" alt="Biryani (Lamb)">
+        <div class="details">
+          <h3>Biryani (Lamb)</h3>
+          <p>Fragrant lamb biryani with spices.</p>
+          <div class="price">$20</div>
+        </div>
+      </div>
+      <div class="image-card" data-location="korea" data-category="healthy" data-condition="new" data-release="2025-05-19">
+        <img src="imgs/bibimbap.png" alt="Bibimbap">
+        <div class="details">
+          <h3>Bibimbap</h3>
+          <p>Mixed rice with vegetables and meat.</p>
+          <div class="price">$9</div>
+        </div>
+      </div>
+      <div class="image-card" data-location="indonesia" data-category="trending" data-condition="used" data-release="2025-05-18">
+        <img src="imgs/satay.png" alt="Satay">
+        <div class="details">
+          <h3>Satay</h3>
+          <p>Grilled meat skewers with peanut sauce.</p>
+          <div class="price">$10</div>
+        </div>
+      </div>
+      <div class="image-card" data-location="vietnam" data-category="healthy" data-condition="new" data-release="2025-05-17">
+        <img src="imgs/pho.png" alt="Pho">
+        <div class="details">
+          <h3>Pho</h3>
+          <p>Vietnamese noodle soup with herbs and meat.</p>
+          <div class="price">$7</div>
+        </div>
+      </div>
+      <div class="image-card" data-location="japan" data-category="trending" data-condition="used" data-release="2025-05-16">
+        <img src="imgs/tempura.png" alt="Tempura">
+        <div class="details">
+          <h3>Tempura</h3>
+          <p>Battered and deep-fried seafood and vegetables.</p>
+          <div class="price">$13</div>
+        </div>
+      </div>
+      <div class="image-card" data-location="korea" data-category="trending" data-condition="new" data-release="2025-05-15">
+        <img src="imgs/kimbap.png" alt="Kimbap">
+        <div class="details">
+          <h3>Kimbap</h3>
+          <p>Korean rice rolls with vegetables and meat.</p>
+          <div class="price">$8</div>
+        </div>
+      </div>
+      <div class="image-card" data-location="korea" data-category="nearby" data-condition="used" data-release="2025-05-14">
+        <img src="imgs/tteokbokki.png" alt="Tteokbokki">
+        <div class="details">
+          <h3>Tteokbokki</h3>
+          <p>Spicy Korean rice cakes with fish cakes.</p>
+          <div class="price">$9</div>
+        </div>
+      </div>
+      <div class="image-card" data-location="vietnam" data-category="trending" data-condition="new" data-release="2025-05-13">
+        <img src="imgs/spring-rolls.png" alt="Spring Rolls">
+        <div class="details">
+          <h3>Spring Rolls</h3>
+          <p>Crispy rolls with shrimp and vegetables.</p>
+          <div class="price">$6</div>
+        </div>
+      </div>
+      <div class="image-card" data-location="india" data-category="nearby" data-condition="used" data-release="2025-05-12">
+        <img src="imgs/naan.png" alt="Naan">
+        <div class="details">
+          <h3>Naan</h3>
+          <p>Soft and fluffy Indian bread.</p>
+          <div class="price">$4</div>
+        </div>
+      </div>
+      <div class="image-card" data-location="india" data-category="authentic" data-condition="new" data-release="2025-05-11">
+        <img src="imgs/biryani.png" alt="Biryani">
+        <div class="details">
+          <h3>Biryani</h3>
+          <p>Fragrant rice dish with meat and spices.</p>
+          <div class="price">$15</div>
+        </div>
+      </div>
+      <div class="image-card" data-location="japan" data-category="nearby" data-condition="used" data-release="2025-05-10">
+        <img src="imgs/miso-soup.png" alt="Miso Soup">
+        <div class="details">
+          <h3>Miso Soup</h3>
+          <p>Traditional Japanese soup with tofu and seaweed.</p>
+          <div class="price">$5</div>
+        </div>
+      </div>
+      <div class="image-card" data-location="thailand" data-category="authentic" data-condition="new" data-release="2025-05-09">
+        <img src="imgs/green-curry.png" alt="Green Curry">
+        <div class="details">
+          <h3>Green Curry</h3>
+          <p>Spicy Thai curry with coconut milk and vegetables.</p>
+          <div class="price">$14</div>
+        </div>
+      </div>
+      <div class="image-card" data-location="china" data-category="authentic" data-condition="used" data-release="2025-05-08">
+        <img src="imgs/baozi.png" alt="Baozi">
+        <div class="details">
+          <h3>Baozi</h3>
+          <p>Chinese steamed buns with various fillings.</p>
+          <div class="price">$7</div>
         </div>
       </div>
     </div>
+  </div>
 
-    <script>
-      const subcategories = {
-        'Free Items': ['Furniture', 'Clothing', 'Books'],
-        'Vehicles': ['Cars', 'Motorcycles', 'Bicycles'],
-        'Properties': ['Houses', 'Apartments', 'Land'],
-        'Jobs': ['Full-time', 'Part-time', 'Freelance'],
-        'Electronics': ['Phones', 'Laptops', 'Cameras']
+  <!-- Modal -->
+  <div class="modal" id="imageModal">
+    <div class="modal-content">
+      <h2 id="modalTitle"></h2>
+      <p id="modalDescription"></p>
+      <button class="close" onclick="closeModal()">Close</button>
+    </div>
+  </div>
+
+
+
+  <script>
+    function openModal(title, description) {
+      document.getElementById('modalTitle').innerText = title;
+      document.getElementById('modalDescription').innerText = description;
+      document.getElementById('imageModal').style.display = 'flex';
+    }
+
+    function closeModal() {
+      document.getElementById('imageModal').style.display = 'none';
+    }
+
+    function filterFood() {
+      const searchInput = document.getElementById('searchBar').value.toLowerCase();
+      const foodCards = document.querySelectorAll('.image-card');
+
+      foodCards.forEach(card => {
+        // Get the food name from the <h3> tag inside .details
+        const foodName = card.querySelector('.details h3').innerText.toLowerCase();
+        if (foodName.includes(searchInput)) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    function filterByLocation(location) {
+      const foodCards = document.querySelectorAll('.image-card');
+
+      foodCards.forEach(card => {
+        const foodLocation = card.getAttribute('data-location'); // Assuming data-location attribute is added to cards
+        if (foodLocation === location || location === 'all') {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    function filterByPrice() {
+      const minPrice = parseFloat(document.getElementById('minPrice').value.replace('.', '').replace(',', '.'));
+      const maxPrice = parseFloat(document.getElementById('maxPrice').value.replace('.', '').replace(',', '.'));
+      const foodCards = document.querySelectorAll('.image-card');
+
+      foodCards.forEach(card => {
+          const priceElement = card.querySelector('.price');
+          const price = parseFloat(priceElement.innerText.replace('$', '').replace('.', '').replace(',', '.'));
+
+          if ((isNaN(minPrice) || price >= minPrice) && (isNaN(maxPrice) || price <= maxPrice)) {
+              card.style.display = 'block';
+          } else {
+              card.style.display = 'none';
+          }
+      });
+    }
+
+    // Quick clear for category checkboxes
+    document.getElementById('clearCategoryBtn').addEventListener('click', function() {
+      document.querySelectorAll('.category-checkbox').forEach(cb => cb.checked = false);
+    });
+
+    // Apply Filters Button Logic
+    document.getElementById('applyFiltersBtn').addEventListener('click', function() {
+      const selectedCategories = Array.from(document.querySelectorAll('.category-checkbox:checked')).map(cb => cb.value.toLowerCase());
+      const selectedLocation = document.getElementById('locationSelect').value;
+      const selectedCondition = document.getElementById('conditionSelect').value;
+      const selectedRelease = document.getElementById('releaseSelect').value;
+      const minPrice = parseFloat(document.getElementById('minPrice').value.replace('.', '').replace(',', '.'));
+      const maxPrice = parseFloat(document.getElementById('maxPrice').value.replace('.', '').replace(',', '.'));
+      const foodCards = document.querySelectorAll('.image-card');
+
+      const now = new Date();
+
+      foodCards.forEach(card => {
+        // Category filter (support multiple categories per card, comma-separated)
+        let cardCategory = card.getAttribute('data-category');
+        let cardCategories = cardCategory ? cardCategory.split(',').map(c => c.trim().toLowerCase()) : [];
+        let categoryMatch = selectedCategories.length === 0 || selectedCategories.some(cat => cardCategories.includes(cat));
+        // Location filter
+        const foodLocation = card.getAttribute('data-location');
+        let locationMatch = (selectedLocation === 'all' || foodLocation === selectedLocation);
+        // Condition filter
+        let cardCondition = card.getAttribute('data-condition');
+        let conditionMatch = (selectedCondition === 'all' || (cardCondition && cardCondition === selectedCondition));
+        // Release date filter
+        let cardRelease = card.getAttribute('data-release');
+        let releaseMatch = true;
+        if (selectedRelease !== 'all' && cardRelease) {
+          const releaseDate = new Date(cardRelease);
+          if (selectedRelease === 'day') {
+            releaseMatch = (now - releaseDate) <= 24*60*60*1000;
+          } else if (selectedRelease === 'week') {
+            releaseMatch = (now - releaseDate) <= 7*24*60*60*1000;
+          } else if (selectedRelease === 'month') {
+            releaseMatch = (now - releaseDate) <= 31*24*60*60*1000;
+          }
+        }
+        // Price filter
+        const priceElement = card.querySelector('.price');
+        const price = parseFloat(priceElement.innerText.replace('$', '').replace('.', '').replace(',', '.'));
+        let priceMatch = (isNaN(minPrice) || price >= minPrice) && (isNaN(maxPrice) || price <= maxPrice);
+
+        if (categoryMatch && locationMatch && conditionMatch && releaseMatch && priceMatch) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+
+
+    // Update the onclick logic for image cards
+    document.querySelectorAll('.image-card').forEach((card, index) => {
+      card.onclick = () => {
+        window.location.href = `item.html?image=${index + 1}`;
       };
+    });
 
-      function selectCategory(category) {
-        const subcategoryButtons = document.getElementById('subcategoryButtons');
-        subcategoryButtons.innerHTML = '';
+    function changeFontSize(size) {
+      document.body.style.fontSize = size;
+      // Change the font size of the food card descriptions as well
+      document.querySelectorAll('.image-card .details p').forEach(function(desc) {
+        desc.style.fontSize = size;
+      });
+    }
 
-        if (subcategories[category]) {
-          subcategories[category].forEach(subcategory => {
-            const button = document.createElement('button');
-            button.textContent = subcategory;
-            button.onclick = () => {
-              window.location.href = `upload.html?category=${category}&subcategory=${subcategory}`;
-            };
-            subcategoryButtons.appendChild(button);
-          });
+    // Translation dictionary (add more as needed)
+    const translations = {
+      en: {
+        'Filter': 'Filter',
+        'Category': 'Category',
+        'Fast Food': 'Fast Food',
+        'Trending': 'Trending',
+        'Authentic': 'Authentic',
+        'Light Meal': 'Light Meal',
+        'Healthy': 'Healthy',
+        'Clear': 'Clear',
+        'Location': 'Location',
+        'All Locations': 'All Locations',
+        'Japan': 'Japan',
+        'China': 'China',
+        'Thailand': 'Thailand',
+        'Korea': 'Korea',
+        'Indonesia': 'Indonesia',
+        'Vietnam': 'Vietnam',
+        'India': 'India',
+        'Condition': 'Condition',
+        'All': 'All',
+        'New': 'New',
+        'Used': 'Used',
+        'Release Date': 'Release Date',
+        'Anytime': 'Anytime',
+        'A day ago': 'A day ago',
+        'A week ago': 'A week ago',
+        'A month ago': 'A month ago',
+        'Price': 'Price',
+        'Minimum Price': 'Minimum Price',
+        'Maximum Price': 'Maximum Price',
+        'Apply Filters': 'Apply Filters',
+        'Logout': 'Logout',
+        'Upload Post': 'Upload Post',
+        'Member Registration': 'Member Registration',
+        'Font Size': 'Font Size',
+        'Search for food...': 'Search for food...',
+        'Small': 'Small',
+        'Medium': 'Medium',
+        'Large': 'Large',
+        'Extra Large': 'Extra Large',
+        'Interactive Front Page': 'Interactive Front Page',
+      },
+      id: {
+        'Filter': 'Filter',
+        'Category': 'Kategori',
+        'Fast Food': 'Cepat Saji',
+        'Trending': 'Sedang Tren',
+        'Authentic': 'Otentik',
+        'Light Meal': 'Makanan Ringan',
+        'Healthy': 'Sehat',
+        'Clear': 'Bersihkan',
+        'Location': 'Lokasi',
+        'All Locations': 'Semua Lokasi',
+        'Japan': 'Jepang',
+        'China': 'Tiongkok',
+        'Thailand': 'Thailand',
+        'Korea': 'Korea',
+        'Indonesia': 'Indonesia',
+        'Vietnam': 'Vietnam',
+        'India': 'India',
+        'Condition': 'Kondisi',
+        'All': 'Semua',
+        'New': 'Baru',
+        'Used': 'Bekas',
+        'Release Date': 'Tanggal Rilis',
+        'Anytime': 'Kapan saja',
+        'A day ago': 'Sehari lalu',
+        'A week ago': 'Seminggu lalu',
+        'A month ago': 'Sebulan lalu',
+        'Price': 'Harga',
+        'Minimum Price': 'Harga Minimum',
+        'Maximum Price': 'Harga Maksimum',
+        'Apply Filters': 'Terapkan Filter',
+        'Logout': 'Keluar',
+        'Upload Post': 'Unggah Postingan',
+        'Member Registration': 'Registrasi Member',
+        'Font Size': 'Ukuran Font',
+        'Search for food...': 'Cari makanan...',
+        'Small': 'Kecil',
+        'Medium': 'Sedang',
+        'Large': 'Besar',
+        'Extra Large': 'Sangat Besar',
+        'Interactive Front Page': 'Halaman Depan Interaktif',
+      },
+      zh: {
+        'Filter': '筛选',
+        'Category': '类别',
+        'Fast Food': '快餐',
+        'Trending': '流行',
+        'Authentic': '正宗',
+        'Light Meal': '轻食',
+        'Healthy': '健康',
+        'Clear': '清除',
+        'Location': '地点',
+        'All Locations': '所有地点',
+        'Japan': '日本',
+        'China': '中国',
+        'Thailand': '泰国',
+        'Korea': '韩国',
+        'Indonesia': '印度尼西亚',
+        'Vietnam': '越南',
+        'India': '印度',
+        'Condition': '状况',
+        'All': '全部',
+        'New': '全新',
+        'Used': '二手',
+        'Release Date': '发布日期',
+        'Anytime': '任何时间',
+        'A day ago': '一天前',
+        'A week ago': '一周前',
+        'A month ago': '一月前',
+        'Price': '价格',
+        'Minimum Price': '最低价格',
+        'Maximum Price': '最高价格',
+        'Apply Filters': '应用筛选',
+        'Logout': '登出',
+        'Upload Post': '上传帖子',
+        'Member Registration': '会员注册',
+        'Font Size': '字体大小',
+        'Search for food...': '搜索美食...',
+        'Small': '小',
+        'Medium': '中',
+        'Large': '大',
+        'Extra Large': '特大',
+        'Interactive Front Page': '互动首页',
+      }
+    };
+
+
+    // Store original text for translation
+    function storeOriginalText(el) {
+      if (el.nodeType === 3) { // Text node
+        if (!el._originalText) {
+          el._originalText = el.nodeValue;
+        }
+      } else if (el.nodeType === 1) {
+        if (["SCRIPT", "STYLE"].includes(el.tagName)) return;
+        if ((el.tagName === 'OPTION' || el.tagName === 'BUTTON') && !el._originalText) {
+          el._originalText = el.textContent;
+        }
+        if (el.placeholder && !el._originalPlaceholder) {
+          el._originalPlaceholder = el.placeholder;
+        }
+        Array.from(el.childNodes).forEach(storeOriginalText);
+      }
+    }
+
+    function translatePage(lang) {
+      function translateElementText(el) {
+        if (el.nodeType === 3) { // Text node
+          const original = el._originalText || el.nodeValue;
+          const trimmed = original.trim();
+          if (translations[lang][trimmed]) {
+            el.nodeValue = original.replace(trimmed, translations[lang][trimmed]);
+          } else {
+            el.nodeValue = original;
+          }
+        } else if (el.nodeType === 1) {
+          if (["SCRIPT", "STYLE"].includes(el.tagName)) return;
+          if (el.tagName === 'OPTION' || el.tagName === 'BUTTON') {
+            const original = el._originalText || el.textContent;
+            const trimmed = original.trim();
+            if (translations[lang][trimmed]) {
+              el.textContent = translations[lang][trimmed];
+            } else {
+              el.textContent = original;
+            }
+          }
+          if (el.placeholder) {
+            const original = el._originalPlaceholder || el.placeholder;
+            if (translations[lang][original]) {
+              el.placeholder = translations[lang][original];
+            } else {
+              el.placeholder = original;
+            }
+          }
+          Array.from(el.childNodes).forEach(translateElementText);
         }
       }
-    </script>
+      // Title
+      if (translations[lang]['Interactive Front Page']) {
+        document.title = translations[lang]['Interactive Front Page'];
+      }
+      translateElementText(document.body);
+    }
+
+    // Store original text on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      storeOriginalText(document.body);
+      // Set initial translation based on selected value
+      const lang = document.getElementById('langSelect').value;
+      translatePage(lang);
+    });
+
+    document.getElementById('langSelect').addEventListener('change', function() {
+      translatePage(this.value);
+    });
+
+    // Font size selector logic
+    document.getElementById('fontSizeSelect').addEventListener('change', function() {
+      changeFontSize(this.value);
+    });
+  </script>
 </body>
 </html>
