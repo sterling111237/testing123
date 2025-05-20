@@ -5,12 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Interactive Front Page</title>
   <style>
+    .font-size-dropdown {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: #f5f7fa;
+      border-radius: 6px;
+      padding: 4px 10px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    }
     body {
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
-      background-color: #dadada;
-      color: #ffffff;
+      background-color: #f5f7fa;
+      color: #222;
     }
 
     /* Navigation Bar */
@@ -18,12 +27,17 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background-color: #999999;
-      padding: 10px 20px;
+      background-color: #e0e7ef;
+      padding: 14px 32px;
+      border-radius: 0 0 12px 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
     }
 
     .navbar .logo {
       flex: 1;
+      font-size: 26px;
+      font-weight: bold;
+      color: #222;
     }
 
     .navbar .font-selector {
@@ -44,9 +58,15 @@
       border: none;
       border-radius: 5px;
       cursor: pointer;
+      font-size: 15px;
+      transition: background 0.2s, color 0.2s;
     }
     .navbar .nav-buttons .login {
       background-color: #81c995;
+      color: #fff;
+    }
+    .navbar .nav-buttons .login:hover {
+      background-color: #5fa87a;
     }
     .navbar .nav-buttons .upload {
       background-color: #4fc3f7;
@@ -70,8 +90,8 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background-color: #b3e5fc;
-      padding: 10px;
+      background-color: #e3f2fd;
+      padding: 12px 0;
     }
     .quick-search button {
       background-color: #4fc3f7;
@@ -80,13 +100,20 @@
       border-radius: 5px;
       cursor: pointer;
       color: #fff;
+      font-size: 15px;
+    }
+    .quick-search button:hover {
+      background-color: #0288d1;
     }
     .quick-search input {
       padding: 10px;
-      border: none;
+      border: 1px solid #b3c7e6;
       border-radius: 5px;
       width: 300px;
       margin-right: 10px;
+      background: #fff;
+      color: #222;
+      font-size: 15px;
     }
 
     /* Container and Sidebar */
@@ -187,6 +214,7 @@
       text-align: center;
       width: 80%;
       max-width: 500px;
+      color: #222;
     }
     .modal-content img {
       width: 100%;
@@ -213,11 +241,27 @@
     }
 
     select {
-      border: 2px solid #4caf50;
+      border: 1.5px solid #b3c7e6;
       border-radius: 5px;
-      padding: 5px;
+      padding: 7px 18px 7px 8px;
       background-color: #fff;
-      color: #000;
+      color: #222;
+      font-size: 15px;
+      outline: none;
+      transition: border 0.2s, box-shadow 0.2s;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      margin: 0;
+    }
+    select:focus {
+      border-color: #4fc3f7;
+      box-shadow: 0 0 0 2px #b3e5fc;
+    }
+    .font-size-dropdown select {
+      margin: 0;
+      min-width: 110px;
     }
 
     /* Hidden Bar Styles */
@@ -258,11 +302,16 @@
     .open-hidden-bar {
       font-size: 20px;
       cursor: pointer;
-      color: white;
+      color: #fff;
       background-color: #444;
       border: none;
       padding: 10px;
       margin: 10px;
+      border-radius: 5px;
+      transition: background 0.2s;
+    }
+    .open-hidden-bar:hover {
+      background-color: #222;
     }
   </style>
 </head>
@@ -272,22 +321,58 @@
     <div class="logo">李</div>
     
     <div class="nav-buttons">
-      <button class="login" onclick="window.location.href='login.html'">Logout</button>
       <button class="upload" onclick="window.location.href='uploadprep.html'">Upload Post</button>
       <button class="register" onclick="window.location.href='member.html'">Member Registration</button>
-      <div class="font-size-dropdown" style="position: relative; display: flex; align-items: center; gap: 8px;">
-        <select id="fontSizeSelect" style="border-radius: 5px; padding: 5px;">
-          <option value="14px">Small</option>
-          <option value="16px" selected>Medium</option>
-          <option value="18px">Large</option>
-          <option value="20px">Extra Large</option>
-        </select>
-        <select id="langSelect" style="margin-left: 10px; border-radius: 5px; padding: 5px;">
-          <option value="en">English</option>
-          <option value="id">Bahasa Indonesia</option>
-          <option value="zh">中文 (Mandarin)</option>
-        </select>
+      <div class="settings-dropdown" style="position: relative; display: inline-block; margin-left: 10px;">
+        <button class="settings" onclick="toggleSettingsDropdown()" title="Settings" style="background-color: #ffd966; color: #222; border-radius: 5px; padding: 10px 20px; border: none; font-size: 15px; cursor: pointer; transition: background 0.2s; min-width: 120px;">
+          <span style="vertical-align: middle;">&#9881; Settings</span>
+        </button>
+        <div id="settingsDropdown" class="dropdown-content" style="display: none; position: absolute; right: 0; background: #fffbe6; min-width: 200px; box-shadow: 0 2px 8px rgba(0,0,0,0.12); border-radius: 8px; z-index: 100; padding: 16px 18px 12px 18px;">
+          <button class="login" onclick="window.location.href='login.html'" style="width:100%;margin-bottom:10px;background-color:#81c995;color:#fff;">Logout</button>
+          <div class="font-size-dropdown" style="margin-bottom: 12px;">
+            <select id="fontSizeSelect" style="border-radius: 5px; padding: 5px; width:100%;">
+              <option value="14px">Small</option>
+              <option value="16px" selected>Medium</option>
+              <option value="18px">Large</option>
+              <option value="20px">Extra Large</option>
+            </select>
+          </div>
+          <div style="margin-bottom: 0;">
+            <select id="langSelect" style="border-radius: 5px; padding: 5px; width:100%;">
+              <option value="en">English</option>
+              <option value="id">Bahasa Indonesia</option>
+              <option value="zh">中文 (Mandarin)</option>
+            </select>
+          </div>
+        </div>
       </div>
+  <script>
+    // Settings dropdown logic
+    function toggleSettingsDropdown() {
+      const dropdown = document.getElementById('settingsDropdown');
+      dropdown.style.display = (dropdown.style.display === 'block') ? 'none' : 'block';
+    }
+
+    // Hide dropdown when clicking outside
+    document.addEventListener('click', function(event) {
+      const dropdown = document.getElementById('settingsDropdown');
+      const settingsBtn = document.querySelector('.settings');
+      if (!dropdown || !settingsBtn) return;
+      if (!dropdown.contains(event.target) && !settingsBtn.contains(event.target)) {
+        dropdown.style.display = 'none';
+      }
+    });
+
+    // Settings dropdown: font size and language logic
+    document.getElementById('settingsDropdown').addEventListener('change', function(e) {
+      if (e.target && e.target.id === 'fontSizeSelect') {
+        changeFontSize(e.target.value);
+      }
+      if (e.target && e.target.id === 'langSelect') {
+        translatePage(e.target.value);
+      }
+    });
+  </script>
     </div>
   </div>
 
