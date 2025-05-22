@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -341,26 +342,79 @@
       <div>
         <h4>Category</h4>
         <ul>
-          <li><input type="checkbox" class="category-checkbox" value="Fast Food"> Fast Food</li>
-          <li><input type="checkbox" class="category-checkbox" value="Trending"> Trending</li>
-          <li><input type="checkbox" class="category-checkbox" value="Authentic"> Authentic</li>
-          <li><input type="checkbox" class="category-checkbox" value="Light Meal"> Light Meal</li>
-          <li><input type="checkbox" class="category-checkbox" value="Healthy"> Healthy</li>
+      <li>
+        <input type="checkbox" class="category-checkbox" value="Free Items" id="free-items"> Free Items
+        <ul class="subcategory-list">
+          <li><input type="checkbox" class="subcategory-checkbox" data-parent="free-items" value="Furniture"> Furniture</li>
+          <li><input type="checkbox" class="subcategory-checkbox" data-parent="free-items" value="Clothing"> Clothing</li>
+          <li><input type="checkbox" class="subcategory-checkbox" data-parent="free-items" value="Books"> Books</li>
+        </ul>
+      </li>
+      <li>
+        <input type="checkbox" class="category-checkbox" value="Vehicles" id="vehicles"> Vehicles
+        <ul class="subcategory-list">
+          <li><input type="checkbox" class="subcategory-checkbox" data-parent="vehicles" value="Cars"> Cars</li>
+          <li><input type="checkbox" class="subcategory-checkbox" data-parent="vehicles" value="Motorcycles"> Motorcycles</li>
+          <li><input type="checkbox" class="subcategory-checkbox" data-parent="vehicles" value="Bicycles"> Bicycles</li>
+        </ul>
+      </li>
+      <li>
+        <input type="checkbox" class="category-checkbox" value="Properties" id="properties"> Properties
+        <ul class="subcategory-list">
+          <li><input type="checkbox" class="subcategory-checkbox" data-parent="properties" value="Houses"> Houses</li>
+          <li><input type="checkbox" class="subcategory-checkbox" data-parent="properties" value="Apartments"> Apartments</li>
+          <li><input type="checkbox" class="subcategory-checkbox" data-parent="properties" value="Land"> Land</li>
+        </ul>
+      </li>
+      <li>
+        <input type="checkbox" class="category-checkbox" value="Jobs" id="jobs"> Jobs
+        <ul class="subcategory-list">
+          <li><input type="checkbox" class="subcategory-checkbox" data-parent="jobs" value="Full-time"> Full-time</li>
+          <li><input type="checkbox" class="subcategory-checkbox" data-parent="jobs" value="Part-time"> Part-time</li>
+          <li><input type="checkbox" class="subcategory-checkbox" data-parent="jobs" value="Freelance"> Freelance</li>
+        </ul>
+      </li>
+      <li>
+        <input type="checkbox" class="category-checkbox" value="Electronics" id="electronics"> Electronics
+        <ul class="subcategory-list">
+          <li><input type="checkbox" class="subcategory-checkbox" data-parent="electronics" value="Phones"> Phones</li>
+          <li><input type="checkbox" class="subcategory-checkbox" data-parent="electronics" value="Laptops"> Laptops</li>
+          <li><input type="checkbox" class="subcategory-checkbox" data-parent="electronics" value="Cameras"> Cameras</li>
+        </ul>
+      </li>
+      <li>
+        <input type="checkbox" class="category-checkbox" value="Foods" id="foods"> Foods
+        <ul class="subcategory-list">
+          <li><input type="checkbox" class="subcategory-checkbox" data-parent="foods" value="Fast Food"> Fast Food</li>
+          <li><input type="checkbox" class="subcategory-checkbox" data-parent="foods" value="Trending"> Trending</li>
+          <li><input type="checkbox" class="subcategory-checkbox" data-parent="foods" value="Authentic"> Authentic</li>
+          <li><input type="checkbox" class="subcategory-checkbox" data-parent="foods" value="Light Meal"> Light Meal</li>
+          <li><input type="checkbox" class="subcategory-checkbox" data-parent="foods" value="Healthy"> Healthy</li>
+        </ul>
+      </li>
         </ul>
         <button id="clearCategoryBtn" style="margin-top:8px; padding:4px 10px; background:#eee; color:#333; border:none; border-radius:4px; cursor:pointer; font-size:13px;">Clear</button>
       </div>
+
+      <style>
+        .subcategory-list {
+          margin-left: 20px;
+          list-style-type: none;
+          padding-left: 10px;
+          display: none;
+        }
+        .category-checkbox:checked + .subcategory-list,
+        .category-checkbox:checked ~ ul.subcategory-list {
+          display: block;
+        }
+      </style>
+
       <div>
         <h4>Location</h4>
         <select id="locationSelect">
-          <option value="all">All Locations</option>
-          <option value="japan">Japan</option>
-          <option value="china">China</option>
-          <option value="thailand">Thailand</option>
-          <option value="korea">Korea</option>
-          <option value="indonesia">Indonesia</option>
-          <option value="vietnam">Vietnam</option>
-          <option value="india">India</option>
-        </select>
+        <option value="all">All Locations</option>
+        <!-- dynamic options will be appended here -->
+      </select>
       </div>
       <div>
         <h4>Condition</h4>
@@ -394,267 +448,7 @@
     </div>
 
     <!-- Image Grid -->
-    <div class="image-container">
-      <!-- Updated image cards with new design -->
-      <div class="image-card" data-category="authentic" data-condition="new" data-release="2025-05-18" onclick="window.location.href='item.html?image=1'">
-        <img src="imgs/sushi.png" alt="Sushi">
-        <div class="details">
-          <h3>Sushi</h3>
-          <p>Traditional Japanese dish</p>
-          <p class="price">$15</p>
-        </div>
-      </div>
-      <div class="image-card" data-category="authentic" data-condition="used" data-release="2025-05-12" onclick="window.location.href='item.html?image=2'">
-        <img src="imgs/dimsum.png" alt="Dim Sum">
-        <div class="details">
-          <h3>Dim Sum</h3>
-          <p>Chinese small dishes</p>
-          <p class="price">$20</p>
-        </div>
-      </div>
-      <div class="image-card" data-category="authentic" data-condition="new" data-release="2025-05-10" onclick="window.location.href='item.html?image=3'">
-        <img src="imgs/ramen.png" alt="Ramen">
-        <div class="details">
-          <h3>Ramen</h3>
-          <p>Japanese noodle soup</p>
-          <p class="price">$12</p>
-        </div>
-      </div>
-      <div class="image-card" data-category="light meal" data-condition="used" data-release="2025-04-19" onclick="window.location.href='item.html?image=4'">
-        <img src="imgs/pad thai.png" alt="Pad Thai">
-        <div class="details">
-          <h3>Pad Thai</h3>
-          <p>Thai stir-fried noodles</p>
-          <p class="price">$10</p>
-        </div>
-      </div>
-      <div class="image-card" data-location="korea" data-category="authentic" data-condition="new" data-release="2025-05-17" onclick="window.location.href='item.html?image=5'">
-        <img src="imgs/bibimbap.png" alt="Bibimbap">
-        <div class="details">
-          <h3>Bibimbap</h3>
-          <p>Mixed rice with vegetables and meat.</p>
-          <div class="price">$9</div>
-        </div>
-      </div>
-      <div class="image-card" data-location="indonesia" data-category="trending" data-condition="used" data-release="2025-05-15" onclick="window.location.href='item.html?image=6'">
-        <img src="imgs/satay.png" alt="Satay">
-        <div class="details">
-          <h3>Satay</h3>
-          <p>Grilled meat skewers with peanut sauce.</p>
-          <div class="price">$10</div>
-        </div>
-      </div>
-      <div class="image-card" data-location="vietnam" data-category="authentic" data-condition="new" data-release="2025-05-13" onclick="window.location.href='item.html?image=7'">
-        <img src="imgs/pho.png" alt="Pho">
-        <div class="details">
-          <h3>Pho</h3>
-          <p>Vietnamese noodle soup with herbs and meat.</p>
-          <div class="price">$7</div>
-        </div>
-      </div>
-      <div class="image-card" data-location="japan" data-category="trending" data-condition="used" data-release="2025-05-10" onclick="window.location.href='item.html?image=8'">
-        <img src="imgs/tempura.png" alt="Tempura">
-        <div class="details">
-          <h3>Tempura</h3>
-          <p>Battered and deep-fried seafood and vegetables.</p>
-          <div class="price">$13</div>
-        </div>
-      </div>
-      <div class="image-card" data-location="korea" data-category="light meal" data-condition="new" data-release="2025-05-01" onclick="window.location.href='item.html?image=9'">
-        <img src="imgs/kimbap.png" alt="Kimbap">
-        <div class="details">
-          <h3>Kimbap</h3>
-          <p>Korean rice rolls with vegetables and meat.</p>
-          <div class="price">$8</div>
-        </div>
-      </div>
-      <div class="image-card" data-location="korea" data-category="light meal" data-condition="used" data-release="2025-04-30" onclick="window.location.href='item.html?image=10'">
-        <img src="imgs/tteokbokki.png" alt="Tteokbokki">
-        <div class="details">
-          <h3>Tteokbokki</h3>
-          <p>Spicy Korean rice cakes with fish cakes.</p>
-          <div class="price">$9</div>
-        </div>
-      </div>
-      <div class="image-card" data-location="vietnam" data-category="trending" data-condition="new" data-release="2025-05-19" onclick="window.location.href='item.html?image=11'">
-        <img src="imgs/spring-rolls.png" alt="Spring Rolls">
-        <div class="details">
-          <h3>Spring Rolls</h3>
-          <p>Crispy rolls with shrimp and vegetables.</p>
-          <div class="price">$6</div>
-        </div>
-      </div>
-      <div class="image-card" data-location="india" data-category="nearby" data-condition="used" data-release="2025-05-18" onclick="window.location.href='item.html?image=12'">
-        <img src="imgs/naan.png" alt="Naan">
-        <div class="details">
-          <h3>Naan</h3>
-          <p>Soft and fluffy Indian bread.</p>
-          <div class="price">$4</div>
-        </div>
-      </div>
-      <div class="image-card" data-location="india" data-category="authentic" data-condition="new" data-release="2025-05-17" onclick="window.location.href='item.html?image=13'">
-        <img src="imgs/biryani.png" alt="Biryani">
-        <div class="details">
-          <h3>Biryani</h3>
-          <p>Fragrant rice dish with meat and spices.</p>
-          <div class="price">$15</div>
-        </div>
-      </div>
-      <div class="image-card" data-location="japan" data-category="nearby" data-condition="used" data-release="2025-05-15" onclick="window.location.href='item.html?image=14'">
-        <img src="imgs/miso-soup.png" alt="Miso Soup">
-        <div class="details">
-          <h3>Miso Soup</h3>
-          <p>Traditional Japanese soup with tofu and seaweed.</p>
-          <div class="price">$5</div>
-        </div>
-      </div>
-      <div class="image-card" data-location="thailand" data-category="authentic" data-condition="new" data-release="2025-05-12" onclick="window.location.href='item.html?image=15'">
-        <img src="imgs/green-curry.png" alt="Green Curry">
-        <div class="details">
-          <h3>Green Curry</h3>
-          <p>Spicy Thai curry with coconut milk and vegetables.</p>
-          <div class="price">$14</div>
-        </div>
-      </div>
-      <div class="image-card" data-location="china" data-category="authentic" data-condition="used" data-release="2025-05-10" onclick="window.location.href='item.html?image=16'">
-        <img src="imgs/baozi.png" alt="Baozi">
-        <div class="details">
-          <h3>Baozi</h3>
-          <p>Chinese steamed buns with various fillings.</p>
-          <div class="price">$7</div>
-        </div>
-      </div>
-      <!-- Extra cards for 5 rows -->
-      <div class="image-card" data-location="china" data-category="trending" data-condition="new" data-release="2025-05-09" onclick="window.location.href='item.html?image=17'">
-        <img src="imgs/baozi.png" alt="Baozi (Chicken)">
-        <div class="details">
-          <h3>Baozi (Chicken)</h3>
-          <p>Steamed Chinese buns with chicken filling.</p>
-          <div class="price">$8</div>
-        </div>
-      </div>
-      <div class="image-card" data-location="japan" data-category="trending" data-condition="used" data-release="2025-05-08" onclick="window.location.href='item.html?image=18'">
-        <img src="imgs/sushi.png" alt="Sushi (Salmon)">
-        <div class="details">
-          <h3>Sushi (Salmon)</h3>
-          <p>Salmon sushi with fresh wasabi.</p>
-          <div class="price">$18</div>
-        </div>
-      </div>
-      <div class="image-card" data-location="thailand" data-category="nearby" data-condition="new" data-release="2025-05-07" onclick="window.location.href='item.html?image=19'">
-        <img src="imgs/green-curry.png" alt="Green Curry (Spicy)">
-        <div class="details">
-          <h3>Green Curry (Spicy)</h3>
-          <p>Extra spicy Thai green curry with coconut milk.</p>
-          <div class="price">$16</div>
-        </div>
-      </div>
-      <div class="image-card" data-location="india" data-category="trending" data-condition="used" data-release="2025-05-06" onclick="window.location.href='item.html?image=20'">
-        <img src="imgs/biryani.png" alt="Biryani (Lamb)">
-        <div class="details">
-          <h3>Biryani (Lamb)</h3>
-          <p>Fragrant lamb biryani with spices.</p>
-          <div class="price">$20</div>
-        </div>
-      </div>
-      <div class="image-card" data-location="korea" data-category="healthy" data-condition="new" data-release="2025-05-19">
-        <img src="imgs/bibimbap.png" alt="Bibimbap">
-        <div class="details">
-          <h3>Bibimbap</h3>
-          <p>Mixed rice with vegetables and meat.</p>
-          <div class="price">$9</div>
-        </div>
-      </div>
-      <div class="image-card" data-location="indonesia" data-category="trending" data-condition="used" data-release="2025-05-18">
-        <img src="imgs/satay.png" alt="Satay">
-        <div class="details">
-          <h3>Satay</h3>
-          <p>Grilled meat skewers with peanut sauce.</p>
-          <div class="price">$10</div>
-        </div>
-      </div>
-      <div class="image-card" data-location="vietnam" data-category="healthy" data-condition="new" data-release="2025-05-17">
-        <img src="imgs/pho.png" alt="Pho">
-        <div class="details">
-          <h3>Pho</h3>
-          <p>Vietnamese noodle soup with herbs and meat.</p>
-          <div class="price">$7</div>
-        </div>
-      </div>
-      <div class="image-card" data-location="japan" data-category="trending" data-condition="used" data-release="2025-05-16">
-        <img src="imgs/tempura.png" alt="Tempura">
-        <div class="details">
-          <h3>Tempura</h3>
-          <p>Battered and deep-fried seafood and vegetables.</p>
-          <div class="price">$13</div>
-        </div>
-      </div>
-      <div class="image-card" data-location="korea" data-category="trending" data-condition="new" data-release="2025-05-15">
-        <img src="imgs/kimbap.png" alt="Kimbap">
-        <div class="details">
-          <h3>Kimbap</h3>
-          <p>Korean rice rolls with vegetables and meat.</p>
-          <div class="price">$8</div>
-        </div>
-      </div>
-      <div class="image-card" data-location="korea" data-category="nearby" data-condition="used" data-release="2025-05-14">
-        <img src="imgs/tteokbokki.png" alt="Tteokbokki">
-        <div class="details">
-          <h3>Tteokbokki</h3>
-          <p>Spicy Korean rice cakes with fish cakes.</p>
-          <div class="price">$9</div>
-        </div>
-      </div>
-      <div class="image-card" data-location="vietnam" data-category="trending" data-condition="new" data-release="2025-05-13">
-        <img src="imgs/spring-rolls.png" alt="Spring Rolls">
-        <div class="details">
-          <h3>Spring Rolls</h3>
-          <p>Crispy rolls with shrimp and vegetables.</p>
-          <div class="price">$6</div>
-        </div>
-      </div>
-      <div class="image-card" data-location="india" data-category="nearby" data-condition="used" data-release="2025-05-12">
-        <img src="imgs/naan.png" alt="Naan">
-        <div class="details">
-          <h3>Naan</h3>
-          <p>Soft and fluffy Indian bread.</p>
-          <div class="price">$4</div>
-        </div>
-      </div>
-      <div class="image-card" data-location="india" data-category="authentic" data-condition="new" data-release="2025-05-11">
-        <img src="imgs/biryani.png" alt="Biryani">
-        <div class="details">
-          <h3>Biryani</h3>
-          <p>Fragrant rice dish with meat and spices.</p>
-          <div class="price">$15</div>
-        </div>
-      </div>
-      <div class="image-card" data-location="japan" data-category="nearby" data-condition="used" data-release="2025-05-10">
-        <img src="imgs/miso-soup.png" alt="Miso Soup">
-        <div class="details">
-          <h3>Miso Soup</h3>
-          <p>Traditional Japanese soup with tofu and seaweed.</p>
-          <div class="price">$5</div>
-        </div>
-      </div>
-      <div class="image-card" data-location="thailand" data-category="authentic" data-condition="new" data-release="2025-05-09">
-        <img src="imgs/green-curry.png" alt="Green Curry">
-        <div class="details">
-          <h3>Green Curry</h3>
-          <p>Spicy Thai curry with coconut milk and vegetables.</p>
-          <div class="price">$14</div>
-        </div>
-      </div>
-      <div class="image-card" data-location="china" data-category="authentic" data-condition="used" data-release="2025-05-08">
-        <img src="imgs/baozi.png" alt="Baozi">
-        <div class="details">
-          <h3>Baozi</h3>
-          <p>Chinese steamed buns with various fillings.</p>
-          <div class="price">$7</div>
-        </div>
-      </div>
-    </div>
-  </div>
+    <div id="items-container" class="image-container"></div>
 
   <!-- Modal -->
   <div class="modal" id="imageModal">
@@ -678,120 +472,169 @@
       document.getElementById('imageModal').style.display = 'none';
     }
 
-    function filterFood() {
-      const searchInput = document.getElementById('searchBar').value.toLowerCase();
-      const foodCards = document.querySelectorAll('.image-card');
+  // Toggle subcategories visibility
+  document.querySelectorAll('.category-checkbox').forEach(cb => {
+    cb.addEventListener('change', function () {
+      const subList = this.closest('li').querySelector('.subcategory-list');
+      if (subList) {
+        subList.style.display = this.checked ? 'block' : 'none';
+      }
+      filterItems();
+    });
+  });
 
-      foodCards.forEach(card => {
-        // Get the food name from the <h3> tag inside .details
-        const foodName = card.querySelector('.details h3').innerText.toLowerCase();
-        if (foodName.includes(searchInput)) {
-          card.style.display = 'block';
-        } else {
-          card.style.display = 'none';
-        }
-      });
+  // Clear all category and subcategory checkboxes and reset filters
+  document.getElementById('clearCategoryBtn').addEventListener('click', function () {
+    document.querySelectorAll('.category-checkbox, .subcategory-checkbox').forEach(cb => cb.checked = false);
+    document.querySelectorAll('.subcategory-list').forEach(ul => ul.style.display = 'none');
+    
+    // Reset other filters to defaults
+    document.getElementById('locationSelect').value = 'all';
+    document.getElementById('conditionSelect').value = 'all';
+    document.getElementById('releaseSelect').value = 'all';
+    document.getElementById('minPrice').value = '';
+    document.getElementById('maxPrice').value = '';
+
+    renderItems(window.allItems);
+  });
+
+  document.querySelectorAll('.subcategory-checkbox').forEach(cb => {
+    cb.addEventListener('change', filterItems);
+  });
+
+  // Fetch items from server and render
+  async function fetchItems() {
+    try {
+      const res = await fetch('http://localhost:3000/items');  // Adjust to your backend URL
+      if (!res.ok) throw new Error('Network response was not ok');
+      const items = await res.json();
+      window.allItems = items; // store for filtering
+      renderItems(items);
+
+    // Dynamically update the location dropdown options
+      updateLocationOptions(items);
+    } catch (err) {
+      console.error('Failed to fetch items:', err);
+      document.getElementById('items-container').innerHTML = '<p>Failed to load items.</p>';
     }
+  }
 
-    function filterByLocation(location) {
-      const foodCards = document.querySelectorAll('.image-card');
+  function updateLocationOptions(items) {
+    const locationSelect = document.getElementById('locationSelect');
 
-      foodCards.forEach(card => {
-        const foodLocation = card.getAttribute('data-location'); // Assuming data-location attribute is added to cards
-        if (foodLocation === location || location === 'all') {
-          card.style.display = 'block';
-        } else {
-          card.style.display = 'none';
-        }
-      });
-    }
+    // Extract unique, trimmed, non-empty locations
+    const locationsSet = new Set(
+      items
+        .map(item => item.location?.trim())
+        .filter(loc => loc && loc.length > 0)
+    );
 
-    function filterByPrice() {
-      const minPrice = parseFloat(document.getElementById('minPrice').value.replace('.', '').replace(',', '.'));
-      const maxPrice = parseFloat(document.getElementById('maxPrice').value.replace('.', '').replace(',', '.'));
-      const foodCards = document.querySelectorAll('.image-card');
+    const locations = Array.from(locationsSet).sort((a, b) => a.localeCompare(b));
 
-      foodCards.forEach(card => {
-          const priceElement = card.querySelector('.price');
-          const price = parseFloat(priceElement.innerText.replace('$', '').replace('.', '').replace(',', '.'));
+    // Preserve currently selected value if possible
+    const currentSelection = locationSelect.value;
 
-          if ((isNaN(minPrice) || price >= minPrice) && (isNaN(maxPrice) || price <= maxPrice)) {
-              card.style.display = 'block';
-          } else {
-              card.style.display = 'none';
-          }
-      });
-    }
+    // Clear all options except 'All Locations'
+    locationSelect.innerHTML = '<option value="all">All Locations</option>';
 
-    // Quick clear for category checkboxes
-    document.getElementById('clearCategoryBtn').addEventListener('click', function() {
-      document.querySelectorAll('.category-checkbox').forEach(cb => cb.checked = false);
+    // Append sorted locations
+    locations.forEach(loc => {
+      const option = document.createElement('option');
+      option.value = loc.toLowerCase(); // lowercase for consistent filtering
+      option.textContent = loc;
+      locationSelect.appendChild(option);
     });
 
-    // Apply Filters Button Logic
-    document.getElementById('applyFiltersBtn').addEventListener('click', function() {
-      const selectedCategories = Array.from(document.querySelectorAll('.category-checkbox:checked')).map(cb => cb.value.toLowerCase());
-      const selectedLocation = document.getElementById('locationSelect').value;
-      const selectedCondition = document.getElementById('conditionSelect').value;
-      const selectedRelease = document.getElementById('releaseSelect').value;
-      const minPrice = parseFloat(document.getElementById('minPrice').value.replace('.', '').replace(',', '.'));
-      const maxPrice = parseFloat(document.getElementById('maxPrice').value.replace('.', '').replace(',', '.'));
-      const foodCards = document.querySelectorAll('.image-card');
-
-      const now = new Date();
-
-      foodCards.forEach(card => {
-        // Category filter (support multiple categories per card, comma-separated)
-        let cardCategory = card.getAttribute('data-category');
-        let cardCategories = cardCategory ? cardCategory.split(',').map(c => c.trim().toLowerCase()) : [];
-        let categoryMatch = selectedCategories.length === 0 || selectedCategories.some(cat => cardCategories.includes(cat));
-        // Location filter
-        const foodLocation = card.getAttribute('data-location');
-        let locationMatch = (selectedLocation === 'all' || foodLocation === selectedLocation);
-        // Condition filter
-        let cardCondition = card.getAttribute('data-condition');
-        let conditionMatch = (selectedCondition === 'all' || (cardCondition && cardCondition === selectedCondition));
-        // Release date filter
-        let cardRelease = card.getAttribute('data-release');
-        let releaseMatch = true;
-        if (selectedRelease !== 'all' && cardRelease) {
-          const releaseDate = new Date(cardRelease);
-          if (selectedRelease === 'day') {
-            releaseMatch = (now - releaseDate) <= 24*60*60*1000;
-          } else if (selectedRelease === 'week') {
-            releaseMatch = (now - releaseDate) <= 7*24*60*60*1000;
-          } else if (selectedRelease === 'month') {
-            releaseMatch = (now - releaseDate) <= 31*24*60*60*1000;
-          }
-        }
-        // Price filter
-        const priceElement = card.querySelector('.price');
-        const price = parseFloat(priceElement.innerText.replace('$', '').replace('.', '').replace(',', '.'));
-        let priceMatch = (isNaN(minPrice) || price >= minPrice) && (isNaN(maxPrice) || price <= maxPrice);
-
-        if (categoryMatch && locationMatch && conditionMatch && releaseMatch && priceMatch) {
-          card.style.display = 'block';
-        } else {
-          card.style.display = 'none';
-        }
-      });
-    });
-
-
-    // Update the onclick logic for image cards
-    document.querySelectorAll('.image-card').forEach((card, index) => {
-      card.onclick = () => {
-        window.location.href = `item.html?image=${index + 1}`;
-      };
-    });
-
-    function changeFontSize(size) {
-      document.body.style.fontSize = size;
-      // Change the font size of the food card descriptions as well
-      document.querySelectorAll('.image-card .details p').forEach(function(desc) {
-        desc.style.fontSize = size;
-      });
+    // Restore previous selection if still valid, else default to 'all'
+    if ([...locationSelect.options].some(opt => opt.value === currentSelection)) {
+      locationSelect.value = currentSelection;
+    } else {
+      locationSelect.value = 'all';
     }
+  }
+
+  // Render items to page
+  function renderItems(items) {
+    const container = document.getElementById('items-container');
+    container.innerHTML = '';
+    if (!items.length) {
+      container.innerHTML = '<p>No items found.</p>';
+      return;
+    }
+    items.forEach(item => {
+      const card = document.createElement('div');
+      card.className = 'image-card';
+      card.setAttribute('data-category', item.category_name || '');
+      card.setAttribute('data-subcategory', item.subcategory_name || '');
+      card.setAttribute('data-location', item.location || '');
+      card.setAttribute('data-condition', item.condition || '');
+      card.setAttribute('data-release', item.release_date || '');
+      card.innerHTML = `
+        <img src="${item.image_url || 'placeholder.jpg'}" alt="${item.product_name}">
+        <div class="details">
+          <h3>${item.product_name}</h3>
+          <p>Location: ${item.location}</p>
+          <p>Condition: ${item.condition}</p>
+          <p class="price">$${item.price}</p>
+        </div>
+      `;
+      container.appendChild(card);
+    });
+  }
+
+  // Main filter function applied by button and category toggles
+  function filterItems() {
+    if (!window.allItems) return;
+
+    const selectedCategories = Array.from(document.querySelectorAll('.category-checkbox:checked')).map(cb => cb.value);
+    const selectedSubcategories = Array.from(document.querySelectorAll('.subcategory-checkbox:checked')).map(cb => cb.value);
+    const selectedLocation = document.getElementById('locationSelect').value;
+    const selectedCondition = document.getElementById('conditionSelect').value;
+    const selectedRelease = document.getElementById('releaseSelect').value;
+    const minPriceInput = document.getElementById('minPrice').value.trim();
+    const maxPriceInput = document.getElementById('maxPrice').value.trim();
+
+    const minPrice = minPriceInput ? parseFloat(minPriceInput.replace(/[.,]/g, '')) : NaN;
+    const maxPrice = maxPriceInput ? parseFloat(maxPriceInput.replace(/[.,]/g, '')) : NaN;
+
+    const now = new Date();
+
+    const filtered = window.allItems.filter(item => {
+      // Category & Subcategory match
+      const categoryMatch = selectedCategories.length === 0 || selectedCategories.includes(item.category_name);
+      const subcategoryMatch = selectedSubcategories.length === 0 || selectedSubcategories.includes(item.subcategory_name);
+
+      // Location match
+      const locationMatch = selectedLocation === 'all' || (item.location && item.location.toLowerCase() === selectedLocation.toLowerCase());
+
+      // Condition match
+      const conditionMatch = selectedCondition === 'all' || (item.condition && item.condition.toLowerCase() === selectedCondition.toLowerCase());
+
+      // Release Date match
+      let releaseMatch = true;
+      if (selectedRelease !== 'all' && item.release_date) {
+        const releaseDate = new Date(item.release_date);
+        const diff = now - releaseDate;
+        if (selectedRelease === 'day') releaseMatch = diff <= 24*60*60*1000;
+        else if (selectedRelease === 'week') releaseMatch = diff <= 7*24*60*60*1000;
+        else if (selectedRelease === 'month') releaseMatch = diff <= 31*24*60*60*1000;
+      }
+
+      // Price match
+      const price = parseFloat(item.price);
+      const priceMatch = (isNaN(minPrice) || price >= minPrice) && (isNaN(maxPrice) || price <= maxPrice);
+
+      return categoryMatch && subcategoryMatch && locationMatch && conditionMatch && releaseMatch && priceMatch;
+    });
+
+    renderItems(filtered);
+  }
+
+  // Connect Apply Filters button
+  document.getElementById('applyFiltersBtn').addEventListener('click', filterItems);
+
+  // Initial fetch on page load
+  document.addEventListener('DOMContentLoaded', fetchItems);
 
     // Translation dictionary (add more as needed)
     const translations = {
