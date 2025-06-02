@@ -9,170 +9,72 @@
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
-      background-color: #d5f2ff;
+      background-color: #e8f5e9;
       color: #333;
     }
 
     /* Navigation Bar */
     .navbar {
       display: flex;
+      justify-content: space-between;
       align-items: center;
       background-color: #ccc;
-      padding: 15px 30px;
-      margin-bottom: 40px;
+      padding: 10px 20px;
     }
     .navbar .logo {
-      flex: 0 0 auto;
       font-size: 24px;
       font-weight: bold;
-      margin-right: 40px;
-    }
-    .navbar .nav-buttons {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      gap: 10px;
     }
     .navbar .nav-buttons button {
-      padding: 10px 18px;
+      margin: 0 5px;
+      padding: 10px 20px;
       border: none;
       border-radius: 5px;
       cursor: pointer;
-      font-size: 16px;
-      margin: 0;
     }
     .navbar .nav-buttons .back {
       background-color: #81c995;
-    }
-    .navbar .nav-buttons .upload {
-      background-color: #4fc3f7;
-      color: #fff;
-    }
-    .navbar .nav-buttons .upload:hover {
-      background-color: #0288d1;
-    }
-    .navbar .nav-buttons .register {
-      background-color: #f28b82;
-      color: #fff;
-    }
-    .navbar .nav-buttons .register:hover {
-      background-color: #e57373;
-    }
-    .navbar .font-size-dropdown {
-      margin-left: 10px;
     }
 
     /* Item Details Section */
     .item-container {
       display: flex;
-      flex-direction: row;
-      gap: 32px;
-      padding: 32px 40px;
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 2px 16px rgba(0,0,0,0.08);
-      max-width: 1200px;
-      margin: 40px auto;
-    }
-    .item-image-gallery {
-      width: 420px;
-      display: flex;
       flex-direction: column;
-      gap: 16px;
-      align-items: flex-start;
+      align-items: center;
+      padding: 20px;
     }
-    .main-image {
-      width: 100%;
-      border-radius: 12px;
-      cursor: pointer;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-      background: #f7f7f7;
-      transition: transform 0.2s;
-      margin-bottom: 12px;
-      height: 320px;
-      object-fit: cover;
-    }
-    .main-image:hover {
-      transform: scale(1.03);
-    }
-    .thumbnail-row {
+    .item-image {
+      width: 80%;
+      max-width: 600px;
+      height: 300px;
+      background-color: #c5e1a5;
       display: flex;
-      gap: 10px;
-      margin-top: 8px;
-    }
-    .thumbnail-row img {
-      width: 60px;
-      height: 60px;
-      object-fit: cover;
-      border-radius: 8px;
-      border: 2px solid transparent;
-      cursor: pointer;
-      transition: border 0.2s;
-    }
-    .thumbnail-row img.selected {
-      border: 2px solid #4fc3f7;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 20px;
+      font-size: 24px;
+      color: #333;
     }
     .item-details {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      width: 100%;
+      max-width: 800px;
     }
     .detail-card {
-      background-color: #fff;
-      padding: 0 0 18px 0;
-      border-radius: 0;
-      box-shadow: none;
-      border-bottom: 1px solid #eee;
-      margin-bottom: 0;
-    }
-    .detail-card:last-child {
-      border-bottom: none;
-    }
-    .detail-card h2, .detail-card h3 {
-      margin-top: 0;
-      margin-bottom: 10px;
-      font-weight: 600;
-      color: #222;
-    }
-    .detail-card p {
-      margin: 0 0 8px 0;
-      color: #444;
-      font-size: 16px;
-    }
-    .product-info {
-      background-color: #f7f7f7;
+      background-color: #e0e0e0;
       padding: 20px;
       border-radius: 8px;
       text-align: center;
     }
-    .mark-done {
-      width: 100%;
-      font-size: 18px;
-      padding: 14px 0;
-      margin-top: 18px;
+    .product-info {
+      grid-column: span 3;
+      background-color: #e0e0e0;
+      padding: 20px;
       border-radius: 8px;
-      background: #00aa5b;
-      color: #fff;
-      border: none;
-      font-weight: 600;
-      letter-spacing: 1px;
-      box-shadow: 0 2px 8px rgba(0,170,91,0.08);
-      transition: background 0.2s;
+      text-align: center;
     }
-    .mark-done:hover {
-      background: #008f4c;
-    }
-    .image-card {
-      cursor: pointer;
-      transition: transform 0.2s;
-    }
-    .image-card:hover {
-      transform: scale(1.05);
-    }
-
-    /* Contact Seller Section */
     .contact-seller {
       margin-top: 20px;
       text-align: center;
@@ -189,20 +91,6 @@
     .contact-seller button:hover {
       background-color: #128c7e;
     }
-
-    /* Mark as Done Button */
-    .mark-done {
-      background-color: #4caf50;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 5px;
-      cursor: pointer;
-      color: #fff;
-      margin-top: 10px;
-    }
-    .mark-done:hover {
-      background-color: #388e3c;
-    }
   </style>
 </head>
 <body>
@@ -211,417 +99,62 @@
     <div class="logo">李</div>
     <div class="nav-buttons">
       <button class="back" onclick="window.location.href='index.html'">Back to Home</button>
-      <button class="upload" onclick="window.location.href='uploadprep.html'">Upload Post</button>
-      <div class="settings-dropdown" style="position: relative; display: inline-block; margin-left: 10px;">
-        <button class="settings" onclick="toggleSettingsDropdown(event)" title="Settings" style="background-color: #ffd966; color: #222; border-radius: 5px; padding: 10px 20px; border: none; font-size: 15px; cursor: pointer; transition: background 0.2s; min-width: 120px;">
-          <span style="vertical-align: middle;">&#9881; Settings</span>
-        </button>
-        <div id="settingsDropdown" class="dropdown-content" style="display: none; position: absolute; right: 0; background: #fffbe6; min-width: 200px; box-shadow: 0 2px 8px rgba(0,0,0,0.12); border-radius: 8px; z-index: 100; padding: 16px 18px 12px 18px;">
-          <button class="profile" onclick="window.location.href='profile.html'" style="width:100%;margin-bottom:10px;background-color:#4fc3f7;color:#fff;">Profile</button>
-          <button class="member" onclick="window.location.href='member.html'" style="width:100%;margin-bottom:10px;background-color:#f28b82;color:#fff;">Member Registration</button>
-          <button class="login" onclick="window.location.href='login.html'" style="width:100%;margin-bottom:10px;background-color:#81c995;color:#fff;">Logout</button>
-          <div class="font-size-dropdown" style="margin-bottom: 12px;">
-            <select id="fontSizeSelect" style="border-radius: 5px; padding: 5px; width:100%;">
-              <option value="14px">Small</option>
-              <option value="16px" selected>Medium</option>
-              <option value="18px">Large</option>
-              <option value="20px">Extra Large</option>
-            </select>
-          </div>
-          <div style="margin-bottom: 0;">
-            <select id="langSelect" style="border-radius: 5px; padding: 5px; width:100%;">
-              <option value="en">English</option>
-              <option value="id">Bahasa Indonesia</option>
-              <option value="zh">中文 (Mandarin)</option>
-            </select>
-          </div>
-        </div>
-      </div>
-    <script>
-      // Settings dropdown logic (copied from index.html)
-      function toggleSettingsDropdown(event) {
-        event.stopPropagation();
-        const dropdown = document.getElementById('settingsDropdown');
-        dropdown.style.display = (dropdown.style.display === 'block') ? 'none' : 'block';
-      }
-      document.addEventListener('click', function(event) {
-        const dropdown = document.getElementById('settingsDropdown');
-        const settingsBtn = document.querySelector('.settings');
-        if (!dropdown || !settingsBtn) return;
-        if (!dropdown.contains(event.target) && !settingsBtn.contains(event.target)) {
-          dropdown.style.display = 'none';
-        }
-      });
-      document.getElementById('settingsDropdown').addEventListener('change', function(e) {
-        if (e.target && e.target.id === 'fontSizeSelect') {
-          document.body.style.fontSize = e.target.value;
-          document.querySelectorAll('.item-details p, .item-details h2, .item-details h3').forEach(function(el) {
-            el.style.fontSize = e.target.value;
-          });
-        }
-        if (e.target && e.target.id === 'langSelect') {
-          if (typeof translatePage === 'function') translatePage(e.target.value);
-        }
-      });
-
-      // Translation dictionary
-      const translations = {
-        en: {
-          'Item Details': 'Item Details',
-          'Back to Home': 'Back to Home',
-          'Upload Post': 'Upload Post',
-          'Member Registration': 'Member Registration',
-          'Font Size': 'Font Size',
-          'English': 'English',
-          'Bahasa Indonesia': 'Bahasa Indonesia',
-          '中文 (Mandarin)': '中文 (Mandarin)',
-          'Item Title': 'Item Title',
-          'Item description goes here. It provides details about the product.': 'Item description goes here. It provides details about the product.',
-          'Price': 'Price',
-          'Seller Information': 'Seller Information',
-          'Seller Name: John Doe': 'Seller Name: John Doe',
-          'Location: Jakarta': 'Location: Jakarta',
-          'Additional Information': 'Additional Information',
-          'Year: 2021': 'Year: 2021',
-          'Condition: Like New': 'Condition: Like New',
-          'Mark as Done': 'Mark as Done',
-          'Contact Seller via WhatsApp': 'Contact Seller via WhatsApp',
-        },
-        id: {
-          'Item Details': 'Detail Barang',
-          'Back to Home': 'Kembali ke Beranda',
-          'Upload Post': 'Unggah Postingan',
-          'Member Registration': 'Registrasi Member',
-          'Font Size': 'Ukuran Font',
-          'English': 'Inggris',
-          'Bahasa Indonesia': 'Bahasa Indonesia',
-          '中文 (Mandarin)': '中文 (Mandarin)',
-          'Item Title': 'Judul Barang',
-          'Item description goes here. It provides details about the product.': 'Deskripsi barang di sini. Berisi detail produk.',
-          'Price': 'Harga',
-          'Seller Information': 'Informasi Penjual',
-          'Seller Name: John Doe': 'Nama Penjual: John Doe',
-          'Location: Jakarta': 'Lokasi: Jakarta',
-          'Additional Information': 'Informasi Tambahan',
-          'Year: 2021': 'Tahun: 2021',
-          'Condition: Like New': 'Kondisi: Seperti Baru',
-          'Mark as Done': 'Tandai Selesai',
-          'Contact Seller via WhatsApp': 'Hubungi Penjual via WhatsApp',
-        },
-        zh: {
-          'Item Details': '商品详情',
-          'Back to Home': '返回首页',
-          'Upload Post': '上传帖子',
-          'Member Registration': '会员注册',
-          'Font Size': '字体大小',
-          'English': '英语',
-          'Bahasa Indonesia': '印尼语',
-          '中文 (Mandarin)': '中文 (普通话)',
-          'Item Title': '商品名称',
-          'Item description goes here. It provides details about the product.': '商品描述在这里，提供产品详细信息。',
-          'Price': '价格',
-          'Seller Information': '卖家信息',
-          'Seller Name: John Doe': '卖家姓名: John Doe',
-          'Location: Jakarta': '地点: 雅加达',
-          'Additional Information': '附加信息',
-          'Year: 2021': '年份: 2021',
-          'Condition: Like New': '状况: 近新',
-          'Mark as Done': '标记为已完成',
-          'Contact Seller via WhatsApp': '通过 WhatsApp 联系卖家',
-        }
-      };
-
-// Store original text for translation
-function storeOriginalText(el) {
-  if (el.nodeType === 3) { // Text node
-    if (!el._originalText) {
-      el._originalText = el.nodeValue;
-    }
-  } else if (el.nodeType === 1) {
-    if (["SCRIPT", "STYLE"].includes(el.tagName)) return;
-    if ((el.tagName === 'OPTION' || el.tagName === 'BUTTON') && !el._originalText) {
-      el._originalText = el.textContent;
-    }
-    if (el.placeholder && !el._originalPlaceholder) {
-      el._originalPlaceholder = el.placeholder;
-    }
-    Array.from(el.childNodes).forEach(storeOriginalText);
-  }
-}
-
-function translatePage(lang) {
-  function translateElementText(el) {
-    if (el.nodeType === 3) { // Text node
-      const original = el._originalText || el.nodeValue;
-      const trimmed = original.trim();
-      if (translations[lang][trimmed]) {
-        el.nodeValue = original.replace(trimmed, translations[lang][trimmed]);
-      } else {
-        el.nodeValue = original;
-      }
-    } else if (el.nodeType === 1) {
-      if (["SCRIPT", "STYLE"].includes(el.tagName)) return;
-      if (el.tagName === 'OPTION' || el.tagName === 'BUTTON') {
-        const original = el._originalText || el.textContent;
-        const trimmed = original.trim();
-        if (translations[lang][trimmed]) {
-          el.textContent = translations[lang][trimmed];
-        } else {
-          el.textContent = original;
-        }
-      }
-      if (el.placeholder) {
-        const original = el._originalPlaceholder || el.placeholder;
-        if (translations[lang][original]) {
-          el.placeholder = translations[lang][original];
-        } else {
-          el.placeholder = original;
-        }
-      }
-      Array.from(el.childNodes).forEach(translateElementText);
-    }
-  }
-  translateElementText(document.body);
-}
-
-// Store original text on page load
-document.addEventListener('DOMContentLoaded', function() {
-  storeOriginalText(document.body);
-  // Set initial translation based on selected value
-  const lang = document.getElementById('langSelect').value;
-  translatePage(lang);
-});
-
-document.getElementById('langSelect').addEventListener('change', function() {
-  translatePage(this.value);
-});
-    </script>
     </div>
   </div>
 
   <!-- Item Details Section -->
   <div class="item-container">
-    <!-- Image Gallery -->
-    <div class="item-image-gallery" id="itemImageGallery">
-      <!-- Image gallery will be populated by JavaScript -->
-    </div>
-    <!-- Item Details -->
+    <div class="item-image" id="itemImage">Loading Image...</div>
     <div class="item-details">
-      <div class="detail-card" id="itemDescription">
-        <h2>Item Title</h2>
-        <p>Item description goes here. It provides details about the product.</p>
-      </div>
-      <div class="detail-card" id="itemCost">
-        <h3>Price</h3>
-        <p>$15,000</p>
-      </div>
-      <div class="detail-card" id="itemSeller">
-        <h3>Seller Information</h3>
-        <p>Seller Name: John Doe</p>
-        <p>Location: Jakarta</p>
-      </div>
-      <div class="detail-card" id="itemInfo">
-        <h3>Additional Information</h3>
-        <p>Year: 2021</p>
-        <p>Condition: Like New</p>
-      </div>
-      <button onclick="markAsDone(1)" class="mark-done">Mark as Done</button>
-      <!-- Contact Seller Section -->
-      <div class="contact-seller">
-        <button onclick="contactSeller('1234567890')">Contact Seller via WhatsApp</button>
-      </div>
+      <div class="detail-card" id="itemDescription">Loading Description...</div>
+      <div class="detail-card" id="itemCost">Loading Cost...</div>
+      <div class="detail-card" id="itemSeller">Loading Seller Info...</div>
+      <div class="product-info" id="itemInfo">Loading Product Info...</div>
     </div>
   </div>
 
+  <!-- Contact Seller Section -->
+  <div class="contact-seller">
+    <button onclick="contactSeller('1234567890')">Contact Seller via WhatsApp</button>
+  </div>
+
   <script>
-      // Function to get query parameters
-      function getQueryParam(param) {
-        const urlParams = new URLSearchParams(window.location.search);
-        return urlParams.get(param);
+    const urlParams = new URLSearchParams(window.location.search);
+    id = urlParams.get('id');
+
+     // Fetch all items and display the first one (or customize as needed)
+  fetch('http://localhost:3000/items')
+    .then(response => response.json())
+    .then(items => {
+      if (!items || items.length === 0) {
+        document.getElementById('itemImage').textContent = 'No items found';
+        return;
       }
 
-      // Load item details based on query parameter
-      const imageId = getQueryParam('image');
-      console.log('Image ID:', imageId); // Debugging log
+      const item = items[id - 1]; // Show the first item, or customize with query param
 
-      if (imageId) {
-        const items = {
-          1: {
-            image: 'imgs/sushi.png',
-            images: ['imgs/sushi.png', 'imgs/sushi2.png', 'imgs/sushi3.png', 'imgs/sushi4.png', 'imgs/sushi5.png'],
-            description: 'Sushi - A traditional Japanese dish made with vinegared rice and seafood.',
-            cost: '$15',
-            seller: 'Sushi Master',
-            info: 'Freshly prepared sushi with authentic Japanese ingredients.',
-          },
-          2: {
-            image: 'imgs/dimsum.png',
-            images: ['imgs/dimsum.png', 'imgs/dimsum2.png', 'imgs/dimsum3.png', 'imgs/dimsum4.png', 'imgs/dimsum5.png'],
-            description: 'Dim Sum - A variety of small Chinese dishes served with tea.',
-            cost: '$20',
-            seller: 'Dim Sum Delight',
-            info: 'A selection of steamed and fried dim sum favorites.',
-          },
-          3: {
-            image: 'imgs/ramen.png',
-            images: ['imgs/ramen.png', 'imgs/ramen2.png', 'imgs/ramen3.png', 'imgs/ramen4.png', 'imgs/ramen5.png'],
-            description: 'Ramen - A Japanese noodle soup with a rich broth.',
-            cost: '$12',
-            seller: 'Ramen House',
-            info: 'Delicious ramen with customizable toppings.',
-          },
-          4: {
-            image: 'imgs/pad thai.png',
-            images: ['imgs/pad thai.png', 'imgs/pad thai2.png', 'imgs/pad thai3.png', 'imgs/pad thai4.png', 'imgs/pad thai5.png'],
-            cost: '$10',
-            seller: 'Thai Express',
-            info: 'Authentic Pad Thai with a perfect balance of flavors.',
-          },
-          5: {
-            image: 'imgs/bibimbap.png',
-            description: 'Bibimbap - A Korean rice dish with mixed vegetables and meat.',
-            cost: '$14',
-            seller: 'Korean Kitchen',
-            info: 'Healthy and flavorful Bibimbap with fresh ingredients.',
-          },
-          6: {
-            image: 'imgs/satay.png',
-            description: 'Satay - Grilled meat skewers served with peanut sauce.',
-            cost: '$8',
-            seller: 'Satay Corner',
-            info: 'Juicy and tender satay with a rich peanut sauce.',
-          },
-          7: {
-            image: 'imgs/pho.png',
-            description: 'Pho - A Vietnamese noodle soup with aromatic broth.',
-            cost: '$13',
-            seller: 'Pho Paradise',
-            info: 'Traditional Pho with fresh herbs and spices.',
-          },
-          8: {
-            image: 'imgs/tempura.png',
-            description: 'Tempura - Lightly battered and fried seafood or vegetables.',
-            cost: '$11',
-            seller: 'Tempura House',
-            info: 'Crispy and golden tempura served with dipping sauce.',
-          },
-          9: {
-            image: 'imgs/kimbap.png',
-            description: 'Kimbap - A Korean dish made with rice and various fillings rolled in seaweed.',
-            cost: '$9',
-            seller: 'Kimbap King',
-            info: 'Freshly rolled Kimbap with a variety of fillings.',
-          },
-          10: {
-            image: 'imgs/tteokbokki.png',
-            description: 'Tteokbokki - Spicy Korean rice cakes.',
-            cost: '$7',
-            seller: 'Spicy Bites',
-            info: 'Chewy rice cakes in a spicy and savory sauce.',
-          },
-          11: {
-            image: 'imgs/spring-rolls.png',
-            description: 'Spring Rolls - Fresh or fried rolls filled with vegetables and meat.',
-            cost: '$6',
-            seller: 'Spring Roll Spot',
-            info: 'Crispy and fresh spring rolls with dipping sauce.',
-          },
-          12: {
-            image: 'imgs/naan.png',
-            description: 'Naan - A soft and fluffy Indian flatbread.',
-            cost: '$3',
-            seller: 'Indian Tandoor',
-            info: 'Freshly baked naan from a traditional tandoor oven.',
-          },
-          13: {
-            image: 'imgs/biryani.png',
-            description: 'Biryani - A fragrant Indian rice dish with spices and meat.',
-            cost: '$12',
-            seller: 'Biryani Bowl',
-            info: 'Aromatic biryani with tender meat and flavorful spices.',
-          },
-          14: {
-            image: 'imgs/miso-soup.png',
-            description: 'Miso Soup - A traditional Japanese soup with miso paste.',
-            cost: '$4',
-            seller: 'Soup Station',
-            info: 'Warm and comforting miso soup with tofu and seaweed.',
-          },
-          15: {
-            image: 'imgs/green-curry.png',
-            description: 'Green Curry - A spicy Thai curry with coconut milk.',
-            cost: '$10',
-            seller: 'Curry House',
-            info: 'Rich and creamy green curry with fresh vegetables.',
-          },
-          16: {
-            image: 'imgs/baozi.png',
-            description: 'Baozi - Steamed Chinese buns with various fillings.',
-            cost: '$5',
-            seller: 'Baozi Bar',
-            info: 'Soft and fluffy baozi with savory fillings.',
-          },
-        };
+      document.getElementById('itemImage').textContent = ''; // Clear loading text
+      document.getElementById('itemImage').style.backgroundImage = `url(${item.image_url})`;
+      document.getElementById('itemImage').style.backgroundSize = 'cover';
+      document.getElementById('itemImage').style.backgroundPosition = 'center';
 
-        const item = items[imageId];
-        if (item) {
-          // Demo: support multiple images per item (if available)
-          // For now, use the same image multiple times for preview
-          const images = item.images || [item.image, item.image, item.image];
-          let mainImage = images[0];
-          const imageGallery = document.getElementById('itemImageGallery');
-          imageGallery.innerHTML = `
-            <img src="${mainImage}" alt="Item Image" class="main-image" id="mainPreviewImage">
-            <div class="thumbnail-row">
-              ${images.map((img, idx) => `<img src="${img}" class="thumbnail${idx === 0 ? ' selected' : ''}" data-idx="${idx}">`).join('')}
-            </div>
-          `;
+      document.getElementById('itemDescription').textContent = item.product_name;
+      document.getElementById('itemCost').textContent = `Price: $${item.price}`;
+      document.getElementById('itemSeller').textContent = `Location: ${item.location}`;
+      document.getElementById('itemInfo').innerHTML = `
+        Condition: ${item.condition}<br>
+        Released: ${item.release_date}<br>
+        Category: ${item.category_name}<br>
+        Subcategory: ${item.subcategory_name}
+      `;
+    })
+    .catch(error => {
+      console.error('Error loading items:', error);
+    });
 
-          // Thumbnail click event
-          imageGallery.querySelectorAll('.thumbnail').forEach(thumb => {
-            thumb.addEventListener('click', function() {
-              const idx = parseInt(this.getAttribute('data-idx'));
-              document.getElementById('mainPreviewImage').src = images[idx];
-              imageGallery.querySelectorAll('.thumbnail').forEach(t => t.classList.remove('selected'));
-              this.classList.add('selected');
-            });
-          });
-
-          // Helper to set text and _originalText for a selector
-          function setTextAndOriginal(selector, value) {
-            const el = document.querySelector(selector);
-            if (el) {
-              el.textContent = value;
-              // If it's a text node child, update its _originalText
-              el.childNodes.forEach(function(node) {
-                if (node.nodeType === 3) node._originalText = value;
-              });
-            }
-          }
-          // Set item details and update _originalText for translation
-          setTextAndOriginal('#itemDescription p', item.description);
-          setTextAndOriginal('#itemCost p', 'Cost: ' + item.cost);
-          setTextAndOriginal('#itemSeller p', 'Seller Name: ' + item.seller);
-          setTextAndOriginal('#itemInfo p', item.info);
-        } else {
-          document.getElementById('itemImage').innerText = 'Item not found';
-          console.error('Item not found for Image ID:', imageId); // Debugging log
-        }
-      } else {
-        document.getElementById('itemImage').innerText = 'No item selected';
-        console.error('No Image ID provided in the query parameter'); // Debugging log
-      }
-
-      // Function to contact seller via WhatsApp
-      function contactSeller(phoneNumber) {
-        window.open(`https://wa.me/${phoneNumber}`, '_blank');
-      }
-
-      // Function to mark item as done
-      function markAsDone(itemId) {
-        console.log(`Item ${itemId} marked as done.`);
-        alert(`Item ${itemId} has been marked as done.`);
-      }
-    </script>
+  function contactSeller(phone) {
+    window.open(`https://wa.me/${phone}`, '_blank');
+  }
+  </script>
 </body>
 </html>
