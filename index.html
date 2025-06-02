@@ -578,6 +578,13 @@
           <p class="price">$${item.price}</p>
         </div>
       `;
+
+        card.onclick = function() {
+        // Redirect to item.html and pass the item ID or product details in query parameters
+        const productId = item.product_id;
+        window.location.href = `item.html?id=${productId}`;
+      };
+
       container.appendChild(card);
     });
   }
