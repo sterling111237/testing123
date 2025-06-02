@@ -38,27 +38,16 @@ app.get('/items', async (req, res) => {
       JOIN subcategories s ON p.subcategory_id = s.subcategory_id
       ORDER BY p.product_id;
     `;
+    const { rows } = await pool.query(query, [id]);
 
-    const { rows } = await pool.query(query);
-    res.json(rows);
-  } catch (error) {
-    console.error('Error fetching products:', error);
-    res.status(500).json({ error: 'Internal server error' });
-  }
-
-  const productId = req.params.id;
-  try {
-    const result = await client.query('SELECT * FROM items WHERE product_id = $1', [productId]);
-    const item = result.rows[0]; // Assuming product_id is unique and returns a single row
-
-    if (item) {
-      res.json(item);
-    } else {
-      res.status(404).json({ error: 'Item not found' });
+    if (rows.length === 0) {
+      return res.status(404).json({ error: 'Item not found' });
     }
-  } catch (err) {
-    console.error('Error fetching item details:', err);
-    res.status(500).json({ error: 'Internal Server Error' });
+
+    res.json(rows[0]);
+  } catch (error) {
+    console.error('Error fetching item:', error);
+    res.status(500).json({ error: 'Internal server error' });
   }
 });
 
