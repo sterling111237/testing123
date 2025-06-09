@@ -38,18 +38,14 @@ app.get('/items', async (req, res) => {
       JOIN subcategories s ON p.subcategory_id = s.subcategory_id
       ORDER BY p.product_id;
     `;
-    const { rows } = await pool.query(query, [id]);
-
-    if (rows.length === 0) {
-      return res.status(404).json({ error: 'Item not found' });
-    }
-
-    res.json(rows[0]);
+    const { rows } = await pool.query(query);
+    res.json(rows);
   } catch (error) {
-    console.error('Error fetching item:', error);
+    console.error('Error fetching items:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
 });
+
 
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
