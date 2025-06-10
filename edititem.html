@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Item</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #e8f5e9;
+      color: #333;
+    }
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #ccc;
+      padding: 10px 20px;
+    }
+    .navbar .logo {
+      font-size: 24px;
+      font-weight: bold;
+    }
+    .navbar .nav-buttons button {
+      margin: 0 5px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .navbar .nav-buttons .back {
+      background-color: #81c995;
+    }
+    .edit-container {
+      max-width: 600px;
+      margin: 40px auto;
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+      padding: 32px 28px 24px 28px;
+    }
+    .edit-container h1 {
+      margin-top: 0;
+      color: #25d366;
+      font-size: 2rem;
+      text-align: center;
+    }
+    .edit-form label {
+      display: block;
+      margin-top: 18px;
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+    .edit-form input, .edit-form textarea {
+      width: 100%;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      margin-bottom: 10px;
+    }
+    .edit-form textarea {
+      min-height: 60px;
+      resize: vertical;
+    }
+    .edit-form button {
+      background: #25d366;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 12px 28px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 18px;
+      transition: background 0.2s;
+    }
+    .edit-form button:hover {
+      background: #128c7e;
+    }
+  </style>
+</head>
+<body>
+  <div class="navbar">
+    <div class="logo">李</div>
+    <div class="nav-buttons">
+      <button class="back" onclick="window.location.href='myproducts.html'">Back to My Products</button>
+    </div>
+  </div>
+  <div class="edit-container">
+    <h1>Edit Your Item</h1>
+    <form class="edit-form" id="editItemForm">
+      <div class="image-upload-section" style="margin-bottom: 24px; text-align: center;">
+        <label for="image" style="display:block;margin-bottom:8px;font-weight:600;">Product Image</label>
+        <div class="image-slot" style="display:inline-block;border:1.5px dashed #ccc;padding:12px 12px 8px 12px;border-radius:8px;background:#fafbfc;">
+          <label for="image" style="cursor:pointer;">
+            <img src="imgs/placeholder.png" alt="Upload" id="previewImage" style="width:120px;height:120px;object-fit:cover;border-radius:8px;background:#f7f7f7;">
+          </label>
+          <input type="file" id="image" name="image" accept="image/*" style="display:none;">
+          <p style="font-size:13px;color:#888;margin:8px 0 0 0;">Click to change image</p>
+        </div>
+      </div>
+      <label for="product_name">Product Name</label>
+      <input type="text" id="product_name" name="product_name" required>
+      <label for="description">Description</label>
+      <textarea id="description" name="description" required></textarea>
+      <label for="price">Price</label>
+      <input type="number" id="price" name="price" min="0" step="0.01" required>
+      <label for="location">Location</label>
+      <input type="text" id="location" name="location" required>
+      <label for="condition">Condition</label>
+      <input type="text" id="condition" name="condition" required>
+      <button type="submit">Save Changes</button>
+    </form>
+    <div id="edit-status" style="margin-top:18px;color:#388e3c;font-weight:600;"></div>
+  </div>
+  <script>
+    // Get item id from query string
+    const urlParams = new URLSearchParams(window.location.search);
+    const id = urlParams.get('id');
+    if (!id) {
+      document.getElementById('edit-status').textContent = 'No item selected.';
+      document.getElementById('editItemForm').style.display = 'none';
+    } else {
+      // Fetch item details and prefill form
+      fetch(`http://localhost:3000/items/${id}`)
+        .then(res => res.json())
+        .then(item => {
+          document.getElementById('product_name').value = item.product_name || '';
+          document.getElementById('description').value = item.description || '';
+          document.getElementById('price').value = item.price || '';
+          document.getElementById('location').value = item.location || '';
+          document.getElementById('condition').value = item.condition || '';
+          if (item.image_url) {
+            document.getElementById('previewImage').src = item.image_url;
+          }
+        });
+    }
+
+    // Image preview
+    document.getElementById('image').addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      const preview = document.getElementById('previewImage');
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(ev) {
+          preview.src = ev.target.result;
+        };
+        reader.readAsDataURL(file);
+      } else {
+        preview.src = 'imgs/placeholder.png';
+      }
+    });
+
+    document.getElementById('editItemForm').onsubmit = async function(e) {
+      e.preventDefault();
+      const formData = new FormData();
+      formData.append('product_name', document.getElementById('product_name').value);
+      formData.append('description', document.getElementById('description').value);
+      formData.append('price', document.getElementById('price').value);
+      formData.append('location', document.getElementById('location').value);
+      formData.append('condition', document.getElementById('condition').value);
+      const imageFile = document.getElementById('image').files[0];
+      if (imageFile) {
+        formData.append('image', imageFile);
+      }
+      const res = await fetch(`http://localhost:3000/items/${id}`, {
+        method: 'PUT',
+        body: formData
+      });
+      if (res.ok) {
+        document.getElementById('edit-status').textContent = 'Item updated successfully!';
+      } else {
+        document.getElementById('edit-status').textContent = 'Failed to update item.';
+      }
+    };
+  </script>
+</body>
+</html>
