@@ -126,77 +126,81 @@
 </head>
 <body>
   <div style="background:#f5f7fa;min-height:100vh;padding:0;margin:0;font-family:'Segoe UI',Arial,sans-serif;">
-    <div style="max-width:700px;margin:40px auto 0 auto;">
-      <div style="background:#fff;border-radius:18px;box-shadow:0 4px 24px rgba(0,0,0,0.10);overflow:hidden;">
-        <!-- Store Banner -->
-        <div style="height:110px;background:linear-gradient(90deg,#25d366 0%,#ff5722 100%);position:relative;">
-          <img src="imgs/store-banner.jpg" alt="Store Banner" style="width:100%;height:100%;object-fit:cover;opacity:0.18;position:absolute;top:0;left:0;z-index:0;">
-          <div style="position:absolute;top:16px;left:24px;z-index:2;background:#fff3cd;color:#ff9800;font-weight:700;padding:4px 14px;border-radius:16px;font-size:1rem;box-shadow:0 1px 4px rgba(255,152,0,0.08);display:flex;align-items:center;gap:6px;">
-            <span style="font-size:1.2em;">&#9733;</span> Trusted Seller
+    <div style="max-width:760px;margin:56px auto 0 auto;">
+      <!-- Store Banner (standalone) -->
+      <div style="height:140px;background:linear-gradient(90deg,#25d366 0%,#ff5722 100%);position:relative;border-radius:22px 22px 0 0;box-shadow:0 4px 18px rgba(44,62,80,0.07);overflow:hidden;">
+        <img src="imgs/store-banner.jpg" alt="Store Banner" style="width:100%;height:100%;object-fit:cover;opacity:0.13;position:absolute;top:0;left:0;z-index:0;">
+        <div style="position:absolute;top:28px;left:40px;z-index:2;background:#fff3cd;color:#ff9800;font-weight:700;padding:7px 26px;border-radius:20px;font-size:1.12rem;box-shadow:0 1px 4px rgba(255,152,0,0.08);display:flex;align-items:center;gap:10px;">
+          <span style="font-size:1.3em;">&#9733;</span> Trusted Seller
+        </div>
+      </div>
+      <!-- Profile Card -->
+      <div style="background:#fff;border-radius:0 0 22px 22px;box-shadow:0 6px 32px rgba(44,62,80,0.10);overflow:hidden;padding:0 44px 44px 44px;position:relative;top:-60px;z-index:2;">
+        <div style="display:flex;align-items:center;gap:40px;position:relative;z-index:2;margin-bottom:24px;">
+          <div style="position:relative;z-index:2;">
+            <img src="imgs/placeholder.png" alt="User Avatar" style="width:120px;height:120px;border-radius:50%;border:6px solid #fff;box-shadow:0 2px 16px rgba(44,62,80,0.10);background:#e3f2fd;position:relative;z-index:2;">
+          </div>
+          <div>
+            <div style="font-size:2.2rem;font-weight:700;color:#222;display:flex;align-items:center;gap:14px;">Jane Doe <span style="background:#25d366;color:#fff;font-size:1rem;padding:3px 14px;border-radius:14px;font-weight:600;">Official Store</span></div>
+            <div style="font-size:1.15rem;color:#25d366;font-weight:600;">@janedoe</div>
+            <div style="font-size:1.08rem;color:#555;margin-top:10px;max-width:340px;">Marketing enthusiast. Passionate about connecting people with great products. Loves sushi, travel, and creative campaigns.</div>
           </div>
         </div>
-        <div style="padding:0 32px 32px 32px;">
-          <div style="display:flex;align-items:center;gap:24px;margin-top:-60px;">
-            <img src="imgs/placeholder.png" alt="User Avatar" style="width:110px;height:110px;border-radius:50%;border:5px solid #fff;box-shadow:0 2px 12px rgba(44,62,80,0.10);background:#e3f2fd;">
-            <div>
-              <div style="font-size:2rem;font-weight:700;color:#222;display:flex;align-items:center;gap:10px;">Jane Doe <span style="background:#25d366;color:#fff;font-size:0.9rem;padding:2px 10px;border-radius:12px;font-weight:600;">Official Store</span></div>
-              <div style="font-size:1.1rem;color:#25d366;font-weight:600;">@janedoe</div>
-              <div style="font-size:1.05rem;color:#555;margin-top:6px;max-width:320px;">Marketing enthusiast. Passionate about connecting people with great products. Loves sushi, travel, and creative campaigns.</div>
-            </div>
-          </div>
+          <!-- Divider -->
+          <div style="height:1px;background:#f0f0f0;margin:36px 0 32px 0;"></div>
           <!-- Quick Links -->
-          <div style="display:flex;justify-content:space-between;align-items:center;margin:28px 0 0 0;gap:10px;">
-            <div onclick="alert('My Orders feature coming soon!')" style="flex:1;text-align:center;cursor:pointer;background:#f5f7fa;border-radius:10px;padding:14px 0;box-shadow:0 1px 4px rgba(44,62,80,0.04);font-size:1.05rem;color:#ff5722;font-weight:600;display:flex;flex-direction:column;align-items:center;gap:4px;">
-              <span style="font-size:1.3em;">&#128179;</span> My Orders
+          <div style="display:flex;justify-content:space-between;align-items:center;margin:0 0 36px 0;gap:18px;">
+            <div onclick="alert('My Orders feature coming soon!')" style="flex:1;text-align:center;cursor:pointer;background:#f5f7fa;border-radius:12px;padding:20px 0;box-shadow:0 1px 4px rgba(44,62,80,0.04);font-size:1.08rem;color:#ff5722;font-weight:600;display:flex;flex-direction:column;align-items:center;gap:6px;">
+              <span style="font-size:1.4em;">&#128179;</span> My Orders
             </div>
-            <div onclick="alert('Wishlist feature coming soon!')" style="flex:1;text-align:center;cursor:pointer;background:#f5f7fa;border-radius:10px;padding:14px 0;box-shadow:0 1px 4px rgba(44,62,80,0.04);font-size:1.05rem;color:#25d366;font-weight:600;display:flex;flex-direction:column;align-items:center;gap:4px;">
-              <span style="font-size:1.3em;">&#10084;&#65039;</span> Wishlist
+            <div onclick="alert('Wishlist feature coming soon!')" style="flex:1;text-align:center;cursor:pointer;background:#f5f7fa;border-radius:12px;padding:20px 0;box-shadow:0 1px 4px rgba(44,62,80,0.04);font-size:1.08rem;color:#25d366;font-weight:600;display:flex;flex-direction:column;align-items:center;gap:6px;">
+              <span style="font-size:1.4em;">&#10084;&#65039;</span> Wishlist
             </div>
-            <div onclick="alert('Messages feature coming soon!')" style="flex:1;text-align:center;cursor:pointer;background:#f5f7fa;border-radius:10px;padding:14px 0;box-shadow:0 1px 4px rgba(44,62,80,0.04);font-size:1.05rem;color:#388e3c;font-weight:600;display:flex;flex-direction:column;align-items:center;gap:4px;">
-              <span style="font-size:1.3em;">&#9993;&#65039;</span> Messages
+            <div onclick="alert('Messages feature coming soon!')" style="flex:1;text-align:center;cursor:pointer;background:#f5f7fa;border-radius:12px;padding:20px 0;box-shadow:0 1px 4px rgba(44,62,80,0.04);font-size:1.08rem;color:#388e3c;font-weight:600;display:flex;flex-direction:column;align-items:center;gap:6px;">
+              <span style="font-size:1.4em;">&#9993;&#65039;</span> Messages
             </div>
-            <div onclick="alert('Sales Report feature coming soon!')" style="flex:1;text-align:center;cursor:pointer;background:#f5f7fa;border-radius:10px;padding:14px 0;box-shadow:0 1px 4px rgba(44,62,80,0.04);font-size:1.05rem;color:#ffd966;font-weight:600;display:flex;flex-direction:column;align-items:center;gap:4px;">
-              <span style="font-size:1.3em;">&#128200;</span> Sales Report
+            <div onclick="alert('Sales Report feature coming soon!')" style="flex:1;text-align:center;cursor:pointer;background:#f5f7fa;border-radius:12px;padding:20px 0;box-shadow:0 1px 4px rgba(44,62,80,0.04);font-size:1.08rem;color:#ffd966;font-weight:600;display:flex;flex-direction:column;align-items:center;gap:6px;">
+              <span style="font-size:1.4em;">&#128200;</span> Sales Report
             </div>
           </div>
           <!-- Stats Bar -->
-          <div style="display:flex;justify-content:space-between;align-items:center;margin:28px 0 0 0;gap:12px;">
-            <div onclick="alert('Posts feature coming soon!')" style="flex:1;text-align:center;background:#f5f7fa;border-radius:10px;padding:18px 0;box-shadow:0 1px 4px rgba(44,62,80,0.04);cursor:pointer;">
-              <div style="font-size:1.2rem;font-weight:700;color:#ff5722;">24</div>
-              <div style="font-size:1rem;color:#888;">Posts</div>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin:0 0 36px 0;gap:18px;">
+            <div onclick="alert('Posts feature coming soon!')" style="flex:1;text-align:center;background:#f5f7fa;border-radius:12px;padding:22px 0;box-shadow:0 1px 4px rgba(44,62,80,0.04);cursor:pointer;">
+              <div style="font-size:1.25rem;font-weight:700;color:#ff5722;">24</div>
+              <div style="font-size:1.05rem;color:#888;">Posts</div>
             </div>
-            <div onclick="alert('Followers feature coming soon!')" style="flex:1;text-align:center;background:#f5f7fa;border-radius:10px;padding:18px 0;box-shadow:0 1px 4px rgba(44,62,80,0.04);cursor:pointer;">
-              <div style="font-size:1.2rem;font-weight:700;color:#25d366;">1,250</div>
-              <div style="font-size:1rem;color:#888;">Followers</div>
+            <div onclick="alert('Followers feature coming soon!')" style="flex:1;text-align:center;background:#f5f7fa;border-radius:12px;padding:22px 0;box-shadow:0 1px 4px rgba(44,62,80,0.04);cursor:pointer;">
+              <div style="font-size:1.25rem;font-weight:700;color:#25d366;">1,250</div>
+              <div style="font-size:1.05rem;color:#888;">Followers</div>
             </div>
-            <div onclick="alert('Following feature coming soon!')" style="flex:1;text-align:center;background:#f5f7fa;border-radius:10px;padding:18px 0;box-shadow:0 1px 4px rgba(44,62,80,0.04);cursor:pointer;">
-              <div style="font-size:1.2rem;font-weight:700;color:#388e3c;">180</div>
-              <div style="font-size:1rem;color:#888;">Following</div>
+            <div onclick="alert('Following feature coming soon!')" style="flex:1;text-align:center;background:#f5f7fa;border-radius:12px;padding:22px 0;box-shadow:0 1px 4px rgba(44,62,80,0.04);cursor:pointer;">
+              <div style="font-size:1.25rem;font-weight:700;color:#388e3c;">180</div>
+              <div style="font-size:1.05rem;color:#888;">Following</div>
             </div>
           </div>
           <!-- Store Description -->
-          <div style="margin:28px 0 0 0;padding:18px 16px;background:#f5f7fa;border-radius:10px;box-shadow:0 1px 4px rgba(44,62,80,0.04);color:#555;font-size:1.05rem;">
+          <div style="margin:0 0 36px 0;padding:22px 20px;background:#f5f7fa;border-radius:12px;box-shadow:0 1px 4px rgba(44,62,80,0.04);color:#555;font-size:1.08rem;">
             <b>About this Store:</b> Welcome to Jane's Official Store! We offer a curated selection of quality products and a great customer experience. Fast response and trusted seller.
           </div>
           <!-- Contact Seller and Badges -->
-          <div style="display:flex;align-items:center;gap:16px;margin:28px 0 0 0;">
-            <button onclick="alert('Contact Seller feature coming soon!')" style="background:#ff5722;color:#fff;padding:10px 24px;border:none;border-radius:8px;font-size:1rem;font-weight:700;box-shadow:0 2px 8px rgba(44,62,80,0.06);cursor:pointer;">Contact Seller</button>
-            <span style="background:#e0e0e0;color:#388e3c;font-size:0.95rem;padding:6px 16px;border-radius:16px;font-weight:600;">Fast Responder</span>
-            <span style="background:#e0e0e0;color:#ff9800;font-size:0.95rem;padding:6px 16px;border-radius:16px;font-weight:600;">Verified</span>
+          <div style="display:flex;align-items:center;gap:22px;margin:0 0 36px 0;">
+            <button onclick="alert('Contact Seller feature coming soon!')" style="background:#ff5722;color:#fff;padding:12px 32px;border:none;border-radius:10px;font-size:1.08rem;font-weight:700;box-shadow:0 2px 8px rgba(44,62,80,0.06);cursor:pointer;">Contact Seller</button>
+            <span style="background:#e0e0e0;color:#388e3c;font-size:1rem;padding:8px 20px;border-radius:18px;font-weight:600;">Fast Responder</span>
+            <span style="background:#e0e0e0;color:#ff9800;font-size:1rem;padding:8px 20px;border-radius:18px;font-weight:600;">Verified</span>
           </div>
           <!-- Store Products -->
-          <div style="margin:32px 0 0 0;">
-            <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px 0;">
+          <div style="margin:0 0 0 0;">
+            <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:18px 0;">
               <div style="font-size:1.2rem;font-weight:600;color:#222;">My Store</div>
-              <button onclick="window.location.href='myproducts.html'" style="background:#25d366;color:#fff;padding:10px 24px;border:none;border-radius:6px;font-weight:600;box-shadow:0 2px 8px rgba(44,62,80,0.06);cursor:pointer;">View Store</button>
+              <button onclick="window.location.href='myproducts.html'" style="background:#25d366;color:#fff;padding:12px 32px;border:none;border-radius:8px;font-weight:600;box-shadow:0 2px 8px rgba(44,62,80,0.06);cursor:pointer;">View Store</button>
             </div>
-            <div id="profile-products-preview" style="display:flex;overflow-x:auto;gap:18px;margin-top:18px;padding-bottom:8px;">
+            <div id="profile-products-preview" style="display:flex;overflow-x:auto;gap:24px;margin-top:24px;padding-bottom:8px;">
               <!-- Product cards will be injected here -->
             </div>
           </div>
-          <div style="display:flex;gap:16px;margin-top:36px;">
-            <button class="edit" id="editProfileBtn" style="flex:1;background:#ff5722;color:#fff;padding:12px 0;border:none;border-radius:8px;font-size:1rem;font-weight:700;box-shadow:0 2px 8px rgba(44,62,80,0.06);cursor:pointer;">Edit Profile</button>
-            <button class="back" onclick="window.location.href='index.html'" style="flex:1;background:#e0e0e0;color:#222;padding:12px 0;border:none;border-radius:8px;font-size:1rem;font-weight:700;box-shadow:0 2px 8px rgba(44,62,80,0.06);cursor:pointer;">Back</button>
+          <div style="display:flex;gap:24px;margin-top:48px;">
+            <button class="edit" id="editProfileBtn" style="flex:1;background:#ff5722;color:#fff;padding:16px 0;border:none;border-radius:10px;font-size:1.08rem;font-weight:700;box-shadow:0 2px 8px rgba(44,62,80,0.06);cursor:pointer;">Edit Profile</button>
+            <button class="back" onclick="window.location.href='index.html'" style="flex:1;background:#e0e0e0;color:#222;padding:16px 0;border:none;border-radius:10px;font-size:1.08rem;font-weight:700;box-shadow:0 2px 8px rgba(44,62,80,0.06);cursor:pointer;">Back</button>
           </div>
         </div>
       </div>
