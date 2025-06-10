@@ -125,91 +125,109 @@
   </style>
 </head>
 <body>
-  <div class="profile-container">
-    <img src="imgs/placeholder.png" alt="User Avatar" class="profile-avatar">
-    <div class="profile-name">Jane Doe</div>
-    <div class="profile-username">@janedoe</div>
-    <div class="profile-bio">Marketing enthusiast. Passionate about connecting people with great products. Loves sushi, travel, and creative campaigns.</div>
-    <div class="profile-info">
-      <div class="info-block">
-        <h4>Posts</h4>
-        <p>24</p>
-      </div>
-      <div class="info-block">
-        <h4>Followers</h4>
-        <p>1,250</p>
-      </div>
-      <div class="info-block">
-        <h4>Following</h4>
-        <p>180</p>
-      </div>
-      <div class="info-block">
-        <h4>Joined</h4>
-        <p>Jan 2024</p>
-      </div>
-    </div>
-    <div class="profile-actions">
-      <button class="edit" id="editProfileBtn">Edit Profile</button>
-      <button class="myproducts" onclick="window.location.href='myproducts.html'">My Products</button>
-      <button class="back" onclick="window.location.href='index.html'">Back</button>
-    </div>
-    <!-- Edit Profile Modal -->
-    <div id="editProfileModal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.35);z-index:200;align-items:center;justify-content:center;">
-      <div style="background:#fff;padding:32px 28px 24px 28px;border-radius:14px;max-width:400px;width:90vw;box-shadow:0 4px 24px rgba(0,0,0,0.12);position:relative;">
-        <h2 style="margin-top:0;margin-bottom:18px;font-size:1.4rem;color:#222;">Edit Profile</h2>
-        <form id="editProfileForm">
-          <label style="display:block;margin-bottom:8px;">Profile Image</label>
-          <input type="file" id="editAvatar" accept="image/*" style="width:100%;margin-bottom:14px;">
-          <label style="display:block;margin-bottom:8px;">Name</label>
-          <input type="text" id="editName" style="width:100%;padding:8px 10px;margin-bottom:14px;border-radius:6px;border:1px solid #ccc;">
-          <label style="display:block;margin-bottom:8px;">Username</label>
-          <input type="text" id="editUsername" style="width:100%;padding:8px 10px;margin-bottom:14px;border-radius:6px;border:1px solid #ccc;">
-          <label style="display:block;margin-bottom:8px;">Bio</label>
-          <textarea id="editBio" style="width:100%;padding:8px 10px;margin-bottom:18px;border-radius:6px;border:1px solid #ccc;resize:vertical;min-height:60px;"></textarea>
-          <div style="display:flex;gap:12px;justify-content:flex-end;">
-            <button type="button" id="cancelEditBtn" style="background:#eee;color:#222;padding:8px 18px;border:none;border-radius:6px;">Cancel</button>
-            <button type="submit" style="background:#4fc3f7;color:#fff;padding:8px 18px;border:none;border-radius:6px;">Save</button>
+  <div style="background:#f5f7fa;min-height:100vh;padding:0;margin:0;font-family:'Segoe UI',Arial,sans-serif;">
+    <div style="max-width:700px;margin:40px auto 0 auto;">
+      <div style="background:#fff;border-radius:18px;box-shadow:0 4px 24px rgba(0,0,0,0.10);overflow:hidden;">
+        <!-- Store Banner -->
+        <div style="height:110px;background:linear-gradient(90deg,#25d366 0%,#ff5722 100%);position:relative;">
+          <img src="imgs/store-banner.jpg" alt="Store Banner" style="width:100%;height:100%;object-fit:cover;opacity:0.18;position:absolute;top:0;left:0;z-index:0;">
+          <div style="position:absolute;top:16px;left:24px;z-index:2;background:#fff3cd;color:#ff9800;font-weight:700;padding:4px 14px;border-radius:16px;font-size:1rem;box-shadow:0 1px 4px rgba(255,152,0,0.08);display:flex;align-items:center;gap:6px;">
+            <span style="font-size:1.2em;">&#9733;</span> Trusted Seller
           </div>
-        </form>
+        </div>
+        <div style="padding:0 32px 32px 32px;">
+          <div style="display:flex;align-items:center;gap:24px;margin-top:-60px;">
+            <img src="imgs/placeholder.png" alt="User Avatar" style="width:110px;height:110px;border-radius:50%;border:5px solid #fff;box-shadow:0 2px 12px rgba(44,62,80,0.10);background:#e3f2fd;">
+            <div>
+              <div style="font-size:2rem;font-weight:700;color:#222;display:flex;align-items:center;gap:10px;">Jane Doe <span style="background:#25d366;color:#fff;font-size:0.9rem;padding:2px 10px;border-radius:12px;font-weight:600;">Official Store</span></div>
+              <div style="font-size:1.1rem;color:#25d366;font-weight:600;">@janedoe</div>
+              <div style="font-size:1.05rem;color:#555;margin-top:6px;max-width:320px;">Marketing enthusiast. Passionate about connecting people with great products. Loves sushi, travel, and creative campaigns.</div>
+            </div>
+          </div>
+          <!-- Quick Links -->
+          <div style="display:flex;justify-content:space-between;align-items:center;margin:28px 0 0 0;gap:10px;">
+            <div onclick="alert('My Orders feature coming soon!')" style="flex:1;text-align:center;cursor:pointer;background:#f5f7fa;border-radius:10px;padding:14px 0;box-shadow:0 1px 4px rgba(44,62,80,0.04);font-size:1.05rem;color:#ff5722;font-weight:600;display:flex;flex-direction:column;align-items:center;gap:4px;">
+              <span style="font-size:1.3em;">&#128179;</span> My Orders
+            </div>
+            <div onclick="alert('Wishlist feature coming soon!')" style="flex:1;text-align:center;cursor:pointer;background:#f5f7fa;border-radius:10px;padding:14px 0;box-shadow:0 1px 4px rgba(44,62,80,0.04);font-size:1.05rem;color:#25d366;font-weight:600;display:flex;flex-direction:column;align-items:center;gap:4px;">
+              <span style="font-size:1.3em;">&#10084;&#65039;</span> Wishlist
+            </div>
+            <div onclick="alert('Messages feature coming soon!')" style="flex:1;text-align:center;cursor:pointer;background:#f5f7fa;border-radius:10px;padding:14px 0;box-shadow:0 1px 4px rgba(44,62,80,0.04);font-size:1.05rem;color:#388e3c;font-weight:600;display:flex;flex-direction:column;align-items:center;gap:4px;">
+              <span style="font-size:1.3em;">&#9993;&#65039;</span> Messages
+            </div>
+            <div onclick="alert('Sales Report feature coming soon!')" style="flex:1;text-align:center;cursor:pointer;background:#f5f7fa;border-radius:10px;padding:14px 0;box-shadow:0 1px 4px rgba(44,62,80,0.04);font-size:1.05rem;color:#ffd966;font-weight:600;display:flex;flex-direction:column;align-items:center;gap:4px;">
+              <span style="font-size:1.3em;">&#128200;</span> Sales Report
+            </div>
+          </div>
+          <!-- Stats Bar -->
+          <div style="display:flex;justify-content:space-between;align-items:center;margin:28px 0 0 0;gap:12px;">
+            <div onclick="alert('Posts feature coming soon!')" style="flex:1;text-align:center;background:#f5f7fa;border-radius:10px;padding:18px 0;box-shadow:0 1px 4px rgba(44,62,80,0.04);cursor:pointer;">
+              <div style="font-size:1.2rem;font-weight:700;color:#ff5722;">24</div>
+              <div style="font-size:1rem;color:#888;">Posts</div>
+            </div>
+            <div onclick="alert('Followers feature coming soon!')" style="flex:1;text-align:center;background:#f5f7fa;border-radius:10px;padding:18px 0;box-shadow:0 1px 4px rgba(44,62,80,0.04);cursor:pointer;">
+              <div style="font-size:1.2rem;font-weight:700;color:#25d366;">1,250</div>
+              <div style="font-size:1rem;color:#888;">Followers</div>
+            </div>
+            <div onclick="alert('Following feature coming soon!')" style="flex:1;text-align:center;background:#f5f7fa;border-radius:10px;padding:18px 0;box-shadow:0 1px 4px rgba(44,62,80,0.04);cursor:pointer;">
+              <div style="font-size:1.2rem;font-weight:700;color:#388e3c;">180</div>
+              <div style="font-size:1rem;color:#888;">Following</div>
+            </div>
+          </div>
+          <!-- Store Description -->
+          <div style="margin:28px 0 0 0;padding:18px 16px;background:#f5f7fa;border-radius:10px;box-shadow:0 1px 4px rgba(44,62,80,0.04);color:#555;font-size:1.05rem;">
+            <b>About this Store:</b> Welcome to Jane's Official Store! We offer a curated selection of quality products and a great customer experience. Fast response and trusted seller.
+          </div>
+          <!-- Contact Seller and Badges -->
+          <div style="display:flex;align-items:center;gap:16px;margin:28px 0 0 0;">
+            <button onclick="alert('Contact Seller feature coming soon!')" style="background:#ff5722;color:#fff;padding:10px 24px;border:none;border-radius:8px;font-size:1rem;font-weight:700;box-shadow:0 2px 8px rgba(44,62,80,0.06);cursor:pointer;">Contact Seller</button>
+            <span style="background:#e0e0e0;color:#388e3c;font-size:0.95rem;padding:6px 16px;border-radius:16px;font-weight:600;">Fast Responder</span>
+            <span style="background:#e0e0e0;color:#ff9800;font-size:0.95rem;padding:6px 16px;border-radius:16px;font-weight:600;">Verified</span>
+          </div>
+          <!-- Store Products -->
+          <div style="margin:32px 0 0 0;">
+            <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px 0;">
+              <div style="font-size:1.2rem;font-weight:600;color:#222;">My Store</div>
+              <button onclick="window.location.href='myproducts.html'" style="background:#25d366;color:#fff;padding:10px 24px;border:none;border-radius:6px;font-weight:600;box-shadow:0 2px 8px rgba(44,62,80,0.06);cursor:pointer;">View Store</button>
+            </div>
+            <div id="profile-products-preview" style="display:flex;overflow-x:auto;gap:18px;margin-top:18px;padding-bottom:8px;">
+              <!-- Product cards will be injected here -->
+            </div>
+          </div>
+          <div style="display:flex;gap:16px;margin-top:36px;">
+            <button class="edit" id="editProfileBtn" style="flex:1;background:#ff5722;color:#fff;padding:12px 0;border:none;border-radius:8px;font-size:1rem;font-weight:700;box-shadow:0 2px 8px rgba(44,62,80,0.06);cursor:pointer;">Edit Profile</button>
+            <button class="back" onclick="window.location.href='index.html'" style="flex:1;background:#e0e0e0;color:#222;padding:12px 0;border:none;border-radius:8px;font-size:1rem;font-weight:700;box-shadow:0 2px 8px rgba(44,62,80,0.06);cursor:pointer;">Back</button>
+          </div>
+        </div>
       </div>
-    </div>
-    <script>
-      // Edit Profile Modal Logic
-      const editBtn = document.getElementById('editProfileBtn');
-      const modal = document.getElementById('editProfileModal');
-      const cancelBtn = document.getElementById('cancelEditBtn');
-      const form = document.getElementById('editProfileForm');
-      const avatarInput = document.getElementById('editAvatar');
-      const avatarImg = document.querySelector('.profile-avatar');
-      // Pre-fill fields with current profile info
-      editBtn.onclick = function() {
-        document.getElementById('editName').value = document.querySelector('.profile-name').innerText;
-        document.getElementById('editUsername').value = document.querySelector('.profile-username').innerText.replace('@','');
-        document.getElementById('editBio').value = document.querySelector('.profile-bio').innerText;
-        avatarInput.value = '';
-        modal.style.display = 'flex';
-      };
-      cancelBtn.onclick = function() {
-        modal.style.display = 'none';
-      };
-      avatarInput.onchange = function(e) {
-        const file = e.target.files[0];
-        if (file) {
-          const reader = new FileReader();
-          reader.onload = function(ev) {
-            avatarImg.src = ev.target.result;
-          };
-          reader.readAsDataURL(file);
+      <!-- Edit Profile Modal ...existing code... -->
+      <div id="editProfileModal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.35);z-index:200;align-items:center;justify-content:center;">
+        ...existing code...
+      </div>
+      <script>
+        // Edit Profile Modal Logic ...existing code...
+        // Product Preview (show up to 6 products, horizontal scroll)
+        const userId = localStorage.getItem('userId');
+        if (userId) {
+          fetch(`http://localhost:3000/user/${userId}/items`)
+            .then(res => res.json())
+            .then(items => {
+              const preview = document.getElementById('profile-products-preview');
+              if (!items.length) {
+                preview.innerHTML = '<div style="color:#888;">No products posted yet.</div>';
+                return;
+              }
+              preview.innerHTML = items.slice(0,6).map(item => `
+                <div style="background:#fff;min-width:140px;max-width:160px;padding:10px 8px 8px 8px;border-radius:10px;text-align:center;box-shadow:0 2px 8px rgba(44,62,80,0.06);border:1px solid #f0f0f0;">
+                  <img src="${item.image_url}" alt="${item.product_name}" style="width:100%;height:80px;object-fit:cover;border-radius:6px;background:#c5e1a5;margin-bottom:8px;">
+                  <div style="font-weight:600;color:#222;font-size:1rem;">${item.product_name}</div>
+                  <div style="font-size:0.95rem;color:#ff5722;font-weight:700;">$${item.price}</div>
+                </div>
+              `).join('');
+            });
         }
-      };
-      form.onsubmit = function(e) {
-        e.preventDefault();
-        document.querySelector('.profile-name').innerText = document.getElementById('editName').value;
-        document.querySelector('.profile-username').innerText = '@' + document.getElementById('editUsername').value;
-        document.querySelector('.profile-bio').innerText = document.getElementById('editBio').value;
-        modal.style.display = 'none';
-      };
-    </script>
+      </script>
+    </div>
   </div>
 </body>
 </html>
