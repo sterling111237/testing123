@@ -31,6 +31,8 @@ app.get('/items', async (req, res) => {
         p.release_date,
         p.price,
         p.image_url,
+        p.item_description,
+        p.user_id,
         c.category_name,
         s.subcategory_name
       FROM ITEMS p
