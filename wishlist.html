@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wishlist</title>
+  <link rel="stylesheet" href="index.css">
+  <style>
+    body { background: #f5f7fa; }
+    .container { max-width: 800px; margin: 40px auto; background: #fff; border-radius: 16px; box-shadow: 0 4px 24px rgba(0,0,0,0.08); padding: 36px; }
+    h2 { color: #ff5722; margin-bottom: 24px; }
+    .wishlist-list { list-style: none; padding: 0; }
+    .wishlist-item { background: #fff3e0; border-radius: 10px; margin-bottom: 18px; padding: 18px 24px; display: flex; justify-content: space-between; align-items: center; }
+    .wishlist-item .details { color: #333; }
+    .wishlist-item .remove { color: #ff5722; font-weight: 600; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Wishlist</h2>
+    <ul class="wishlist-list" id="wishlistList">
+      <!-- Wishlist items will be injected here -->
+    </ul>
+    <button onclick="window.location.href='profile.html'" style="margin-top:24px;background:#ff5722;color:#fff;padding:12px 32px;border:none;border-radius:8px;font-weight:600;cursor:pointer;">Back to Profile</button>
+  </div>
+  <script>
+    // Dummy data for prototype
+    let wishlist = [
+      { id: 1, product: 'Green Curry' },
+      { id: 2, product: 'Spring Rolls' },
+      { id: 3, product: 'Satay' }
+    ];
+    const wishlistList = document.getElementById('wishlistList');
+    function renderWishlist() {
+      wishlistList.innerHTML = wishlist.map(w => `<li class='wishlist-item'><span class='details'>${w.product}</span><span class='remove' onclick='removeItem(${w.id})'>Remove</span></li>`).join('');
+    }
+    function removeItem(id) {
+      wishlist = wishlist.filter(w => w.id !== id);
+      renderWishlist();
+    }
+    renderWishlist();
+  </script>
+</body>
+</html>
