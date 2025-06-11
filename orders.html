@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Orders</title>
+  <link rel="stylesheet" href="index.css">
+  <style>
+    body { background: #f5f7fa; }
+    .container { max-width: 800px; margin: 40px auto; background: #fff; border-radius: 16px; box-shadow: 0 4px 24px rgba(0,0,0,0.08); padding: 36px; }
+    h2 { color: #25d366; margin-bottom: 24px; }
+    .order-list { list-style: none; padding: 0; }
+    .order-item { background: #e0f2f1; border-radius: 10px; margin-bottom: 18px; padding: 18px 24px; display: flex; justify-content: space-between; align-items: center; }
+    .order-item .details { color: #333; }
+    .order-item .status { color: #388e3c; font-weight: 600; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>My Orders</h2>
+    <ul class="order-list" id="orderList">
+      <!-- Orders will be injected here -->
+    </ul>
+    <button onclick="window.location.href='profile.html'" style="margin-top:24px;background:#25d366;color:#fff;padding:12px 32px;border:none;border-radius:8px;font-weight:600;cursor:pointer;">Back to Profile</button>
+  </div>
+  <script>
+    // Dummy data for prototype
+    const orders = [
+      { id: 1, product: 'Sushi Set', date: '2025-06-01', status: 'Delivered' },
+      { id: 2, product: 'Pad Thai', date: '2025-06-05', status: 'Shipped' },
+      { id: 3, product: 'Ramen Bowl', date: '2025-06-09', status: 'Processing' }
+    ];
+    const orderList = document.getElementById('orderList');
+    orderList.innerHTML = orders.map(o => `<li class='order-item'><span class='details'>${o.product} <br><small>${o.date}</small></span><span class='status'>${o.status}</span></li>`).join('');
+  </script>
+</body>
+</html>
