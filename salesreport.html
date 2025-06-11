@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sales Report</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f7fa;
+      color: #222;
+    }
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #e0e7ef;
+      padding: 14px 32px;
+      border-radius: 0 0 12px 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+    }
+    .navbar .logo {
+      font-size: 26px;
+      font-weight: bold;
+      color: #222;
+    }
+    .navbar .nav-buttons button {
+      margin: 0 5px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      background-color: #81c995;
+      color: #fff;
+      font-size: 15px;
+    }
+    .container {
+      max-width: 800px;
+      margin: 40px auto;
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+      padding: 32px 28px 24px 28px;
+    }
+    h1 {
+      text-align: center;
+      color: #25d366;
+      margin-bottom: 30px;
+    }
+    .period-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .period-buttons button {
+      padding: 8px 24px;
+      border: none;
+      border-radius: 6px;
+      background: #f5f7fa;
+      color: #222;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background 0.2s;
+    }
+    .period-buttons button.active, .period-buttons button:hover {
+      background: #4fc3f7;
+      color: #fff;
+    }
+    #chartContainer {
+      width: 100%;
+      height: 340px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 18px;
+    }
+    #noDataMsg {
+      text-align: center;
+      color: #888;
+      font-size: 1.1rem;
+      margin-top: 40px;
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="navbar">
+    <div class="logo">李</div>
+    <div class="nav-buttons">
+      <button onclick="window.location.href='profile.html'">Back to Profile</button>
+    </div>
+  </div>
+  <div class="container">
+    <h1>Sales Report</h1>
+    <div class="period-buttons">
+      <button id="btnWeek" class="active">Week</button>
+      <button id="btnMonth">Month</button>
+      <button id="btnYear">Year</button>
+    </div>
+    <div id="chartContainer">
+      <canvas id="salesChart" width="700" height="320"></canvas>
+    </div>
+    <div id="noDataMsg" style="display:none;">No sales data available for this period.</div>
+  </div>
+  <script>
+    const userId = localStorage.getItem('userId');
+    let chart;
+    async function fetchSalesData(period) {
+      const res = await fetch(`http://localhost:3000/user/${userId}/salesgraph?period=${period}`);
+      if (!res.ok) return null;
+      return await res.json();
+    }
+    function renderChart(labels, data) {
+      const ctx = document.getElementById('salesChart').getContext('2d');
+      if (chart) chart.destroy();
+      chart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: 'Sales ($)',
+            data: data,
+            backgroundColor: '#4fc3f7',
+            borderRadius: 6,
+          }]
+        },
+        options: {
+          responsive: false,
+          plugins: {
+            legend: { display: false }
+          },
+          scales: {
+            y: { beginAtZero: true }
+          }
+        }
+      });
+    }
+    async function loadReport(period) {
+      document.getElementById('noDataMsg').style.display = 'none';
+      document.getElementById('salesChart').style.display = 'block';
+      const data = await fetchSalesData(period);
+      if (!data || !data.labels || !data.labels.length) {
+        document.getElementById('salesChart').style.display = 'none';
+        document.getElementById('noDataMsg').style.display = 'block';
+        return;
+      }
+      renderChart(data.labels, data.sales);
+    }
+    document.getElementById('btnWeek').onclick = function() {
+      setActive(this); loadReport('week');
+    };
+    document.getElementById('btnMonth').onclick = function() {
+      setActive(this); loadReport('month');
+    };
+    document.getElementById('btnYear').onclick = function() {
+      setActive(this); loadReport('year');
+    };
+    function setActive(btn) {
+      document.querySelectorAll('.period-buttons button').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    }
+    // Initial load
+    loadReport('week');
+  </script>
+</body>
+</html>
