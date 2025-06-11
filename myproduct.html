@@ -115,6 +115,36 @@
     <div id="items-container" class="products-grid">
       <!-- User's products will be rendered here -->
     </div>
+    <!-- Edit Panel Modal -->
+    <div id="editPanelModal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.35);z-index:200;align-items:center;justify-content:center;">
+      <div style="background:#fff;padding:32px 28px 24px 28px;border-radius:14px;max-width:400px;width:90vw;box-shadow:0 4px 24px rgba(0,0,0,0.12);position:relative;">
+        <h2 style="margin-top:0;margin-bottom:18px;font-size:1.4rem;color:#222;">Edit Product</h2>
+        <form id="editPanelForm" style="display:flex;flex-direction:column;gap:12px;">
+          <div style="text-align:center;margin-bottom:10px;">
+            <label for="editImage" style="cursor:pointer;display:inline-block;">
+              <img id="editPreviewImage" src="imgs/placeholder.png" alt="Product Image" style="width:100px;height:100px;object-fit:cover;border-radius:8px;background:#f7f7f7;">
+            </label>
+            <input type="file" id="editImage" name="image" accept="image/*" style="display:none;">
+            <div style="font-size:13px;color:#888;margin-top:6px;">Click image to change</div>
+          </div>
+          <label style="font-weight:600;margin-bottom:2px;">Product Name</label>
+          <input type="text" id="editProductName" required style="padding:8px 10px;border-radius:6px;border:1px solid #ccc;font-size:1rem;">
+          <label style="font-weight:600;margin-bottom:2px;">Description</label>
+          <textarea id="editDescription" required style="padding:8px 10px;border-radius:6px;border:1px solid #ccc;font-size:1rem;min-height:60px;resize:vertical;"></textarea>
+          <label style="font-weight:600;margin-bottom:2px;">Price</label>
+          <input type="number" id="editPrice" min="0" step="0.01" required style="padding:8px 10px;border-radius:6px;border:1px solid #ccc;font-size:1rem;">
+          <label style="font-weight:600;margin-bottom:2px;">Location</label>
+          <input type="text" id="editLocation" required style="padding:8px 10px;border-radius:6px;border:1px solid #ccc;font-size:1rem;">
+          <label style="font-weight:600;margin-bottom:2px;">Condition</label>
+          <input type="text" id="editCondition" required style="padding:8px 10px;border-radius:6px;border:1px solid #ccc;font-size:1rem;">
+          <div style="display:flex;gap:12px;justify-content:flex-end;margin-top:10px;">
+            <button type="button" id="cancelEditPanelBtn" style="background:#eee;color:#222;padding:8px 18px;border:none;border-radius:6px;">Cancel</button>
+            <button type="submit" style="background:#4fc3f7;color:#fff;padding:8px 18px;border:none;border-radius:6px;">Save</button>
+          </div>
+        </form>
+        <div id="editPanelStatus" style="margin-top:12px;color:#388e3c;font-weight:600;"></div>
+      </div>
+    </div>
   </div>
 <script>
     function renderItems(items) {
@@ -142,11 +172,64 @@
       </div>
     `;
 
-    card.onclick = function(e) {
-      e.stopPropagation();
-      const productId = item.product_id;
-      window.location.href = `edititem.html?id=${productId}`;
+            card.onclick = function(e) {
+              e.stopPropagation();
+              openEditPanel(item);
+            };
+// Edit Panel Logic
+let currentEditId = null;
+function openEditPanel(item) {
+  currentEditId = item.product_id;
+  document.getElementById('editProductName').value = item.product_name || '';
+  document.getElementById('editDescription').value = item.description || '';
+  document.getElementById('editPrice').value = item.price || '';
+  document.getElementById('editLocation').value = item.location || '';
+  document.getElementById('editCondition').value = item.condition || '';
+  document.getElementById('editPanelStatus').textContent = '';
+  document.getElementById('editPreviewImage').src = item.image_url || 'imgs/placeholder.png';
+  document.getElementById('editPanelModal').style.display = 'flex';
+}
+document.getElementById('cancelEditPanelBtn').onclick = function() {
+  document.getElementById('editPanelModal').style.display = 'none';
+};
+document.getElementById('editImage').addEventListener('change', function(e) {
+  const file = e.target.files[0];
+  const preview = document.getElementById('editPreviewImage');
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function(ev) {
+      preview.src = ev.target.result;
     };
+    reader.readAsDataURL(file);
+  } else {
+    preview.src = 'imgs/placeholder.png';
+  }
+});
+document.getElementById('editPanelForm').onsubmit = async function(e) {
+  e.preventDefault();
+  if (!currentEditId) return;
+  const formData = new FormData();
+  formData.append('product_name', document.getElementById('editProductName').value);
+  formData.append('description', document.getElementById('editDescription').value);
+  formData.append('price', document.getElementById('editPrice').value);
+  formData.append('location', document.getElementById('editLocation').value);
+  formData.append('condition', document.getElementById('editCondition').value);
+  const imageFile = document.getElementById('editImage').files[0];
+  if (imageFile) {
+    formData.append('image', imageFile);
+  }
+  const res = await fetch(`http://localhost:3000/items/${currentEditId}`, {
+    method: 'PUT',
+    body: formData
+  });
+  if (res.ok) {
+    document.getElementById('editPanelStatus').textContent = 'Item updated successfully!';
+    document.getElementById('editPanelModal').style.display = 'none';
+    fetchItems(); // Refresh list
+  } else {
+    document.getElementById('editPanelStatus').textContent = 'Failed to update item.';
+  }
+};
 
       container.appendChild(card);
     });
