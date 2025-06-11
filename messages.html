@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Messages</title>
+  <link rel="stylesheet" href="index.css">
+  <style>
+    body { background: #f5f7fa; }
+    .container { max-width: 800px; margin: 40px auto; background: #fff; border-radius: 16px; box-shadow: 0 4px 24px rgba(0,0,0,0.08); padding: 36px; }
+    h2 { color: #388e3c; margin-bottom: 24px; }
+    .message-list { list-style: none; padding: 0; }
+    .message-item { background: #e8f5e9; border-radius: 10px; margin-bottom: 18px; padding: 18px 24px; }
+    .message-item .from { color: #25d366; font-weight: 600; }
+    .message-item .body { color: #333; margin-top: 6px; }
+  </style>
+</head>
+<body>
+  <div class="container" style="display:flex;gap:32px;min-height:420px;">
+    <div style="flex:1;max-width:260px;border-right:1px solid #e0e0e0;padding-right:18px;">
+      <h2 style="color:#388e3c;margin-bottom:18px;font-size:1.3rem;">Inbox</h2>
+      <ul class="message-list" id="inboxList" style="padding:0;margin:0;">
+        <!-- Inbox items injected here -->
+      </ul>
+    </div>
+    <div style="flex:2;padding-left:18px;">
+      <div id="messageView" style="display:none;">
+        <div style="font-size:1.1rem;color:#25d366;font-weight:600;margin-bottom:8px;" id="msgFrom"></div>
+        <div style="color:#888;font-size:0.98rem;margin-bottom:18px;" id="msgSubject"></div>
+        <div style="color:#333;font-size:1.08rem;line-height:1.6;" id="msgBody"></div>
+      </div>
+      <div id="emptyView" style="color:#aaa;text-align:center;margin-top:80px;">Select a message to read</div>
+      <button onclick="window.location.href='profile.html'" style="margin-top:32px;background:#388e3c;color:#fff;padding:12px 32px;border:none;border-radius:8px;font-weight:600;cursor:pointer;">Back to Profile</button>
+    </div>
+  </div>
+  <script>
+    // Dummy data for prototype
+    const messages = [
+      { id: 1, from: 'Support', subject: 'Order Update', body: 'Your order has shipped! Track your package in your orders.' },
+      { id: 2, from: 'Jane Doe', subject: 'Thank You!', body: 'Thank you for your purchase! Let me know if you have any questions.' },
+      { id: 3, from: 'Admin', subject: 'Welcome!', body: 'Welcome to our platform! We hope you enjoy your experience.' }
+    ];
+    const inboxList = document.getElementById('inboxList');
+    const messageView = document.getElementById('messageView');
+    const emptyView = document.getElementById('emptyView');
+    const msgFrom = document.getElementById('msgFrom');
+    const msgSubject = document.getElementById('msgSubject');
+    const msgBody = document.getElementById('msgBody');
+
+    function showMessage(id) {
+      const msg = messages.find(m => m.id === id);
+      if (msg) {
+        msgFrom.textContent = msg.from;
+        msgSubject.textContent = msg.subject;
+        msgBody.textContent = msg.body;
+        messageView.style.display = 'block';
+        emptyView.style.display = 'none';
+        // Highlight selected
+        Array.from(inboxList.children).forEach(li => li.classList.remove('selected'));
+        const selected = document.getElementById('msgitem-' + id);
+        if (selected) selected.classList.add('selected');
+      }
+    }
+
+    inboxList.innerHTML = messages.map(m => `
+      <li id="msgitem-${m.id}" class="message-item" style="background:#fff;cursor:pointer;margin-bottom:10px;padding:14px 16px;border-radius:8px;transition:background 0.15s;" onclick="showMessage(${m.id})">
+        <div style="font-weight:600;color:#25d366;">${m.from}</div>
+        <div style="color:#888;font-size:0.97rem;">${m.subject}</div>
+      </li>
+    `).join('');
+    // Add selected style
+    const style = document.createElement('style');
+    style.innerHTML = `.message-item.selected { background: #e8f5e9 !important; border-left: 4px solid #25d366; }`;
+    document.head.appendChild(style);
+    // Default: show empty view
+    messageView.style.display = 'none';
+    emptyView.style.display = 'block';
+    // Optionally, auto-select first message:
+    // showMessage(messages[0].id);
+  </script>
+</body>
+</html>
