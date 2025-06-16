@@ -180,8 +180,9 @@
 let currentEditId = null;
 function openEditPanel(item) {
   currentEditId = item.product_id;
+  console.log('ID: ',currentEditId);
   document.getElementById('editProductName').value = item.product_name || '';
-  document.getElementById('editDescription').value = item.description || '';
+  document.getElementById('editDescription').value = item.item_description || '';
   document.getElementById('editPrice').value = item.price || '';
   document.getElementById('editLocation').value = item.location || '';
   document.getElementById('editCondition').value = item.condition || '';
@@ -205,31 +206,26 @@ document.getElementById('editImage').addEventListener('change', function(e) {
     preview.src = 'imgs/placeholder.png';
   }
 });
-document.getElementById('editPanelForm').onsubmit = async function(e) {
-  e.preventDefault();
-  if (!currentEditId) return;
-  const formData = new FormData();
-  formData.append('product_name', document.getElementById('editProductName').value);
-  formData.append('description', document.getElementById('editDescription').value);
-  formData.append('price', document.getElementById('editPrice').value);
-  formData.append('location', document.getElementById('editLocation').value);
-  formData.append('condition', document.getElementById('editCondition').value);
-  const imageFile = document.getElementById('editImage').files[0];
-  if (imageFile) {
-    formData.append('image', imageFile);
-  }
-  const res = await fetch(`http://localhost:3000/items/${currentEditId}`, {
-    method: 'PUT',
-    body: formData
-  });
-  if (res.ok) {
-    document.getElementById('editPanelStatus').textContent = 'Item updated successfully!';
-    document.getElementById('editPanelModal').style.display = 'none';
-    fetchItems(); // Refresh list
-  } else {
-    document.getElementById('editPanelStatus').textContent = 'Failed to update item.';
-  }
-};
+ document.getElementById('editPanelModal').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      console.log('ID: ',currentEditId);
+      const productData = {
+        productId: currentEditId,
+        productName: document.getElementById('editProductName').value,
+        location: document.getElementById('editLocation').value,
+        condition: document.getElementById('editCondition').value,
+        price: document.getElementById('editPrice').value,
+        imageUrl: document.getElementById('editPreviewImage').src,
+        description: document.getElementById('editDescription').value,
+      };
+
+      const res = await fetch('http://localhost:5000/update-product', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(productData)
+      });
+      location.reload();
+    });
 
       container.appendChild(card);
     });
