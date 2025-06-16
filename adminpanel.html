@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel</title>
+  <link rel="stylesheet" href="index.css">
+  <style>
+    .font-size-dropdown {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: #f5f7fa;
+      border-radius: 6px;
+      padding: 4px 10px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    }
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f7fa;
+      color: #222;
+    }
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #e0e7ef;
+      padding: 14px 32px;
+      border-radius: 0 0 12px 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+    }
+    .navbar .logo {
+      flex: 1;
+      font-size: 26px;
+      font-weight: bold;
+      color: #222;
+    }
+    .navbar .font-selector {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+    }
+    .navbar .nav-buttons {
+      flex: 1;
+      display: flex;
+      justify-content: flex-end;
+    }
+    .navbar .nav-buttons button {
+      margin: 0 5px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 15px;
+      transition: background 0.2s, color 0.2s;
+    }
+    .navbar .nav-buttons .login {
+      background-color: #81c995;
+      color: #fff;
+    }
+    .navbar .nav-buttons .login:hover {
+      background-color: #5fa87a;
+    }
+    .navbar .nav-buttons .upload {
+      background-color: #4fc3f7;
+      color: #fff;
+      margin-left: 10px;
+    }
+    .navbar .nav-buttons .upload:hover {
+      background-color: #0288d1;
+    }
+    .navbar .nav-buttons .register {
+      background-color: #f28b82;
+      color: #fff;
+      margin-left: 10px;
+    }
+    .navbar .nav-buttons .register:hover {
+      background-color: #e57373;
+    }
+    .container {
+      display: flex;
+      gap: 32px;
+      max-width: 1300px;
+      margin: 40px auto;
+    }
+    .sidebar {
+      width: 260px;
+      background-color: #fff;
+      color: #222;
+      padding: 28px 20px;
+      box-sizing: border-box;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      min-height: 600px;
+    }
+    .flex {
+      display: flex;
+    }
+    .flex-wrap {
+      flex-wrap: wrap;
+    }
+    .gap-4 {
+      gap: 1rem;
+    }
+    .mb-8 {
+      margin-bottom: 2rem;
+    }
+    .text-xl {
+      font-size: 1.25rem;
+    }
+    .font-semibold {
+      font-weight: 600;
+    }
+    .bg-white {
+      background-color: #fff;
+    }
+    .rounded {
+      border-radius: 0.5rem;
+    }
+    .shadow {
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .p-4 {
+      padding: 1rem;
+    }
+    .text-3xl {
+      font-size: 1.875rem;
+    }
+    .text-blue-700 {
+      color: #1976d2;
+    }
+    .min-w-full {
+      min-width: 100%;
+    }
+    .text-left {
+      text-align: left;
+    }
+    .py-2 {
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+    }
+    .px-4 {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+    .border-b {
+      border-bottom: 1px solid #e5e7eb;
+    }
+    .overflow-x-auto {
+      overflow-x: auto;
+    }
+    .bg-blue-700 {
+      background-color: #1976d2;
+    }
+    .text-white {
+      color: #fff;
+    }
+    .hover\:bg-blue-800:hover {
+      background-color: #1565c0;
+    }
+    .px-4 {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+    .py-2 {
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+    }
+    .rounded {
+      border-radius: 0.5rem;
+    }
+    .shadow {
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .bg-blue-900 {
+      background-color: #1e293b;
+    }
+    .text-center {
+      text-align: center;
+    }
+    .mt-8 {
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <div class="navbar">
+    <div class="logo">李</div>
+    <div class="nav-buttons">
+      <button class="upload" onclick="window.location.href='uploadprep.html'">Upload Post</button>
+      <div class="settings-dropdown" style="position: relative; display: inline-block; margin-left: 10px;">
+        <button class="settings" onclick="toggleSettingsDropdown()" title="Settings" style="background-color: #ffd966; color: #222; border-radius: 5px; padding: 10px 20px; border: none; font-size: 15px; cursor: pointer; transition: background 0.2s; min-width: 120px;">
+          <span style="vertical-align: middle;">&#9881; Settings</span>
+        </button>
+        <div id="settingsDropdown" class="dropdown-content" style="display: none; position: absolute; right: 0; background: #fffbe6; min-width: 200px; box-shadow: 0 2px 8px rgba(0,0,0,0.12); border-radius: 8px; z-index: 100; padding: 16px 18px 12px 18px;">
+          <button class="profile" onclick="window.location.href='profile.html'" style="width:100%;margin-bottom:10px;background-color:#4fc3f7;color:#fff;">Profile</button>
+          <button class="member" onclick="window.location.href='member.html'" style="width:100%;margin-bottom:10px;background-color:#f28b82;color:#fff;">Member</button>
+          <button class="login" onclick="window.location.href='login.html'" style="width:100%;margin-bottom:10px;background-color:#81c995;color:#fff;">Logout</button>
+          <div class="font-size-dropdown" style="margin-bottom: 12px;">
+            <select id="fontSizeSelect" style="border-radius: 5px; padding: 5px; width:100%;">
+              <option value="14px">Small</option>
+              <option value="16px" selected>Medium</option>
+              <option value="18px">Large</option>
+              <option value="20px">Extra Large</option>
+            </select>
+          </div>
+          <div style="margin-bottom: 0;">
+            <select id="langSelect" style="border-radius: 5px; padding: 5px; width:100%;">
+              <option value="en">English</option>
+              <option value="id">Bahasa Indonesia</option>
+              <option value="zh">中文 (Mandarin)</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Admin Panel Main Content -->
+  <div class="container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <h3>Admin Tools</h3>
+      <ul>
+        <li><a href="#overview">Website Overview</a></li>
+        <li><a href="#activity">Recent Activity</a></li>
+        <li><a href="#actions">Quick Actions</a></li>
+      </ul>
+    </div>
+    <!-- Main Panel -->
+    <div style="flex:1;">
+      <section id="overview" class="mb-8">
+        <h2 class="text-xl font-semibold mb-2">Website Overview</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="bg-white rounded shadow p-4">
+            <h3 class="font-bold text-lg">Total Users</h3>
+            <p class="text-3xl text-blue-700" id="total-users">--</p>
+          </div>
+          <div class="bg-white rounded shadow p-4">
+            <h3 class="font-bold text-lg">Active Listings</h3>
+            <p class="text-3xl text-blue-700" id="active-listings">--</p>
+          </div>
+          <div class="bg-white rounded shadow p-4">
+            <h3 class="font-bold text-lg">Orders Today</h3>
+            <p class="text-3xl text-blue-700" id="orders-today">--</p>
+          </div>
+        </div>
+      </section>
+      <!-- User Management -->
+      <section id="user-management" class="mb-8">
+        <h2 class="text-xl font-semibold mb-2 flex items-center">User Management <span title="Manage all users" style="margin-left:8px;cursor:help;">👤</span></h2>
+        <div class="bg-white rounded shadow p-4 overflow-x-auto">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;gap:10px;flex-wrap:wrap;">
+            <input id="userSearch" type="text" placeholder="Search users by name or email..." style="padding:6px 12px;border-radius:5px;border:1px solid #ccc;min-width:220px;">
+            <select id="userStatusFilter" style="padding:6px 12px;border-radius:5px;border:1px solid #ccc;">
+              <option value="all">All Statuses</option>
+              <option value="active">Active</option>
+              <option value="inactive">Inactive</option>
+            </select>
+          </div>
+          <table class="min-w-full text-left" id="userTable">
+            <thead>
+              <tr>
+                <th class="py-2 px-4 border-b">User ID</th>
+                <th class="py-2 px-4 border-b">Name</th>
+                <th class="py-2 px-4 border-b">Email</th>
+                <th class="py-2 px-4 border-b">Status</th>
+                <th class="py-2 px-4 border-b">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="userTableBody">
+              <tr data-user-id="1">
+                <td class="py-2 px-4">1</td>
+                <td class="py-2 px-4">John Doe</td>
+                <td class="py-2 px-4">john@example.com</td>
+                <td class="py-2 px-4 status">Active</td>
+                <td class="py-2 px-4">
+                  <button class="bg-blue-700 text-white px-2 py-1 rounded action-btn" onclick="confirmAction('deactivate',1)">Deactivate</button>
+                  <button class="bg-gray-300 text-gray-800 px-2 py-1 rounded" onclick="viewUserDetails(1)" title="View Details">🔍</button>
+                </td>
+              </tr>
+              <tr data-user-id="2">
+                <td class="py-2 px-4">2</td>
+                <td class="py-2 px-4">Jane Smith</td>
+                <td class="py-2 px-4">jane@example.com</td>
+                <td class="py-2 px-4 status">Inactive</td>
+                <td class="py-2 px-4">
+                  <button class="bg-green-700 text-white px-2 py-1 rounded action-btn" onclick="confirmAction('activate',2)">Activate</button>
+                  <button class="bg-gray-300 text-gray-800 px-2 py-1 rounded" onclick="viewUserDetails(2)" title="View Details">🔍</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div id="userPagination" style="margin-top:10px;text-align:right;"></div>
+        </div>
+      </section>
+
+      <!-- Listing Management -->
+      <section id="listing-management" class="mb-8">
+        <h2 class="text-xl font-semibold mb-2 flex items-center">Product/Listing Management <span title="Manage all listings" style="margin-left:8px;cursor:help;">📦</span></h2>
+        <div class="bg-white rounded shadow p-4 overflow-x-auto">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;gap:10px;flex-wrap:wrap;">
+            <input id="listingSearch" type="text" placeholder="Search listings by title..." style="padding:6px 12px;border-radius:5px;border:1px solid #ccc;min-width:220px;">
+            <select id="listingStatusFilter" style="padding:6px 12px;border-radius:5px;border:1px solid #ccc;">
+              <option value="all">All Statuses</option>
+              <option value="pending">Pending</option>
+              <option value="approved">Approved</option>
+              <option value="rejected">Rejected</option>
+            </select>
+          </div>
+          <table class="min-w-full text-left" id="listingTable">
+            <thead>
+              <tr>
+                <th class="py-2 px-4 border-b">Listing ID</th>
+                <th class="py-2 px-4 border-b">Title</th>
+                <th class="py-2 px-4 border-b">Status</th>
+                <th class="py-2 px-4 border-b">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="listingTableBody">
+              <tr data-listing-id="101">
+                <td class="py-2 px-4">101</td>
+                <td class="py-2 px-4">Sample Product</td>
+                <td class="py-2 px-4 listing-status">Pending</td>
+                <td class="py-2 px-4">
+                  <button class="bg-blue-700 text-white px-2 py-1 rounded approve-btn" onclick="confirmListingAction('approve',101)">Approve</button>
+                  <button class="bg-red-600 text-white px-2 py-1 rounded reject-btn" onclick="confirmListingAction('reject',101)">Reject</button>
+                  <button class="bg-gray-300 text-gray-800 px-2 py-1 rounded" onclick="viewListingDetails(101)" title="View Details">🔍</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div id="listingPagination" style="margin-top:10px;text-align:right;"></div>
+        </div>
+      </section>
+
+      <!-- Order Monitoring -->
+      <section id="order-monitoring" class="mb-8">
+        <h2 class="text-xl font-semibold mb-2">Order Monitoring</h2>
+        <div class="bg-white rounded shadow p-4 overflow-x-auto">
+          <table class="min-w-full text-left">
+            <thead>
+              <tr>
+                <th class="py-2 px-4 border-b">Order ID</th>
+                <th class="py-2 px-4 border-b">User</th>
+                <th class="py-2 px-4 border-b">Status</th>
+                <th class="py-2 px-4 border-b">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="py-2 px-4">5001</td>
+                <td class="py-2 px-4">John Doe</td>
+                <td class="py-2 px-4">Pending</td>
+                <td class="py-2 px-4">$100</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- System Health -->
+      <section id="system-health" class="mb-8">
+        <h2 class="text-xl font-semibold mb-2">System Health</h2>
+        <div class="bg-white rounded shadow p-4">
+          <ul>
+            <li>Server Status: <span class="text-blue-700">Online</span></li>
+            <li>Database Connection: <span class="text-blue-700">Connected</span></li>
+            <li>Error Logs: <a href="#" class="text-blue-700 underline" onclick="viewErrorLogs()">View Logs</a></li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Analytics -->
+      <section id="analytics" class="mb-8">
+        <h2 class="text-xl font-semibold mb-2">Analytics</h2>
+        <div class="bg-white rounded shadow p-4">
+          <p>[Charts for user growth, sales trends, and most active users/products will appear here]</p>
+        </div>
+      </section>
+
+      <!-- Recent Logins -->
+      <section id="recent-logins" class="mb-8">
+        <h2 class="text-xl font-semibold mb-2">Recent Logins</h2>
+        <div class="bg-white rounded shadow p-4 overflow-x-auto">
+          <table class="min-w-full text-left">
+            <thead>
+              <tr>
+                <th class="py-2 px-4 border-b">User</th>
+                <th class="py-2 px-4 border-b">IP Address</th>
+                <th class="py-2 px-4 border-b">Time</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="py-2 px-4">John Doe</td>
+                <td class="py-2 px-4">192.168.1.10</td>
+                <td class="py-2 px-4">2025-06-16 10:00</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Notifications -->
+      <section id="notifications" class="mb-8">
+        <h2 class="text-xl font-semibold mb-2">Notifications & Alerts</h2>
+        <div class="bg-white rounded shadow p-4">
+          <ul>
+            <li>No new notifications.</li>
+          </ul>
+        </div>
+      </section>
+      <section id="activity" class="mb-8">
+        <h2 class="text-xl font-semibold mb-2">Recent Activity</h2>
+        <div class="bg-white rounded shadow p-4 overflow-x-auto">
+          <table class="min-w-full text-left">
+            <thead>
+              <tr>
+                <th class="py-2 px-4 border-b">Time</th>
+                <th class="py-2 px-4 border-b">User</th>
+                <th class="py-2 px-4 border-b">Action</th>
+              </tr>
+            </thead>
+            <tbody id="recent-activity">
+              <tr>
+                <td class="py-2 px-4">--</td>
+                <td class="py-2 px-4">--</td>
+                <td class="py-2 px-4">--</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section id="actions">
+        <h2 class="text-xl font-semibold mb-2">Quick Actions</h2>
+        <div class="flex flex-wrap gap-4">
+          <a href="member.html" class="bg-blue-700 text-white px-4 py-2 rounded shadow hover:bg-blue-800">Manage Members</a>
+          <a href="orders.html" class="bg-blue-700 text-white px-4 py-2 rounded shadow hover:bg-blue-800">View Orders</a>
+          <a href="salesreport.html" class="bg-blue-700 text-white px-4 py-2 rounded shadow hover:bg-blue-800">Sales Reports</a>
+          <a href="upload.html" class="bg-blue-700 text-white px-4 py-2 rounded shadow hover:bg-blue-800">Upload Product</a>
+        </div>
+      </section>
+    </div>
+  </div>
+  <footer class="bg-blue-900 text-white text-center p-4 mt-8">
+    &copy; 2025 Margalie. Admin Panel.
+  </footer>
+  <script>
+    // Snackbar notification
+    function showSnackbar(msg) {
+      let bar = document.getElementById('snackbar');
+      if (!bar) {
+        bar = document.createElement('div');
+        bar.id = 'snackbar';
+        bar.style.position = 'fixed';
+        bar.style.bottom = '30px';
+        bar.style.left = '50%';
+        bar.style.transform = 'translateX(-50%)';
+        bar.style.background = '#323232';
+        bar.style.color = '#fff';
+        bar.style.padding = '14px 32px';
+        bar.style.borderRadius = '8px';
+        bar.style.fontSize = '16px';
+        bar.style.zIndex = 9999;
+        bar.style.opacity = 0;
+        bar.style.transition = 'opacity 0.3s';
+        document.body.appendChild(bar);
+      }
+      bar.textContent = msg;
+      bar.style.opacity = 1;
+      setTimeout(() => { bar.style.opacity = 0; }, 2000);
+    }
+
+    // Confirmation dialog for actions
+    function confirmAction(type, userId) {
+      const name = document.querySelector(`tr[data-user-id='${userId}'] td:nth-child(2)`).textContent;
+      if (confirm(`Are you sure you want to ${type} user '${name}'?`)) {
+        if (type === 'deactivate') deactivateUser(userId);
+        else if (type === 'activate') activateUser(userId);
+      }
+    }
+    function confirmListingAction(type, listingId) {
+      const title = document.querySelector(`tr[data-listing-id='${listingId}'] td:nth-child(2)`).textContent;
+      if (confirm(`Are you sure you want to ${type} listing '${title}'?`)) {
+        if (type === 'approve') approveListing(listingId);
+        else if (type === 'reject') rejectListing(listingId);
+      }
+    }
+
+    // View details modal (dummy)
+    function viewUserDetails(userId) {
+      const row = document.querySelector(`tr[data-user-id='${userId}']`);
+      if (!row) return;
+      const name = row.children[1].textContent;
+      const email = row.children[2].textContent;
+      const status = row.children[3].textContent;
+      showModal(`<b>User Details</b><br>ID: ${userId}<br>Name: ${name}<br>Email: ${email}<br>Status: ${status}`);
+    }
+    function viewListingDetails(listingId) {
+      const row = document.querySelector(`tr[data-listing-id='${listingId}']`);
+      if (!row) return;
+      const title = row.children[1].textContent;
+      const status = row.children[2].textContent;
+      showModal(`<b>Listing Details</b><br>ID: ${listingId}<br>Title: ${title}<br>Status: ${status}`);
+    }
+
+    // Modal
+    function showModal(html) {
+      let modal = document.getElementById('adminModal');
+      if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'adminModal';
+        modal.style.position = 'fixed';
+        modal.style.top = 0;
+        modal.style.left = 0;
+        modal.style.width = '100vw';
+        modal.style.height = '100vh';
+        modal.style.background = 'rgba(0,0,0,0.4)';
+        modal.style.display = 'flex';
+        modal.style.alignItems = 'center';
+        modal.style.justifyContent = 'center';
+        modal.innerHTML = `<div id="modalContent" style="background:#fff;padding:32px 40px;border-radius:12px;min-width:300px;max-width:90vw;max-height:80vh;overflow:auto;position:relative;"></div>`;
+        document.body.appendChild(modal);
+        modal.onclick = function(e) { if (e.target === modal) modal.style.display = 'none'; };
+      }
+      document.getElementById('modalContent').innerHTML = html + '<br><br><button onclick="document.getElementById(\'adminModal\').style.display=\'none\'" style="margin-top:10px;padding:8px 18px;border-radius:6px;background:#1976d2;color:#fff;border:none;">Close</button>';
+      modal.style.display = 'flex';
+    }
+
+    // User search/filter
+    document.getElementById('userSearch').addEventListener('input', filterUsers);
+    document.getElementById('userStatusFilter').addEventListener('change', filterUsers);
+    function filterUsers() {
+      const search = document.getElementById('userSearch').value.toLowerCase();
+      const status = document.getElementById('userStatusFilter').value;
+      document.querySelectorAll('#userTableBody tr').forEach(row => {
+        const name = row.children[1].textContent.toLowerCase();
+        const email = row.children[2].textContent.toLowerCase();
+        const userStatus = row.children[3].textContent.toLowerCase();
+        let show = true;
+        if (search && !(name.includes(search) || email.includes(search))) show = false;
+        if (status !== 'all' && userStatus !== status) show = false;
+        row.style.display = show ? '' : 'none';
+      });
+    }
+
+    // Listing search/filter
+    document.getElementById('listingSearch').addEventListener('input', filterListings);
+    document.getElementById('listingStatusFilter').addEventListener('change', filterListings);
+    function filterListings() {
+      const search = document.getElementById('listingSearch').value.toLowerCase();
+      const status = document.getElementById('listingStatusFilter').value;
+      document.querySelectorAll('#listingTableBody tr').forEach(row => {
+        const title = row.children[1].textContent.toLowerCase();
+        const listingStatus = row.children[2].textContent.toLowerCase();
+        let show = true;
+        if (search && !title.includes(search)) show = false;
+        if (status !== 'all' && listingStatus !== status) show = false;
+        row.style.display = show ? '' : 'none';
+      });
+    }
+    // Settings dropdown logic (copied from index.html)
+    function toggleSettingsDropdown() {
+      const dropdown = document.getElementById('settingsDropdown');
+      dropdown.style.display = (dropdown.style.display === 'block') ? 'none' : 'block';
+    }
+    document.addEventListener('click', function(event) {
+      const dropdown = document.getElementById('settingsDropdown');
+      const settingsBtn = document.querySelector('.settings');
+      if (!dropdown || !settingsBtn) return;
+      if (!dropdown.contains(event.target) && !settingsBtn.contains(event.target)) {
+        dropdown.style.display = 'none';
+      }
+    });
+    document.getElementById('settingsDropdown').addEventListener('change', function(e) {
+      if (e.target && e.target.id === 'fontSizeSelect') {
+        document.body.style.fontSize = e.target.value;
+      }
+      // Language change logic can be added here if needed
+    });
+
+    // Dummy functions for admin actions
+    function deactivateUser(userId) {
+      const row = document.querySelector(`tr[data-user-id='${userId}']`);
+      if (row) {
+        row.querySelector('.status').textContent = 'Inactive';
+        const btn = row.querySelector('.action-btn');
+        btn.textContent = 'Activate';
+        btn.classList.remove('bg-blue-700');
+        btn.classList.add('bg-green-700');
+        btn.onclick = function() { activateUser(userId); };
+      }
+      alert('User ' + userId + ' deactivated (dummy function)');
+    }
+    function activateUser(userId) {
+      const row = document.querySelector(`tr[data-user-id='${userId}']`);
+      if (row) {
+        row.querySelector('.status').textContent = 'Active';
+        const btn = row.querySelector('.action-btn');
+        btn.textContent = 'Deactivate';
+        btn.classList.remove('bg-green-700');
+        btn.classList.add('bg-blue-700');
+        btn.onclick = function() { deactivateUser(userId); };
+      }
+      alert('User ' + userId + ' activated (dummy function)');
+    }
+    function approveListing(listingId) {
+      const row = document.querySelector(`tr[data-listing-id='${listingId}']`);
+      if (row) {
+        row.querySelector('.listing-status').textContent = 'Approved';
+        row.querySelector('.approve-btn').disabled = true;
+        row.querySelector('.reject-btn').disabled = true;
+      }
+      alert('Listing ' + listingId + ' approved (dummy function)');
+    }
+    function rejectListing(listingId) {
+      const row = document.querySelector(`tr[data-listing-id='${listingId}']`);
+      if (row) {
+        row.querySelector('.listing-status').textContent = 'Rejected';
+        row.querySelector('.approve-btn').disabled = true;
+        row.querySelector('.reject-btn').disabled = true;
+      }
+      alert('Listing ' + listingId + ' rejected (dummy function)');
+    }
+    function viewErrorLogs() {
+      alert('Viewing error logs (dummy function)');
+    }
+  </script>
+</body>
+</html>
