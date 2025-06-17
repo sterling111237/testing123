@@ -1,25 +1,41 @@
 const express = require('express');
 const { Pool } = require('pg');
+const bcrypt = require('bcrypt');
 const cors = require('cors');
 
 const app = express();
 const port = 3000;
 
-// Allow requests from your frontend origin (adjust or use '*' for testing)
-app.use(cors({
-  origin: '*'
-}));
+// Middleware
+app.use(cors({ origin: '*' }));
+app.use(express.json()); // needed to parse req.body
 
-// PostgreSQL connection pool (update with your DB credentials)
+// PostgreSQL connection
 const pool = new Pool({
   user: 'postgres',
   host: 'localhost',
   database: 'postgres',
-  password: '123',
+  password: 'Yaomingers10983',
   port: 5432,
 });
 
-// API endpoint to get products with category and subcategory names
+// Login route
+app.post('/login', async (req, res) => {
+  const { username, password } = req.body;
+  try {
+    const result = await pool.query('SELECT password FROM users WHERE username = $1', [username]);
+    if (result.rows.length === 0) return res.status(401).send('Invalid credentials');
+
+    const match = await bcrypt.compare(password, result.rows[0].password);
+    if (match) res.send('success');
+    else res.status(401).send('Invalid credentials');
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Server error');
+  }
+});
+
+// Product listing route
 app.get('/items', async (req, res) => {
   try {
     const query = `
@@ -31,8 +47,6 @@ app.get('/items', async (req, res) => {
         p.release_date,
         p.price,
         p.image_url,
-        p.item_description,
-        p.user_id,
         c.category_name,
         s.subcategory_name
       FROM ITEMS p
@@ -48,7 +62,7 @@ app.get('/items', async (req, res) => {
   }
 });
 
-
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
+
