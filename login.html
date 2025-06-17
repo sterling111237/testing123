@@ -132,37 +132,52 @@
     <div class="login-container">
       <h2>Marga Lie</h2>
       <form id="loginForm">
-        <input type="text" id="username" placeholder="User" required>
-        <input type="password" id="password" placeholder="Password" required>
-        <button type="submit" class="login-btn">Enter</button>
-        <button type="button" class="register-btn">Register Now</button>
-      </form>
+  <input type="text" id="username" name="username" placeholder="Username" required>
+  <input type="password" id="password" name="password" placeholder="Password" required>
+  <button type="submit" class="login-btn">Login</button>
+  <button type="button" class="register-btn">Register</button>
+</form>
+
+
     </div>
   </div>
 
   <script>
-    document.getElementById('loginForm').addEventListener('submit', function(event) {
-      event.preventDefault();
-      var usernameInput = document.getElementById('username').value;
-      var passwordInput = document.getElementById('password').value;
-      var usernameData = JSON.parse(localStorage.getItem("usernameLocalData"));
-      var passwordData = JSON.parse(localStorage.getItem("passwordLocalData"));
+    fetch('http://localhost:3000/login', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({ username, password })
+})
 
-      for (let i =0;i < usernameData.length; i++) {
-          console.log(usernameData[i]);
-          console.log(i)
-          console.log(usernameData.length)
-          if (usernameInput == usernameData[i] && passwordInput == passwordData[i]) {
-            console.log("Logged in");
-            return window.location.href = 'index.html';
-          }
-        }
-        alert ("wrong password");
-    });
+  document.getElementById('loginForm').addEventListener('submit', async function(event) {
+    event.preventDefault();
 
-      document.querySelector('.register-btn').addEventListener('click', function() {
-      window.open('register.html', '_blank'); // Opens the registration page in a new tab
-    });
-  </script>
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+
+    try {
+      const res = await fetch('http://localhost:3000/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password })
+      });
+
+      const text = await res.text();
+      console.log("Server response:", text);
+
+      if (res.ok && text === 'success') {
+        window.location.href = 'index.html';
+      } else {
+        alert('Login failed: ' + text);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Network error');
+    }
+  });
+</script>
+
 </body>
 </html>
