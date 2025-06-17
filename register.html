@@ -123,53 +123,57 @@
     <!-- Register Section -->
     <div class="register-container">
       <h2>Marga Lie</h2>
-      <form id="registerForm">
-        <input type="text" id="username" placeholder="User" required>
-        <input type="password" id="password" placeholder="Password" required>
-        <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
-        <button type="submit">Enter</button>
-        <button type="button" onclick="window.location.href='login.html'">Back to Login</button>
-      </form>
+      <form id="sus">
+  <input type="text" id="username" required>
+  <input type="email" id="email" required>
+  <input type="password"id="password" required>
+  <input type="number" id="age" required>
+  
+  <select id="gender" name="gender" >
+    <option value="Female">Female</option>
+    <option value="Male">Male</option>
+    <option value="Other">Other</option>
+  </select>
+  
+  <button type="button" id="submitBtn">Register</button>
+
+</form>
+
+
     </div>
   </div>
 
   <script>
-    document.getElementById('registerForm').addEventListener('submit', function(event) {
-      event.preventDefault();
-      var username = document.getElementById('username').value;
-      var password = document.getElementById('password').value;
-      var confirmPassword = document.getElementById('confirmPassword').value;
+  document.getElementById('submitBtn').addEventListener('click', function(event) {
+  event.preventDefault();
 
-      if (password !== confirmPassword) {
-        alert('Passwords do not match!');
-        return;
-      }
-      else {
-        alert(`User ${username} registered successfully!`);
-        save();
-      }
-    });
-      function save() {
-                var usernameData = document.getElementById('username').value
-                var pass = document.getElementById('password').value
+  const username = document.getElementById('username').value.trim();
+  const password = document.getElementById('password').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const age = document.getElementById('age').value.trim();
+  const gender = document.getElementById('gender').value;
 
-                if(localStorage.getItem('usernameLocalData') == null) {
-                    localStorage.setItem('usernameLocalData', '[]');
-                }
-                if(localStorage.getItem('passwordLocalData') == null) {
-                    localStorage.setItem('passwordLocalData', '[]');
-                }
+  console.log({ username, password, age, gender }); // Debug
 
-                var usernameOldData = JSON.parse(localStorage.getItem('usernameLocalData'));
-                usernameOldData.push(usernameData);
-                var passOldData = JSON.parse(localStorage.getItem('passwordLocalData'));
-                passOldData.push(pass);
+  if (!username || !password || !age || !gender || !email) {
+    console.error("All fields are required.");
+    return;
+  }
 
-                localStorage.setItem('usernameLocalData', JSON.stringify(usernameOldData));
-                localStorage.setItem('passwordLocalData', JSON.stringify(passOldData));
+  const userData = { username, password, age, gender, email};
 
-                return window.location.href = 'login.html';
-            }
-  </script>
+  fetch("http://localhost:4000/user", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(userData)
+  })
+  .then(res => res.json())
+  .then(data => console.log("Server response:", data))
+  .catch(err => console.error("Error sending data:", err));
+});
+
+</script>
+
+
 </body>
 </html>
