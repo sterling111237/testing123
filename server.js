@@ -35,6 +35,32 @@ app.post('/login', async (req, res) => {
   }
 });
 
+app.post('/loginAdmin', async (req, res) => {
+  const { username, password } = req.body;
+
+  try {
+    const result = await pool.query('SELECT password, admin FROM users WHERE username = $1', [username]);
+
+    if (result.rows.length === 0) return res.status(401).send('Invalid credentials');
+
+    const isAdmin = result.rows[0].admin;
+    const hashedPassword = result.rows[0].password;
+
+    const match = await bcrypt.compare(password, hashedPassword);
+
+    if (!match) return res.status(401).send('Invalid credentials');
+    if (!isAdmin) return res.status(403).send('Not an admin');
+
+    return res.send('success');
+
+  } catch (err) {
+    console.error('Error during admin login:', err.message);
+    res.status(500).send('Server error');
+  }
+});
+
+
+
 // Product listing route
 app.get('/items', async (req, res) => {
   try {
@@ -65,4 +91,5 @@ app.get('/items', async (req, res) => {
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
+
 
