@@ -237,15 +237,18 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div class="bg-white rounded shadow p-4">
             <h3 class="font-bold text-lg">Total Users</h3>
-            <p class="text-3xl text-blue-700" id="total-users">--</p>
+            <p class="text-3xl text-blue-700" id="total-users">512</p>
+            <span style="color:#888;font-size:13px;">(+8 today)</span>
           </div>
           <div class="bg-white rounded shadow p-4">
             <h3 class="font-bold text-lg">Active Listings</h3>
-            <p class="text-3xl text-blue-700" id="active-listings">--</p>
+            <p class="text-3xl text-blue-700" id="active-listings">134</p>
+            <span style="color:#888;font-size:13px;">(12 new)</span>
           </div>
           <div class="bg-white rounded shadow p-4">
             <h3 class="font-bold text-lg">Orders Today</h3>
-            <p class="text-3xl text-blue-700" id="orders-today">--</p>
+            <p class="text-3xl text-blue-700" id="orders-today">27</p>
+            <span style="color:#888;font-size:13px;">(last: #5002)</span>
           </div>
         </div>
       </section>
@@ -378,7 +381,8 @@
       <section id="analytics" class="mb-8">
         <h2 class="text-xl font-semibold mb-2">Analytics</h2>
         <div class="bg-white rounded shadow p-4">
-          <p>[Charts for user growth, sales trends, and most active users/products will appear here]</p>
+          <canvas id="userGrowthChart" width="400" height="180" style="max-width:100%;margin-bottom:24px;"></canvas>
+          <p style="color:#666;font-size:14px;">User Growth (last 6 months)</p>
         </div>
       </section>
 
@@ -410,7 +414,9 @@
         <h2 class="text-xl font-semibold mb-2">Notifications & Alerts</h2>
         <div class="bg-white rounded shadow p-4">
           <ul>
-            <li>No new notifications.</li>
+            <li><span style="color:#1976d2;font-weight:600;">[System]</span> New user <b>Jane Smith</b> registered. <span style="color:#888;font-size:12px;">(2025-06-18 09:12)</span></li>
+            <li><span style="color:#1976d2;font-weight:600;">[Order]</span> Order <b>#5002</b> placed by <b>John Doe</b>. <span style="color:#888;font-size:12px;">(2025-06-18 08:45)</span></li>
+            <li><span style="color:#d32f2f;font-weight:600;">[Alert]</span> Listing <b>#101</b> pending approval. <span style="color:#888;font-size:12px;">(2025-06-18 08:30)</span></li>
           </ul>
         </div>
       </section>
@@ -427,9 +433,19 @@
             </thead>
             <tbody id="recent-activity">
               <tr>
-                <td class="py-2 px-4">--</td>
-                <td class="py-2 px-4">--</td>
-                <td class="py-2 px-4">--</td>
+                <td class="py-2 px-4">2025-06-18 09:12</td>
+                <td class="py-2 px-4">Jane Smith</td>
+                <td class="py-2 px-4">Registered as new user</td>
+              </tr>
+              <tr>
+                <td class="py-2 px-4">2025-06-18 08:45</td>
+                <td class="py-2 px-4">John Doe</td>
+                <td class="py-2 px-4">Placed order #5002</td>
+              </tr>
+              <tr>
+                <td class="py-2 px-4">2025-06-18 08:30</td>
+                <td class="py-2 px-4">System</td>
+                <td class="py-2 px-4">Listing #101 pending approval</td>
               </tr>
             </tbody>
           </table>
@@ -449,46 +465,121 @@
   <footer class="bg-blue-900 text-white text-center p-4 mt-8">
     &copy; 2025 Margalie. Admin Panel.
   </footer>
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
-    // Snackbar notification
-    function showSnackbar(msg) {
-      let bar = document.getElementById('snackbar');
-      if (!bar) {
-        bar = document.createElement('div');
-        bar.id = 'snackbar';
-        bar.style.position = 'fixed';
-        bar.style.bottom = '30px';
-        bar.style.left = '50%';
-        bar.style.transform = 'translateX(-50%)';
-        bar.style.background = '#323232';
-        bar.style.color = '#fff';
-        bar.style.padding = '14px 32px';
-        bar.style.borderRadius = '8px';
-        bar.style.fontSize = '16px';
-        bar.style.zIndex = 9999;
-        bar.style.opacity = 0;
-        bar.style.transition = 'opacity 0.3s';
-        document.body.appendChild(bar);
+    // Example analytics chart: User Growth (Bar Chart)
+    document.addEventListener('DOMContentLoaded', function() {
+      const ctx = document.getElementById('userGrowthChart').getContext('2d');
+      // Example data for last 6 months
+      const months = [
+        'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'
+      ];
+      const userCounts = [120, 180, 250, 320, 400, 480];
+      new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: months,
+          datasets: [{
+            label: 'Users',
+            data: userCounts,
+            backgroundColor: '#1976d2',
+            borderRadius: 6,
+            maxBarThickness: 40
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: { display: false },
+            title: { display: false }
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              ticks: { stepSize: 100 }
+            }
+          }
+        }
+      });
+    });
+    // Centered modal notification for admin alerts
+    function showAdminAlert(msg) {
+      let modal = document.getElementById('adminAlertModal');
+      if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'adminAlertModal';
+        modal.style.position = 'fixed';
+        modal.style.top = 0;
+        modal.style.left = 0;
+        modal.style.width = '100vw';
+        modal.style.height = '100vh';
+        modal.style.background = 'rgba(0,0,0,0.4)';
+        modal.style.display = 'flex';
+        modal.style.alignItems = 'center';
+        modal.style.justifyContent = 'center';
+        modal.style.zIndex = 9999;
+        modal.innerHTML = `<div id="adminAlertContent" style="background:#fff;padding:32px 40px;border-radius:12px;min-width:300px;max-width:90vw;max-width:90vw;max-height:80vh;overflow:auto;position:relative;text-align:center;box-shadow:0 2px 16px rgba(0,0,0,0.18);font-size:18px;"></div>`;
+        document.body.appendChild(modal);
       }
-      bar.textContent = msg;
-      bar.style.opacity = 1;
-      setTimeout(() => { bar.style.opacity = 0; }, 2000);
+      document.getElementById('adminAlertContent').innerHTML = `
+        <div style='margin-bottom:18px;'>${msg}</div>
+        <button id='adminAlertCloseBtn' style='margin-top:10px;padding:8px 18px;border-radius:6px;background:#1976d2;color:#fff;border:none;'>Close</button>
+      `;
+      modal.style.display = 'flex';
+      document.getElementById('adminAlertCloseBtn').onclick = function() {
+        modal.style.display = 'none';
+      };
+      modal.onclick = function(e) { if (e.target === modal) modal.style.display = 'none'; };
     }
 
-    // Confirmation dialog for actions
+    // Custom modal confirmation dialog for actions
+    function showConfirmDialog(message, onConfirm) {
+      let modal = document.getElementById('confirmModal');
+      if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'confirmModal';
+        modal.style.position = 'fixed';
+        modal.style.top = 0;
+        modal.style.left = 0;
+        modal.style.width = '100vw';
+        modal.style.height = '100vh';
+        modal.style.background = 'rgba(0,0,0,0.4)';
+        modal.style.display = 'flex';
+        modal.style.alignItems = 'center';
+        modal.style.justifyContent = 'center';
+        modal.innerHTML = `<div id="confirmModalContent" style="background:#fff;padding:32px 40px;border-radius:12px;min-width:300px;max-width:90vw;max-height:80vh;overflow:auto;position:relative;text-align:center;"></div>`;
+        document.body.appendChild(modal);
+      }
+      document.getElementById('confirmModalContent').innerHTML = `
+        <div style='font-size:18px;margin-bottom:18px;'>${message}</div>
+        <button id='confirmYesBtn' style='margin:0 12px;padding:8px 18px;border-radius:6px;background:#1976d2;color:#fff;border:none;'>Yes</button>
+        <button id='confirmNoBtn' style='margin:0 12px;padding:8px 18px;border-radius:6px;background:#eee;color:#222;border:none;'>No</button>
+      `;
+      modal.style.display = 'flex';
+      document.getElementById('confirmYesBtn').onclick = function() {
+        modal.style.display = 'none';
+        if (onConfirm) onConfirm();
+      };
+      document.getElementById('confirmNoBtn').onclick = function() {
+        modal.style.display = 'none';
+      };
+      modal.onclick = function(e) { if (e.target === modal) modal.style.display = 'none'; };
+    }
+
     function confirmAction(type, userId) {
       const name = document.querySelector(`tr[data-user-id='${userId}'] td:nth-child(2)`).textContent;
-      if (confirm(`Are you sure you want to ${type} user '${name}'?`)) {
+      showConfirmDialog(`Are you sure you want to ${type} user '<b>${name}</b>'?`, function() {
         if (type === 'deactivate') deactivateUser(userId);
         else if (type === 'activate') activateUser(userId);
-      }
+      });
     }
     function confirmListingAction(type, listingId) {
       const title = document.querySelector(`tr[data-listing-id='${listingId}'] td:nth-child(2)`).textContent;
-      if (confirm(`Are you sure you want to ${type} listing '${title}'?`)) {
+      showConfirmDialog(`Are you sure you want to ${type} listing '<b>${title}</b>'?`, function() {
         if (type === 'approve') approveListing(listingId);
         else if (type === 'reject') rejectListing(listingId);
-      }
+      });
     }
 
     // View details modal (dummy)
@@ -594,7 +685,7 @@
         btn.classList.add('bg-green-700');
         btn.onclick = function() { activateUser(userId); };
       }
-      alert('User ' + userId + ' deactivated (dummy function)');
+      showAdminAlert('User ' + userId + ' deactivated (dummy function)');
     }
     function activateUser(userId) {
       const row = document.querySelector(`tr[data-user-id='${userId}']`);
@@ -606,7 +697,7 @@
         btn.classList.add('bg-blue-700');
         btn.onclick = function() { deactivateUser(userId); };
       }
-      alert('User ' + userId + ' activated (dummy function)');
+      showAdminAlert('User ' + userId + ' activated (dummy function)');
     }
     function approveListing(listingId) {
       const row = document.querySelector(`tr[data-listing-id='${listingId}']`);
@@ -615,7 +706,7 @@
         row.querySelector('.approve-btn').disabled = true;
         row.querySelector('.reject-btn').disabled = true;
       }
-      alert('Listing ' + listingId + ' approved (dummy function)');
+      showAdminAlert('Listing ' + listingId + ' approved (dummy function)');
     }
     function rejectListing(listingId) {
       const row = document.querySelector(`tr[data-listing-id='${listingId}']`);
@@ -624,10 +715,10 @@
         row.querySelector('.approve-btn').disabled = true;
         row.querySelector('.reject-btn').disabled = true;
       }
-      alert('Listing ' + listingId + ' rejected (dummy function)');
+      showAdminAlert('Listing ' + listingId + ' rejected (dummy function)');
     }
     function viewErrorLogs() {
-      alert('Viewing error logs (dummy function)');
+      showAdminAlert('Viewing error logs (dummy function)');
     }
   </script>
 </body>
