@@ -2,6 +2,7 @@ const express = require('express');
 const { Pool } = require('pg');
 const bcrypt = require('bcrypt');
 const cors = require('cors');
+const path = require('path')
 
 const app = express();
 const port = 3000;
@@ -9,7 +10,8 @@ const port = 3000;
 // Middleware
 app.use(cors({ origin: '*' }));
 app.use(express.json()); // needed to parse req.body
-
+app.use(express.urlencoded({extended:true}))
+// app.use(express.static(path.join(__dirname, `public`,`public`)))
 // PostgreSQL connection
 const pool = new Pool({
   user: 'postgres',
@@ -19,6 +21,37 @@ const pool = new Pool({
   port: 5432,
 });
 
+app.get('/login',(req,res)=>{  
+  res.sendFile(path.join(__dirname, `public`,`login.html`))
+})
+
+app.get('/register',(req,res)=>{  
+  res.sendFile(path.join(__dirname, `public`,`register.html`  ))
+})
+app.get('/loginAdmin',(req,res)=>{  
+  res.sendFile(path.join(__dirname, `public`,`loginAdmin.html`  ))
+})
+app.get('/dashboard',(req,res)=>{  
+  res.sendFile(path.join(__dirname, `public`,`index.html`  ))
+})
+app.get('/profile',(req,res)=>{  
+  res.sendFile(path.join(__dirname, `public`,`profile.html`  ))
+})
+app.get('/member',(req,res)=>{  
+  res.sendFile(path.join(__dirname, `public`,`member.html`  ))
+})
+app.get('/myproducts',(req,res)=>{  
+  res.sendFile(path.join(__dirname, `public`,`myproduct.html`  ))
+})
+app.get('/adminPanel',(req,res)=>{  
+  res.sendFile(path.join(__dirname, `public`,`adminPanel.html`  ))
+})
+app.get('/upload',(req,res)=>{  
+  res.sendFile(path.join(__dirname, `public`,`uploadpred.html`  ))
+})
+app.get('/items',(req,res)=>{  
+  res.sendFile(path.join(__dirname, `public`,`item.html`  ))
+})
 // Login route
 app.post('/login', async (req, res) => {
   const { username, password } = req.body;
@@ -27,7 +60,10 @@ app.post('/login', async (req, res) => {
     if (result.rows.length === 0) return res.status(401).send('Invalid credentials');
 
     const match = await bcrypt.compare(password, result.rows[0].password);
-    if (match) res.send('success');
+    if (match) {
+      //res.redirect(`/dashboard`);
+      return res.send('success');
+    }
     else res.status(401).send('Invalid credentials');
   } catch (err) {
     console.error(err);
@@ -88,8 +124,35 @@ app.get('/items', async (req, res) => {
   }
 });
 
+
+//post untuk register user baru
+app.post('/user', async (req, res) => {
+  const { username, password, age, gender, email } = req.body;
+
+  if (!username || !password || !age || !gender || !email) {
+    return res.status(400).json({ error: 'Missing required fields' });
+  }
+
+  try {
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const query = `
+      INSERT INTO users (username, password, age, gender, email)
+      VALUES ($1, $2, $3, $4, $5)
+      RETURNING *;
+    `;
+
+    const values = [username, hashedPassword, age, gender, email];
+
+    const { rows } = await pool.query(query, values);
+    // res.status(201).json({ message: 'User created successfully qqq', user: rows[0] });
+    res.redirect(`/login`)
+  } catch (error) {
+    console.error('Error inserting user:', error.message);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
-
-
