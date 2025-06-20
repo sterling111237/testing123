@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Select Category</title>
+  <style>
+    .font-size-dropdown {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: #f5f7fa;
+      border-radius: 6px;
+      padding: 4px 10px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    }
+    select {
+      border: 1.5px solid #b3c7e6;
+      border-radius: 5px;
+      padding: 7px 18px 7px 8px;
+      background-color: #fff;
+      color: #222;
+      font-size: 15px;
+      outline: none;
+      transition: border 0.2s, box-shadow 0.2s;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      margin: 0;
+    }
+    select:focus {
+      border-color: #4fc3f7;
+      box-shadow: 0 0 0 2px #b3e5fc;
+    }
+    .font-size-dropdown select {
+      margin: 0;
+      min-width: 110px;
+    }
+    .custom-navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: #ccc;
+      padding: 15px 30px;
+      margin-bottom: 30px;
+      border-radius: 0 0 8px 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+    }
+    .custom-navbar .logo {
+      flex: 0 0 auto;
+      font-size: 24px;
+      font-weight: bold;
+      margin-right: 40px;
+    }
+    .custom-navbar .nav-buttons {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+    .custom-navbar .back {
+      background-color: #81c995;
+      border: none;
+      border-radius: 5px;
+      padding: 8px 18px;
+      font-size: 15px;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+    .custom-navbar .selectors {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .custom-navbar select {
+      border-radius: 5px;
+      padding: 5px 10px;
+      font-size: 15px;
+      border: 1px solid #bbb;
+      background: #fff;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #ccc;
+      padding: 15px 30px;
+      margin-bottom: 30px;
+    }
+
+    .navbar .logo {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .navbar .nav-buttons button {
+      margin: 0 5px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .navbar .nav-buttons .back {
+      background-color: #81c995;
+    }
+
+    
+    .container {
+      display: flex;
+      flex-direction: row;
+      max-width: 1200px;
+      margin: 90px auto;
+      padding: 70px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .category-list {
+      flex: 1;
+      border-right: 1px solid #ddd;
+      padding-right: 20px;
+    }
+
+    .category-list h2 {
+      margin-bottom: 20px;
+    }
+
+    .category-list button {
+      display: block;
+      width: 100%;
+      padding: 15px;
+      margin-bottom: 30px;
+      border: none;
+      border-radius: 100px;
+      background-color: #4fc3f7;
+      color: #ffffff;
+      cursor: pointer;
+      text-align: left;
+    }
+
+    .category-list button:hover {
+      background-color: #0288d1;
+    }
+
+    .subcategory-list {
+      flex: 2;
+      padding-left: 20px;
+    }
+
+    .subcategory-list h2 {
+      margin-bottom: 20px;
+    }
+
+    .subcategory-list button {
+      display: inline-block;
+      padding: 50px 70px;
+      margin: 25px;
+      border: 5px solid #ddd;
+      border-radius: 100px;
+      background-color: #fff;
+      cursor: pointer;
+    }
+
+    .subcategory-list button:hover {
+      background-color: #a79797;
+    }
+
+    .subcategory-list button.active {
+      background-color: #4fc3f7;
+      color: #fff;
+      border-color: #0288d1;
+    }
+  </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <div class="navbar custom-navbar">
+      <div class="logo">李</div>
+      <div class="nav-buttons">
+        <button class="back" onclick="window.location.href='index.html?refresh=true'">Back to Home</button>
+        <div class="settings-dropdown" style="position: relative; display: inline-block; margin-left: 10px;">
+          <button class="settings" onclick="toggleSettingsDropdown()" title="Settings" style="background-color: #ffd966; color: #222; border-radius: 5px; padding: 10px 20px; border: none; font-size: 15px; cursor: pointer; transition: background 0.2s; min-width: 120px;">
+            <span style="vertical-align: middle;">&#9881; Settings</span>
+          </button>
+          <div id="settingsDropdown" class="dropdown-content" style="display: none; position: absolute; right: 0; background: #fffbe6; min-width: 200px; box-shadow: 0 2px 8px rgba(0,0,0,0.12); border-radius: 8px; z-index: 100; padding: 16px 18px 12px 18px;">
+            <button class="profile" onclick="window.location.href='profile.html'" style="width:100%;margin-bottom:10px;background-color:#4fc3f7;color:#fff;">Profile</button>
+            <div class="font-size-dropdown" style="margin-bottom: 12px;">
+              <select id="fontSizeSelect" style="border-radius: 5px; padding: 5px; width:100%;">
+                <option value="14px">Small</option>
+                <option value="16px" selected>Medium</option>
+                <option value="18px">Large</option>
+                <option value="20px">Extra Large</option>
+              </select>
+            </div>
+<script>
+  // Robust settings dropdown logic
+  function toggleSettingsDropdown(event) {
+    if (event) event.stopPropagation();
+    const dropdown = document.getElementById('settingsDropdown');
+    dropdown.style.display = (dropdown.style.display === 'block') ? 'none' : 'block';
+  }
+  document.addEventListener('click', function(event) {
+    const dropdown = document.getElementById('settingsDropdown');
+    const settingsBtn = document.querySelector('.settings');
+    if (!dropdown || !settingsBtn) return;
+    if (!dropdown.contains(event.target) && !settingsBtn.contains(event.target)) {
+      dropdown.style.display = 'none';
+    }
+  });
+  document.getElementById('settingsDropdown').addEventListener('change', function(e) {
+    if (e.target && e.target.id === 'fontSizeSelect') {
+      document.body.style.fontSize = e.target.value;
+    }
+    if (e.target && e.target.id === 'langSelect') {
+      if (typeof translatePage === 'function') translatePage(e.target.value);
+    }
+  });
+</script>
+            <div style="margin-bottom: 0;">
+              <select id="langSelect" style="border-radius: 5px; padding: 5px; width:100%;">
+                <option value="en">English</option>
+                <option value="id">Bahasa Indonesia</option>
+                <option value="zh">中文 (Mandarin)</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    <script>
+      // Font size selector logic
+      document.getElementById('fontSizeSelect').addEventListener('change', function() {
+        document.body.style.fontSize = this.value;
+      });
+
+      // Translation dictionary (minimal for demo, expand as needed)
+      const translations = {
+        en: {
+          'Back to Home': 'Back to Home',
+          'Small': 'Small',
+          'Medium': 'Medium',
+          'Large': 'Large',
+          'Extra Large': 'Extra Large',
+          'English': 'English',
+          'Bahasa Indonesia': 'Bahasa Indonesia',
+          '中文 (Mandarin)': '中文 (Mandarin)',
+          'Select a Category': 'Select a Category',
+          'Free Items': 'Free Items',
+          'Vehicles': 'Vehicles',
+          'Properties': 'Properties',
+          'Jobs': 'Jobs',
+          'Electronics': 'Electronics',
+          'Select a Subcategory': 'Select a Subcategory',
+          'Furniture': 'Furniture',
+          'Clothing': 'Clothing',
+          'Books': 'Books',
+          'Cars': 'Cars',
+          'Motorcycles': 'Motorcycles',
+          'Bicycles': 'Bicycles',
+          'Houses': 'Houses',
+          'Apartments': 'Apartments',
+          'Land': 'Land',
+          'Full-time': 'Full-time',
+          'Part-time': 'Part-time',
+          'Freelance': 'Freelance',
+          'Phones': 'Phones',
+          'Laptops': 'Laptops',
+          'Cameras': 'Cameras'
+        },
+        id: {
+          'Back to Home': 'Kembali ke Beranda',
+          'Small': 'Kecil',
+          'Medium': 'Sedang',
+          'Large': 'Besar',
+          'Extra Large': 'Sangat Besar',
+          'English': 'Inggris',
+          'Bahasa Indonesia': 'Bahasa Indonesia',
+          '中文 (Mandarin)': '中文 (Mandarin)',
+          'Select a Category': 'Pilih Kategori',
+          'Free Items': 'Barang Gratis',
+          'Vehicles': 'Kendaraan',
+          'Properties': 'Properti',
+          'Jobs': 'Pekerjaan',
+          'Electronics': 'Elektronik',
+          'Select a Subcategory': 'Pilih Subkategori',
+          'Furniture': 'Perabotan',
+          'Clothing': 'Pakaian',
+          'Books': 'Buku',
+          'Cars': 'Mobil',
+          'Motorcycles': 'Motor',
+          'Bicycles': 'Sepeda',
+          'Houses': 'Rumah',
+          'Apartments': 'Apartemen',
+          'Land': 'Tanah',
+          'Full-time': 'Penuh Waktu',
+          'Part-time': 'Paruh Waktu',
+          'Freelance': 'Lepas',
+          'Phones': 'Telepon',
+          'Laptops': 'Laptop',
+          'Cameras': 'Kamera'
+        },
+        zh: {
+          'Back to Home': '返回首页',
+          'Small': '小',
+          'Medium': '中',
+          'Large': '大',
+          'Extra Large': '特大',
+          'English': '英语',
+          'Bahasa Indonesia': '印尼语',
+          '中文 (Mandarin)': '中文 (普通话)',
+          'Select a Category': '选择类别',
+          'Free Items': '免费物品',
+          'Vehicles': '车辆',
+          'Properties': '房产',
+          'Jobs': '工作',
+          'Electronics': '电子产品',
+          'Select a Subcategory': '选择子类别',
+          'Furniture': '家具',
+          'Clothing': '服装',
+          'Books': '书籍',
+          'Cars': '汽车',
+          'Motorcycles': '摩托车',
+          'Bicycles': '自行车',
+          'Houses': '房屋',
+          'Apartments': '公寓',
+          'Land': '土地',
+          'Full-time': '全职',
+          'Part-time': '兼职',
+          'Freelance': '自由职业',
+          'Phones': '手机',
+          'Laptops': '笔记本电脑',
+          'Cameras': '相机'
+        }
+      };
+
+      // Store original text for translation
+      function storeOriginalText(el) {
+        if (el.nodeType === 3) {
+          if (!el._originalText) {
+            el._originalText = el.nodeValue;
+          }
+        } else if (el.nodeType === 1) {
+          if (["SCRIPT", "STYLE"].includes(el.tagName)) return;
+          if ((el.tagName === 'OPTION' || el.tagName === 'BUTTON') && !el._originalText) {
+            el._originalText = el.textContent;
+          }
+          if (el.placeholder && !el._originalPlaceholder) {
+            el._originalPlaceholder = el.placeholder;
+          }
+          Array.from(el.childNodes).forEach(storeOriginalText);
+        }
+      }
+
+      function translatePage(lang) {
+        function translateElementText(el) {
+          if (el.nodeType === 3) {
+            const original = el._originalText || el.nodeValue;
+            const trimmed = original.trim();
+            if (translations[lang][trimmed]) {
+              el.nodeValue = original.replace(trimmed, translations[lang][trimmed]);
+            } else {
+              el.nodeValue = original;
+            }
+          } else if (el.nodeType === 1) {
+            if (["SCRIPT", "STYLE"].includes(el.tagName)) return;
+            if (el.tagName === 'OPTION' || el.tagName === 'BUTTON') {
+              const original = el._originalText || el.textContent;
+              const trimmed = original.trim();
+              if (translations[lang][trimmed]) {
+                el.textContent = translations[lang][trimmed];
+              } else {
+                el.textContent = original;
+              }
+            }
+            if (el.placeholder) {
+              const original = el._originalPlaceholder || el.placeholder;
+              if (translations[lang][original]) {
+                el.placeholder = translations[lang][original];
+              } else {
+                el.placeholder = original;
+              }
+            }
+            Array.from(el.childNodes).forEach(translateElementText);
+          }
+        }
+        translateElementText(document.body);
+      }
+
+      document.addEventListener('DOMContentLoaded', function() {
+        storeOriginalText(document.body);
+        const lang = document.getElementById('langSelect').value;
+        translatePage(lang);
+      });
+      document.getElementById('langSelect').addEventListener('change', function() {
+        translatePage(this.value);
+      });
+    </script>
+    </div>
+
+    <!-- Container -->
+    <div class="container">
+      <!-- Category List -->
+      <div class="category-list">
+        <h2>Select a Category</h2>
+        <button onclick="selectCategory('Free Items')">Free Items</button>
+        <button onclick="selectCategory('Vehicles')">Vehicles</button>
+        <button onclick="selectCategory('Properties')">Properties</button>
+        <button onclick="selectCategory('Jobs')">Jobs</button>
+        <button onclick="selectCategory('Electronics')">Electronics</button>
+        <button onclick="selectCategory('Foods')">Foods</button>
+      </div>
+
+      <!-- Subcategory List -->
+      <div class="subcategory-list">
+        <h2>Select a Subcategory</h2>
+        <div id="subcategoryButtons">
+          <!-- Subcategory buttons will be dynamically added here -->
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const subcategories = {
+        'Free Items': ['Furniture', 'Clothing', 'Books'],
+        'Vehicles': ['Cars', 'Motorcycles', 'Bicycles'],
+        'Properties': ['Houses', 'Apartments', 'Land'],
+        'Jobs': ['Full-time', 'Part-time', 'Freelance'],
+        'Electronics': ['Phones', 'Laptops', 'Cameras'],
+        'Foods': ['Fast food', 'trending', 'Authentic','Light meal', 'Healthy']
+      };
+      const categoriesMap = new Map([
+        ['Free Items', 1],
+        ['Vehicles', 2],
+        ['Properties', 3],
+        ['Jobs', 4],
+        ['Electronics', 5],
+        ['Foods', 6]
+      ]);
+
+      const subcategoriesMap = new Map([
+        ['Furniture', 1], 
+        ['Clothing', 2],
+        ['Books', 3],
+        ['Cars', 4],
+        ['Motorcycles', 5],
+        ['Bicycles', 6],
+        ['Houses', 7], 
+        ['Apartments', 8], 
+        ['Land', 9],
+        ['Full-time', 10], 
+        ['Part-time', 11], 
+        ['Freelance', 12],
+        ['Phones', 13], 
+        ['Laptops', 14], 
+        ['Cameras', 15],
+        ['Fast Food', 16], 
+        ['Trending', 17], 
+        ['Authentic', 18],
+        ['Light Meal', 19],
+        ['Healthy', 20]
+      ]);
+      
+      function selectCategory(category) {
+        const subcategoryButtons = document.getElementById('subcategoryButtons');
+        subcategoryButtons.innerHTML = '';
+
+        if (subcategories[category]) {
+          subcategories[category].forEach(subcategory => {
+            const button = document.createElement('button');
+            button.textContent = subcategory;
+            button.onclick = () => {
+
+              function storeCategoryIds(category, subcategory) {
+                const normalizedCategory = category.trim().toLowerCase();
+                const normalizedSubcategory = subcategory.trim().toLowerCase();
+
+                // Find matching category and subcategory (case-insensitive)
+                const categoryId = [...categoriesMap.entries()]
+                  .find(([key]) => key.toLowerCase() === normalizedCategory)?.[1];
+
+                const subcategoryId = [...subcategoriesMap.entries()]
+                  .find(([key]) => key.toLowerCase() === normalizedSubcategory)?.[1];
+
+                if (categoryId && subcategoryId) {
+                  localStorage.setItem('categoryId', categoryId);
+                  localStorage.setItem('subcategoryId', subcategoryId);
+                  console.log('IDs stored successfully.');
+                } else {
+                  console.error('Invalid category or subcategory:', category, subcategory);
+                }
+              }
+              storeCategoryIds(category, subcategory);
+              window.location.href = `upload.html?category=${category}&subcategory=${subcategory}`;
+            };
+            subcategoryButtons.appendChild(button);
+          });
+        }
+      }
+    </script>
+</body>
+</html>
