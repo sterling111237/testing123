@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Item Details</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #e8f5e9;
+      color: #333;
+    }
+
+    /* Navigation Bar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #ccc;
+      padding: 10px 20px;
+    }
+    .navbar .logo {
+      font-size: 24px;
+      font-weight: bold;
+    }
+    .navbar .nav-buttons button {
+      margin: 0 5px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .navbar .nav-buttons .back {
+      background-color: #81c995;
+    }
+
+    /* Item Details Section */
+    .item-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+    .item-image {
+      width: 80%;
+      max-width: 600px;
+      height: 300px;
+      background-color: #c5e1a5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 20px;
+      font-size: 24px;
+      color: #333;
+    }
+    .item-details {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      width: 100%;
+      max-width: 800px;
+    }
+    .detail-card {
+      background-color: #e0e0e0;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+    }
+    .product-info {
+      grid-column: span 3;
+      background-color: #e0e0e0;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+    }
+    .contact-seller {
+      margin-top: 20px;
+      text-align: center;
+    }
+    .contact-seller button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      background-color: #25d366;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .contact-seller button:hover {
+      background-color: #128c7e;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <div class="navbar">
+    <div class="logo">李</div>
+    <div class="nav-buttons">
+      <button class="back" onclick="window.location.href='index.html'">Back to Home</button>
+    </div>
+  </div>
+
+  <!-- Item Details Section -->
+  <div class="item-container">
+    <div class="item-image" id="itemImage">Loading Image...</div>
+    <div class="item-details">
+      <div class="detail-card" id="itemDescription">Loading Description...</div>
+      <div class="detail-card" id="itemCost">Loading Cost...</div>
+      <div class="detail-card" id="itemSeller">Loading Seller Info...</div>
+      <div class="product-info" id="itemInfo">Loading Product Info...</div>
+    </div>
+  </div>
+
+  <!-- Contact Seller Section -->
+  <div class="contact-seller">
+    <button onclick="contactSeller('1234567890')">Contact Seller via WhatsApp</button>
+  </div>
+
+  <script>
+
+     // Fetch all items and display the first one (or customize as needed)
+ async function fetchProduct() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const productId = urlParams.get("id");
+      console.log(productId);
+
+      try {
+        const response = await fetch(`http://localhost:9000/itemInfo/${productId}`);
+        const item = await response.json();
+
+        if (response.ok) {
+      document.getElementById('itemImage').textContent = ''; // Clear loading text
+      document.getElementById('itemImage').style.backgroundImage = `url(${item.image_url})`;
+      document.getElementById('itemImage').style.backgroundSize = 'cover';
+      document.getElementById('itemImage').style.backgroundPosition = 'center';
+
+      document.getElementById('itemDescription').textContent = item.product_name;
+      document.getElementById('itemCost').textContent = `Price: $${item.price}`;
+      document.getElementById('itemSeller').textContent = `Location: ${item.location}`;
+      document.getElementById('itemInfo').innerHTML = `
+        Description: ${item.item_description}<br>
+        Condition: ${item.condition}<br>
+        Released: ${item.release_date}<br>
+        Category: ${item.category_name}<br>
+        Subcategory: ${item.subcategory_name}
+      `;
+}} catch (error) {
+        document.getElementById("product-info").textContent = "Error fetching product.";
+      }
+    }
+  function contactSeller(phone) {
+    window.open(`https://wa.me/${phone}`, '_blank');
+  }
+  fetchProduct();
+  </script>
+</body>
+</html>
