@@ -47,10 +47,13 @@ app.get('/adminPanel',(req,res)=>{
   res.sendFile(path.join(__dirname, `public`,`adminPanel.html`  ))
 })
 app.get('/upload',(req,res)=>{  
-  res.sendFile(path.join(__dirname, `public`,`uploadpred.html`  ))
+  res.sendFile(path.join(__dirname, `public`,`upload.html`  ))
 })
 app.get('/items',(req,res)=>{  
   res.sendFile(path.join(__dirname, `public`,`item.html`  ))
+})
+app.get('/uploadprep',(req,res)=>{  
+  res.sendFile(path.join(__dirname, `public`,`uploadprep.html`  ))
 })
 // Login route
 app.post('/login', async (req, res) => {
