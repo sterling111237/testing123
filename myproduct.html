@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -47,54 +48,33 @@
       max-width: 1100px;
       margin-top: 20px;
     }
-    .image-card {
-      background-color: #fff;
-      border: 1px solid #eee;
-      border-radius: 12px;
-      overflow: hidden;
-      cursor: pointer;
-      transition: box-shadow 0.2s, transform 0.2s;
-      text-align: left;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
+    .product-card {
+      background-color: #e0e0e0;
+      padding: 18px 16px 16px 16px;
+      border-radius: 8px;
+      text-align: center;
       box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-      min-height: 260px;
-    }
-    .image-card:hover {
-      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
-      transform: translateY(-4px) scale(1.03);
-    }
-    .image-card img {
-      width: 100%;
-      height: 160px;
-      object-fit: cover;
-      background: #f7f7f7;
-      border-bottom: 1px solid #eee;
-    }
-    .image-card .details {
-      padding: 16px 16px 10px 16px;
-      flex: 1;
       display: flex;
       flex-direction: column;
-      justify-content: flex-start;
+      align-items: center;
     }
-    .image-card .details h3 {
-      font-size: 17px;
-      margin: 0 0 6px 0;
-      color: #222;
-      font-weight: 600;
+    .product-card img {
+      width: 100%;
+      max-width: 220px;
+      height: 140px;
+      object-fit: cover;
+      border-radius: 6px;
+      margin-bottom: 12px;
+      background: #c5e1a5;
     }
-    .image-card .details p {
-      font-size: 14px;
-      margin: 0 0 8px 0;
-      color: #666;
+    .product-card h2 {
+      font-size: 1.2rem;
+      margin: 8px 0 6px 0;
+      color: #388e3c;
     }
-    .image-card .details .price {
-      font-size: 18px;
-      font-weight: bold;
-      color: #00aa5b;
-      margin-top: auto;
+    .product-card p {
+      margin: 4px 0;
+      font-size: 1rem;
     }
     @media (max-width: 700px) {
       .products-grid {
@@ -107,138 +87,41 @@
   <div class="navbar">
     <div class="logo">李</div>
     <div class="nav-buttons">
-      <button class="back" onclick="window.location.href='profile.html'">Back to Profile</button>
+      <button class="back" onclick="window.location.href='/profile'">Back to Profile</button>
     </div>
   </div>
   <div class="myproducts-container">
     <h1>My Posted Products</h1>
-    <div id="items-container" class="products-grid">
+    <div id="products-container" class="products-grid">
       <!-- User's products will be rendered here -->
     </div>
-    <!-- Edit Panel Modal -->
-    <div id="editPanelModal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.35);z-index:200;align-items:center;justify-content:center;">
-      <div style="background:#fff;padding:32px 28px 24px 28px;border-radius:14px;max-width:400px;width:90vw;box-shadow:0 4px 24px rgba(0,0,0,0.12);position:relative;">
-        <h2 style="margin-top:0;margin-bottom:18px;font-size:1.4rem;color:#222;">Edit Product</h2>
-        <form id="editPanelForm" style="display:flex;flex-direction:column;gap:12px;">
-          <div style="text-align:center;margin-bottom:10px;">
-            <label for="editImage" style="cursor:pointer;display:inline-block;">
-              <img id="editPreviewImage" src="imgs/placeholder.png" alt="Product Image" style="width:100px;height:100px;object-fit:cover;border-radius:8px;background:#f7f7f7;">
-            </label>
-            <input type="file" id="editImage" name="image" accept="image/*" style="display:none;">
-            <div style="font-size:13px;color:#888;margin-top:6px;">Click image to change</div>
-          </div>
-          <label style="font-weight:600;margin-bottom:2px;">Product Name</label>
-          <input type="text" id="editProductName" required style="padding:8px 10px;border-radius:6px;border:1px solid #ccc;font-size:1rem;">
-          <label style="font-weight:600;margin-bottom:2px;">Description</label>
-          <textarea id="editDescription" required style="padding:8px 10px;border-radius:6px;border:1px solid #ccc;font-size:1rem;min-height:60px;resize:vertical;"></textarea>
-          <label style="font-weight:600;margin-bottom:2px;">Price</label>
-          <input type="number" id="editPrice" min="0" step="0.01" required style="padding:8px 10px;border-radius:6px;border:1px solid #ccc;font-size:1rem;">
-          <label style="font-weight:600;margin-bottom:2px;">Location</label>
-          <input type="text" id="editLocation" required style="padding:8px 10px;border-radius:6px;border:1px solid #ccc;font-size:1rem;">
-          <label style="font-weight:600;margin-bottom:2px;">Condition</label>
-          <input type="text" id="editCondition" required style="padding:8px 10px;border-radius:6px;border:1px solid #ccc;font-size:1rem;">
-          <div style="display:flex;gap:12px;justify-content:flex-end;margin-top:10px;">
-            <button type="button" id="cancelEditPanelBtn" style="background:#eee;color:#222;padding:8px 18px;border:none;border-radius:6px;">Cancel</button>
-            <button type="submit" style="background:#4fc3f7;color:#fff;padding:8px 18px;border:none;border-radius:6px;">Save</button>
-          </div>
-        </form>
-        <div id="editPanelStatus" style="margin-top:12px;color:#388e3c;font-weight:600;"></div>
-      </div>
-    </div>
   </div>
-<script>
-    function renderItems(items) {
-          const container = document.getElementById('items-container');
-            container.innerHTML = '';
-            if (!items.length) {
-            container.innerHTML = '<p>No items found.</p>';
+  <script>
+    const userId = localStorage.getItem('userId');
+    if (!userId) {
+      document.getElementById('products-container').innerHTML = '<p>Please log in to view your products.</p>';
+    } else {
+      fetch(`http://localhost:3000/user/${userId}/items`)
+        .then(res => res.json())
+        .then(items => {
+          if (!items.length) {
+            document.getElementById('products-container').innerHTML = '<p>No products posted yet.</p>';
             return;
-            }
-            items.forEach(item => {
-    const card = document.createElement('div');
-    card.className = 'image-card';
-    card.setAttribute('data-category', item.category_name || '');
-    card.setAttribute('data-subcategory', item.subcategory_name || '');
-    card.setAttribute('data-location', item.location || '');
-    card.setAttribute('data-condition', item.condition || '');
-    card.setAttribute('data-release', item.release_date || '');
-    card.innerHTML = `
-      <img src="${item.image_url || 'placeholder.jpg'}" alt="${item.product_name}">
-      <div class="details">
-      <h3>${item.product_name}</h3>
-      <p>Location: ${item.location}</p>
-      <p>Condition: ${item.condition}</p>
-      <p class="price">$${item.price}</p>
-      </div>
-    `;
-
-            card.onclick = function(e) {
-              e.stopPropagation();
-              openEditPanel(item);
-            };
-// Edit Panel Logic
-let currentEditId = null;
-function openEditPanel(item) {
-  currentEditId = item.product_id;
-  console.log('ID: ',currentEditId);
-  document.getElementById('editProductName').value = item.product_name || '';
-  document.getElementById('editDescription').value = item.item_description || '';
-  document.getElementById('editPrice').value = item.price || '';
-  document.getElementById('editLocation').value = item.location || '';
-  document.getElementById('editCondition').value = item.condition || '';
-  document.getElementById('editPanelStatus').textContent = '';
-  document.getElementById('editPreviewImage').src = item.image_url || 'imgs/placeholder.png';
-  document.getElementById('editPanelModal').style.display = 'flex';
-}
-document.getElementById('cancelEditPanelBtn').onclick = function() {
-  document.getElementById('editPanelModal').style.display = 'none';
-};
-document.getElementById('editImage').addEventListener('change', function(e) {
-  const file = e.target.files[0];
-  const preview = document.getElementById('editPreviewImage');
-  if (file) {
-    const reader = new FileReader();
-    reader.onload = function(ev) {
-      preview.src = ev.target.result;
-    };
-    reader.readAsDataURL(file);
-  } else {
-    preview.src = 'imgs/placeholder.png';
-  }
-});
- document.getElementById('editPanelModal').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      console.log('ID: ',currentEditId);
-      const productData = {
-        productId: currentEditId,
-        productName: document.getElementById('editProductName').value,
-        location: document.getElementById('editLocation').value,
-        condition: document.getElementById('editCondition').value,
-        price: document.getElementById('editPrice').value,
-        imageUrl: document.getElementById('editPreviewImage').src,
-        description: document.getElementById('editDescription').value,
-      };
-
-      const res = await fetch('http://localhost:5000/update-product', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(productData)
-      });
-      location.reload();
-    });
-
-      container.appendChild(card);
-    });
-}
-
-    async function fetchItems() {
-      const res = await fetch('http://localhost:4000/userItems');  // Adjust to your backend URL
-      if (!res.ok) throw new Error('Network response was not ok');
-      const items = await res.json();
-      window.allItems = items; // store for filtering
-      console.log(items)
-      renderItems(items);
+          }
+          document.getElementById('products-container').innerHTML = items.map(item => `
+            <div class="product-card">
+              <img src="${item.image_url}" alt="${item.product_name}" />
+              <h2>${item.product_name}</h2>
+              <p>Location: ${item.location}</p>
+              <p>Price: $${item.price}</p>
+              <p>Condition: ${item.condition}</p>
+            </div>
+          `).join('');
+        })
+        .catch(err => {
+          document.getElementById('products-container').innerHTML = '<p>Failed to load your products.</p>';
+        });
     }
-
-  document.addEventListener('DOMContentLoaded', fetchItems);
-</script>
+  </script>
+</body>
+</html>

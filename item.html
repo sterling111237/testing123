@@ -98,7 +98,7 @@
   <div class="navbar">
     <div class="logo">李</div>
     <div class="nav-buttons">
-      <button class="back" onclick="window.location.href='index.html'">Back to Home</button>
+      <button class="back" onclick="window.location.href='/dashboard'">Back to Home</button>
     </div>
   </div>
 
@@ -142,7 +142,6 @@
       document.getElementById('itemCost').textContent = `Price: $${item.price}`;
       document.getElementById('itemSeller').textContent = `Location: ${item.location}`;
       document.getElementById('itemInfo').innerHTML = `
-        Description: ${item.item_description}<br>
         Condition: ${item.condition}<br>
         Released: ${item.release_date}<br>
         Category: ${item.category_name}<br>

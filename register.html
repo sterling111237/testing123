@@ -123,57 +123,24 @@
     <!-- Register Section -->
     <div class="register-container">
       <h2>Marga Lie</h2>
-      <form id="sus">
-  <input type="text" id="username" required>
-  <input type="email" id="email" required>
-  <input type="password"id="password" required>
-  <input type="number" id="age" required>
-  
-  <select id="gender" name="gender" >
-    <option value="Female">Female</option>
-    <option value="Male">Male</option>
-    <option value="Other">Other</option>
-  </select>
-  
-  <button type="button" id="submitBtn">Register</button>
 
-</form>
+      <form action="http://localhost:3000/user" method="POST">
+        <input type="text" name="username" placeholder="Username" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <input type="number" name="age" placeholder="Age" required>
 
+        <select name="gender" required>
+          <option value="" disabled selected>Select Gender</option>
+          <option value="Female">Female</option>
+          <option value="Male">Male</option>
+          <option value="Other">Other</option>
+        </select>
 
+        <button type="submit">Register</button>
+      </form>
     </div>
   </div>
-
-  <script>
-  document.getElementById('submitBtn').addEventListener('click', function(event) {
-  event.preventDefault();
-
-  const username = document.getElementById('username').value.trim();
-  const password = document.getElementById('password').value.trim();
-  const email = document.getElementById('email').value.trim();
-  const age = document.getElementById('age').value.trim();
-  const gender = document.getElementById('gender').value;
-
-  console.log({ username, password, age, gender }); // Debug
-
-  if (!username || !password || !age || !gender || !email) {
-    console.error("All fields are required.");
-    return;
-  }
-
-  const userData = { username, password, age, gender, email};
-
-  fetch("http://localhost:4000/user", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(userData)
-  })
-  .then(res => res.json())
-  .then(data => console.log("Server response:", data))
-  .catch(err => console.error("Error sending data:", err));
-});
-
-</script>
-
-
 </body>
+
 </html>

@@ -125,7 +125,7 @@
     <!-- Welcome Section -->
     <div class="welcome-section">
       <div class="logo">李</div>
-      <h1>Welcome Admin-sama~</h1>
+      <h1>Welcome, Admin</h1>
     </div>
 
     <!-- Login Section -->
@@ -159,7 +159,7 @@
       console.log("Server response:", text);
 
       if (res.ok && text === 'success') {
-        window.location.href = 'adminPanel.html';
+        window.location.href = '/adminPanel';
       } else {
         alert('Login failed: ' + text);
       }
